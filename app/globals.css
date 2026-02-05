@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+/* Apply background to body and html instead of everything */
+html,
+body {
+  background-color: var(--color-dark);
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@theme {
+  --font-cartographCF: 'cartographCF', sans-serif;
+  --font-switzer: 'switzer', sans-serif;
+  --font-hoshiko: 'Hoshiko-Satsuki', sans-serif;
+
+  --color-light: #edf2f4;
+  --color-dark: #0a0908;
+}
+
+@font-face {
+  font-family: 'cartographCF';
+  src: url(/fonts/CartographCF-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'switzer';
+  src: url(/fonts/Switzer-Regular.otf) format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hoshiko-Satsuki';
+  src: url(/fonts/Hoshiko-Satsuki.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
