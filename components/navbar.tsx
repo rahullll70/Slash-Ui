@@ -13,6 +13,7 @@ import {
   MousePointer2,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import path from 'path';
 
 interface NavLink {
   name: string;
@@ -51,14 +52,30 @@ const Navbar: React.FC = () => {
   ];
 
   const searchItems = [
-    { icon: <Home size={16} />, label: 'Home', category: 'Pages' },
-    { icon: <LoaderCircle size={16} />, label: 'Loader', category: 'Pages' },
-    { icon: <MousePointer2 size={16} />, label: 'Cursor', category: 'Pages' },
-    { icon: <Box size={16} />, label: 'All Components', category: 'Pages' },
+    { icon: <Home size={16} />, label: 'Home', category: 'Pages', path: '/' },
+    {
+      icon: <LoaderCircle size={16} />,
+      label: 'Loader',
+      category: 'Pages',
+      path: '/loader',
+    },
+    {
+      icon: <MousePointer2 size={16} />,
+      label: 'Cursor',
+      category: 'Pages',
+      path: 'id:/cursor',
+    },
+    {
+      icon: <Box size={16} />,
+      label: 'All Components',
+      category: 'Pages',
+      path: '/component',
+    },
     {
       icon: <Rocket size={16} />,
       label: 'Quick Start',
       category: 'Get Started',
+      path: '/docs',
     },
   ];
 
@@ -81,9 +98,9 @@ const Navbar: React.FC = () => {
           }`}
         >
           <div className='flex items-center gap-8'>
-            <div  className='flex items-center gap-2 text-white font-bold cursor-pointer'>
-              
-              <a href='/'
+            <div className='flex items-center gap-2 text-white font-bold cursor-pointer'>
+              <a
+                href='/'
                 className={`hidden md:inline-block font-hoshiko tracking-wider transition-all ${scrolled ? 'text-lg' : 'text-2xl'}`}
               >
                 Slash/U!
@@ -128,7 +145,7 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={toggleTheme}
-              className='p-2 hover:bg-zinc-800 rounded-full transition-all text-zinc-400 hover:text-white'
+              className='p-2 hover:bg-zinc-800 rounded-full transition-all text-zinc-400 hover:text-white cursor-pointer'
               aria-label='Toggle Theme'
             >
               <AnimatePresence mode='wait'>
@@ -183,8 +200,9 @@ const Navbar: React.FC = () => {
                     {searchItems
                       .filter((item) => item.category === category)
                       .map((item) => (
-                        <div
+                        <a
                           key={item.label}
+                          href={item.path}
                           className='flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-zinc-900 cursor-pointer group transition-all'
                         >
                           <div className='text-zinc-500 group-hover:text-white transition-colors'>
@@ -193,7 +211,7 @@ const Navbar: React.FC = () => {
                           <span className='text-sm text-zinc-300 group-hover:text-white'>
                             {item.label}
                           </span>
-                        </div>
+                        </a>
                       ))}
                   </div>
                 ))}
