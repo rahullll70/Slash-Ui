@@ -3,6 +3,7 @@ import Navbar from '@/components/navbar';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import FeaturedComponents from '@/components/featuredComponents';
+import Pricing from '@/components/pricing';
 
 const page = () => {
   return (
@@ -10,6 +11,7 @@ const page = () => {
       <Navbar />
       <Hero />
       <FeaturedComponents />
+      <Pricing />
       <Footer />
     </div>
   );
