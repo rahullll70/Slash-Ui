@@ -2,12 +2,12 @@
 
 export const registry = [
   {
-    name: "neubrutal-button",
-    type: "ui",
-    files: ["ui/neubrutal-button.tsx"],
-    category: "buttons",
-    install: "npm install framer-motion lucide-react",
-    description:`
+    name: 'neubrutal-button',
+    type: 'ui',
+    files: ['ui/neubrutal-button.tsx'],
+    category: 'buttons',
+    install: 'npm install framer-motion lucide-react',
+    description: `
 ### Neubrutal 3D Button
 A modern 3D button component with a soft neumorphic depth and smooth press animation. Designed to feel tactile and interactive, it visually responds to user interaction with layered shadows and subtle motion.
 

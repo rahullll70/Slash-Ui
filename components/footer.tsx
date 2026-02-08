@@ -35,8 +35,8 @@ const Footer = () => {
       {/* Bottom Credit Section */}
       <div className='py-8 border-t border-neutral-900'>
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className='text-xs font-cartographCF text-neutral-500 tracking-widest uppercase'>
-            © 2026 SLASH/UI. ALL RIGHTS RESERVED.
+          <p className='text-sm font-cartographCF text-neutral-500 capitalize'>
+            © 2026 Slash/Ui. All Rights Reserved.
           </p>
           
           <h1 className='text-sm font-cartographCF text-neutral-500'>

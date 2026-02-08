@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { Index } from "@/__registry__"; 
@@ -20,43 +20,19 @@ const ComponentCard = ({
   span = '',
   bg = 'bg-[#161616]',
 }: ComponentCardProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
-
   return (
     <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`group relative flex flex-col justify-between rounded-3xl ${bg} border border-white/5 p-1 hover:border-white/20 transition-all duration-500 h-full ${span}`}
+      className={`group relative flex flex-col justify-between rounded-3xl ${bg} border border-white/5 p-1 hover:border-white/20 transition-all duration-500 h-full cursor-pointer ${span}`}
     >
-      <div className={`absolute inset-0 transition-opacity duration-500 rounded-3xl bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.05)_0%,transparent_70%)] ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
-
-      <div className='relative flex-grow overflow-hidden rounded-[22px] bg-[#0A0A0A] flex items-center justify-center min-h-[140px] cursor-pointer border border-white/[0.03]'>
+      <div className='relative flex-grow overflow-hidden rounded-[22px] bg-[#0A0A0A] flex items-center justify-center min-h-[140px] border border-white/[0.03]'>
         {videoSrc ? (
           <video
-            ref={videoRef}
             src={videoSrc}
+            autoPlay
             loop
             muted
             playsInline
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-              isHovered ? 'opacity-100 scale-105' : 'opacity-30 scale-100'
-            }`}
+            className="absolute inset-0 w-full h-full object-cover opacity-100 scale-100"
           />
         ) : (
           <div className="relative z-10 w-full h-full flex items-center justify-center">
@@ -66,26 +42,24 @@ const ComponentCard = ({
       </div>
 
       <div className='px-4 py-3 flex justify-between items-center bg-transparent relative z-10'>
-        <h3 className='text-[13px] font-medium text-zinc-400 group-hover:text-white transition-colors'>{title}</h3>
+        <h3 className='text-[13px] font-medium text-zinc-400 group-hover:text-white transition-colors'>
+          {title}
+        </h3>
       </div>
     </div>
   );
 };
 
 const FeaturedComponents = () => {
-  // Helper to get registry data safely
-  const getComp = (name: string) => Index["default"]?.[name];
+  const getComp = (name: string) => (Index as any)["default"]?.[name];
 
   return (
     <div className='min-h-screen w-full p-8 text-white mt-10'>
       <div className='max-w-7xl mx-auto'>
-        
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px]'>
           
-          {/* All hrefs changed from /showcase/ to /component/ */}
-          
           {/* 1. Image Reveal */}
-          <Link href={`/component/reveal`} className="block">
+          <Link href={`/component/reveal`}>
             <ComponentCard title="Image Reveal" videoSrc={getComp("reveal")?.video} />
           </Link>
 
@@ -110,15 +84,15 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 5. Devouring Details */}
-          <Link href={`/component/details`} className="block">
+          <Link href={`/component/details`}>
             <ComponentCard title="Devouring Details" videoSrc={getComp("details")?.video} />
           </Link>
 
-          {/* 6. 3D Button - YOUR ACTIVE COMPONENT */}
-          <Link href={`/component/neubrutal-button`} className="block">
+          {/* 6. Neubrutal Button */}
+          <Link href={`/component/neubrutal-button`}>
             <ComponentCard 
-                title="3D Button" 
-                videoSrc={getComp("neubrutal-button")?.video || "/videos/3d-button-demo.mp4"} 
+                title="Neubrutal Button" 
+                videoSrc={getComp("neubrutal-button")?.video || "/compVideos/neubrutal-button.mp4"} 
             />
           </Link>
 
@@ -128,18 +102,18 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 8. User Feedback */}
-          <Link href={`/component/feedback`} className="lg:col-span-1">
+          <Link href={`/component/feedback`}>
             <ComponentCard title="User Feedback" videoSrc={getComp("feedback")?.video}>
-                <div className="text-2xl font-bold opacity-20 group-hover:opacity-100 transition-opacity">?</div>
+                <div className="text-2xl font-bold opacity-50 transition-opacity">?</div>
             </ComponentCard>
           </Link>
         </div>
 
         {/* Explore Button */}
-        <div className='mt-2 flex justify-center'>
+        <div className='mt-8 flex justify-center'>
           <Link
             href='/component'
-            className='relative z-30 h-12 px-6 rounded-lg text-sm text-white border border-white/5 hover:bg-white/5 transition-all flex items-center gap-2 group'
+            className='relative z-30 h-12 px-6 rounded-lg text-sm text-white transition-all flex items-center gap-2 group'
           >
             Explore All Components
             <div className='flex items-center justify-center transition-transform group-hover:translate-x-1'>

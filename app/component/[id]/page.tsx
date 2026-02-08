@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Index } from '@/__registry__';
-
 import ShowcaseContainer from '@/components/ShowcaseContainer';
 
 export default async function Page({
@@ -9,7 +8,12 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const activeItem = Index['default'][id];
+
+  const activeItem = (Index['default'] as any)[id];
+
+  if (!activeItem) {
+    return <div>Component "{id}" not found in __registry__/index.ts</div>;
+  }
   const SelectedComponent = activeItem?.component;
 
   return (
@@ -27,7 +31,7 @@ export default async function Page({
             </div>
           }
         >
-          <SelectedComponent>Click Me!</SelectedComponent>
+          <SelectedComponent />
         </Suspense>
       ) : (
         <div className='flex flex-col items-center justify-center h-64 border border-dashed border-zinc-800 rounded-xl bg-zinc-950/50'>

@@ -1,9 +1,9 @@
-import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
-import path from "path";
-import { registry } from "../registry/index"; 
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
+import path from 'path';
+import { registry } from '../registry/index';
 
-const OUTPUT_DIR = path.join(process.cwd(), "__registry__");
-const OUTPUT_PATH = path.join(OUTPUT_DIR, "index.ts");
+const OUTPUT_DIR = path.join(process.cwd(), '__registry__');
+const OUTPUT_PATH = path.join(OUTPUT_DIR, 'index.ts');
 
 async function buildRegistry() {
   if (!existsSync(OUTPUT_DIR)) {
@@ -18,37 +18,38 @@ export const Index: Record<string, any> = {
   "default": {
 `;
 
-  registry.forEach((item) => {
-    const filePath = path.join(process.cwd(), item.files[0]);
-    const rawContent = existsSync(filePath) 
-      ? readFileSync(filePath, "utf8")
-      : "";
+  registry.forEach((item: any) => {
+    const filePath = path.join(process.cwd(), 'registry', item.files[0]);
+    const rawContent = existsSync(filePath)
+      ? readFileSync(filePath, 'utf8')
+      : '';
 
-    const safeContent = rawContent
-      .replace(/\\/g, "\\\\")
-      .replace(/\`/g, "\\\`")
-      .replace(/\$/g, "\\\$");
-
+    // FIX: Escape backticks and dollar signs to prevent breaking template literals
     const importPath = item.files[0].replace(/\.tsx?$/, "");
 
-    // Inside your registry.forEach loop in build-registry.ts
+// FIX: Escape backticks and dollar signs to prevent breaking the template literal
+const safeContent = rawContent.replace(/`/g, "\\`").replace(/\$/g, "\\$");
+const safeDescription = (item.description || "").replace(/`/g, "\\`").replace(/\$/g, "\\$");
+
 indexContent += `    "${item.name}": {
       name: "${item.name}",
       type: "${item.type}",
-      component: React.lazy(() => import("@/${importPath}")),
+      // FIX: Ensure the import points to the correct relative path
+      component: React.lazy(() => import("../registry/${importPath}")),
       files: ${JSON.stringify(item.files)},
       category: "${item.category || 'undefined'}",
       content: \`${safeContent}\`,
-      // Add these lines for dynamic info
-      description: "${item.description || 'A beautiful, handcrafted component.'}",
-      install: "${item.install || 'npm install lucide-react clsx tailwind-merge'}",
+      description: \`${safeDescription}\`,
+      install: "${item.install || ''}",
     },
 `;
   });
+
   indexContent += `  }
 };`;
+
   writeFileSync(OUTPUT_PATH, indexContent);
-  console.log("✅ Slash UI Registry generated with Lazy Imports!");
+  console.log('✅ Slash UI Registry generated!');
 }
 
 buildRegistry();

@@ -25,26 +25,30 @@ export default function ShowcaseContainer({
   children,
   title,
   code: propsCode,
+  description: propsDescription,
+  install: propsInstall,
 }: {
   children: React.ReactNode;
   title: string;
   code?: string;
+  description?: string;
+  install?: string;
 }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [activePanel, setActivePanel] = useState<
-    'code' | 'info' | 'search' | null
-  >(null);
+  const [activePanel, setActivePanel] = useState<'code' | 'info' | 'search' | null>(null);
   const [copied, setCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { id } = useParams();
 
   const componentsList = Object.values(Index['default']);
   const activeItem = Index['default'][id as string] as any;
-  const dynamicCode =
-    propsCode || activeItem?.content || '// No source code found.';
 
-  const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(dynamicCode);
+  const dynamicCode = propsCode || activeItem?.content || '// No source code found.';
+  const dynamicDescription = propsDescription || activeItem?.description || `Premium ${title} component.`;
+  const dynamicInstall = propsInstall || activeItem?.install || 'npm install framer-motion lucide-react';
+
+  const copyToClipboard = async (text: string) => {
+    await navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -136,7 +140,7 @@ export default function ShowcaseContainer({
             </div>
           </main>
 
-          {/* RIGHT SIDE PANEL - FIXED ANIMATION LOGIC */}
+          {/* RIGHT SIDE PANEL */}
           <div
             className={`h-full bg-neutral-900 border-white/5 transition-all duration-500 ease-in-out overflow-hidden rounded-l-2xl ${
               activePanel === 'code' || activePanel === 'info'
@@ -178,7 +182,7 @@ export default function ShowcaseContainer({
                       className='relative rounded-2xl bg-black/40 border border-white/5 overflow-hidden'
                     >
                       <button
-                        onClick={copyToClipboard}
+                        onClick={() => copyToClipboard(dynamicCode)}
                         className='absolute top-4 right-4 p-2 bg-white/5 rounded-md text-zinc-400 cursor-pointer z-10 hover:bg-white/10'
                       >
                         {copied ? (
@@ -223,19 +227,24 @@ export default function ShowcaseContainer({
                             prose-code:text-sky-400 prose-code:bg-white/5 prose-code:px-1 prose-code:rounded'
                         >
                           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {activeItem?.description ||
-                              `Premium ${title} component.`}
+                            {dynamicDescription}
                           </ReactMarkdown>
                         </div>
-                        
                       </section>
                       <section>
                         <h4 className='text-white mb-4 text-[11px] tracking-widest uppercase opacity-40'>
                           Dependencies
                         </h4>
-                        <div className='bg-black p-5 rounded-xl border border-white/5 text-sm text-zinc-500 font-mono'>
-                          {activeItem?.install ||
-                            'npm install framer-motion lucide-react'}
+                        <div className='relative group'>
+                          <div className='bg-black p-5 rounded-xl border border-white/5 text-sm text-zinc-500 font-mono flex items-center justify-between'>
+                            <span>{dynamicInstall}</span>
+                            <button
+                              onClick={() => copyToClipboard(dynamicInstall)}
+                              className='p-2 hover:bg-white/5 rounded-md transition-colors cursor-pointer'
+                            >
+                               {copied ? <Check size={14} className='text-white' /> : <Copy size={14} />}
+                            </button>
+                          </div>
                         </div>
                       </section>
                     </motion.div>
