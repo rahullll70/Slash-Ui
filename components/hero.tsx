@@ -41,7 +41,7 @@ const Hero = (): JSX.Element => {
       <div className='relative z-10 container mx-auto px-6 flex flex-col items-center isolation-isolate'>
         <h1 className='max-w-4xl text-center text-5xl font-beVietnamPro  tracking-tight md:text-7xl lg:text-8xl leading-[0.9] text-white mix-blend-difference'>
           A NEW STANDARD <br />
-          <span className='font-hoshiko'>MODERN</span> <br />
+          <span className=''>MODERN</span> <br />
           UI COMPONENTS
         </h1>
 
