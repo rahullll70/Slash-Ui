@@ -21,7 +21,7 @@ const Hero = (): JSX.Element => {
     <section className='relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden'>
       {/* --- BACKGROUND IMAGE PROPERTIES --- */}
       <div className='absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none opacity-5'>
-        <img
+        {/* <img
           src='/images/slash_2.svg'
           alt='Background Texture'
           className='
@@ -31,7 +31,7 @@ const Hero = (): JSX.Element => {
             brightness-110 
             contrast-125
           '
-        />
+        /> */}
       </div>
 
       {/* --- GRID OVERLAY --- */}
