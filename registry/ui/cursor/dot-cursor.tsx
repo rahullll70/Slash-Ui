@@ -8,7 +8,7 @@ const CustomCursor = () => {
   const [isDarkBackground, setIsDarkBackground] = useState(false);
 
   useEffect(() => {
-
+    
     
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -46,6 +46,7 @@ const CustomCursor = () => {
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
 
+      
      
     };
   }, []);
@@ -68,7 +69,7 @@ const CustomCursor = () => {
       position: 'fixed', 
       top: 0, 
       left: 0, 
-      pointerEvents: 'none' // Ensure it doesn't block clicks
+      pointerEvents: 'none' 
     }}>
     
     <div 

@@ -31,7 +31,7 @@ const Navbar = () => {
   if (!mounted) return null;
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-6 px-6 pointer-events-none'>
+    <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-6 px-6 pointer-events-none mt-10'>
       <motion.div
         initial={{ y: -100 }}
         animate={{ y: 0 }}
