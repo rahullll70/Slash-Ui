@@ -58,13 +58,13 @@ const FeaturedComponents = () => {
       <div className='max-w-7xl mx-auto'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px]'>
           
-          {/* 1. Image Reveal */}
+         
           <Link href={`/component/reveal`}>
             <ComponentCard title="Image Reveal" videoSrc={getComp("reveal")?.video} />
           </Link>
 
           {/* 2. Navbar */}
-          <Link href={`/component/navbar`} className="lg:col-span-2">
+          <Link href={`/component/floating-navbar`} className="lg:col-span-2">
             <ComponentCard title="Navbar" videoSrc={getComp("navbar")?.video} />
           </Link>
 
@@ -74,12 +74,9 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 4. Custom Cursor */}
-          <Link href={`/component/cursor`} className="lg:col-span-2 lg:row-span-2">
+          <Link href={`/component/dot-cursor`} className="lg:col-span-2 lg:row-span-2">
             <ComponentCard title="Custom Cursor">
-                <div className='w-32 h-10 bg-black rounded-full border border-zinc-800 flex items-center px-4 gap-2'>
-                   <div className='w-2 h-2 rounded-full bg-blue-500 animate-pulse' />
-                   <div className='w-16 h-1 bg-zinc-800 rounded-full' />
-                </div>
+                
             </ComponentCard>
           </Link>
 
