@@ -9,6 +9,7 @@ const CustomCursor = () => {
 
   useEffect(() => {
     
+    document.body.style.cursor = 'none';
     
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -45,7 +46,6 @@ const CustomCursor = () => {
       window.removeEventListener('mousemove', updatePosition);
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
-
       
      
     };

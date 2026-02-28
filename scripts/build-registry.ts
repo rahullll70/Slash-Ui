@@ -1,4 +1,4 @@
-import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync, readFileSync } from 'fs';
 import path from 'path';
 import { registry } from '../registry/index';
 
@@ -19,30 +19,20 @@ export const Index: Record<string, any> = {
 `;
 
   registry.forEach((item: any) => {
-    
     const componentPath = item.files[0].replace(/\.tsx?$/, "");
     const sourceFilePath = path.join(process.cwd(), 'registry', item.files[0]);
-    
-    
-    const detailsRelativePath = `details/${item.name}.tsx`;
-    const detailsFilePath = path.join(process.cwd(), 'registry', detailsRelativePath);
+    const detailsFilePath = path.join(process.cwd(), 'registry', `details/${item.name}.tsx`);
     const hasDetails = existsSync(detailsFilePath);
 
-    const rawContent = existsSync(sourceFilePath)
-      ? readFileSync(sourceFilePath, 'utf8')
-      : '';
-    
+    const rawContent = existsSync(sourceFilePath) ? readFileSync(sourceFilePath, 'utf8') : '';
     const safeContent = rawContent.replace(/`/g, "\\`").replace(/\$/g, "\\$");
     const safeDescription = (item.description || "").replace(/`/g, "\\`").replace(/\$/g, "\\$");
 
     indexContent += `    "${item.name}": {
       name: "${item.name}",
       type: "${item.type}",
-
       component: React.lazy(() => import("../registry/${componentPath}")),
-      
       details: ${hasDetails ? `React.lazy(() => import("../registry/details/${item.name}"))` : 'null'},
-      
       files: ${JSON.stringify(item.files)},
       category: "${item.category || 'undefined'}",
       content: \`${safeContent}\`,

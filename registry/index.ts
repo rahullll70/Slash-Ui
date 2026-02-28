@@ -15,6 +15,6 @@ export const registry = [
     type: 'ui',
     files: ['ui/cursor/dot-cursor.tsx'],
     category: 'cursors',
-    install: '',
+    install: 'npm install framer-motion',
   }
 ];
