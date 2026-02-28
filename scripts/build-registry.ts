@@ -19,14 +19,22 @@ export const Index: Record<string, any> = {
 `;
 
   registry.forEach((item: any) => {
-    const componentPath = item.files[0].replace(/\.tsx?$/, "");
+    const componentPath = item.files[0].replace(/\.tsx?$/, '');
     const sourceFilePath = path.join(process.cwd(), 'registry', item.files[0]);
-    const detailsFilePath = path.join(process.cwd(), 'registry', `details/${item.name}.tsx`);
+    const detailsFilePath = path.join(
+      process.cwd(),
+      'registry',
+      `details/${item.name}.tsx`,
+    );
     const hasDetails = existsSync(detailsFilePath);
 
-    const rawContent = existsSync(sourceFilePath) ? readFileSync(sourceFilePath, 'utf8') : '';
-    const safeContent = rawContent.replace(/`/g, "\\`").replace(/\$/g, "\\$");
-    const safeDescription = (item.description || "").replace(/`/g, "\\`").replace(/\$/g, "\\$");
+    const rawContent = existsSync(sourceFilePath)
+      ? readFileSync(sourceFilePath, 'utf8')
+      : '';
+    const safeContent = rawContent.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+    const safeDescription = (item.description || '')
+      .replace(/`/g, '\\`')
+      .replace(/\$/g, '\\$');
 
     indexContent += `    "${item.name}": {
       name: "${item.name}",

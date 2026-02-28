@@ -38,7 +38,9 @@ export default function ShowcaseContainer({
   install?: string;
 }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [activePanel, setActivePanel] = useState<'code' | 'info' | 'search' | null>(null);
+  const [activePanel, setActivePanel] = useState<
+    'code' | 'info' | 'search' | null
+  >(null);
   const [copied, setCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { id } = useParams();
@@ -49,16 +51,14 @@ export default function ShowcaseContainer({
   const componentsList = Object.values(Index['default']);
   const activeItem = Index['default'][id as string] as any;
 
-
-
   //style based on components id
   const getContainerStyle = () => {
-   switch (id) {
+    switch (id) {
       case 'neubrutal-button':
-        return 'bg-[#538F37]'; 
+        return 'bg-[#538F37]';
       case 'dot-cursor':
-      case 'navbar1':
-        return '' ;
+      case 'flaoting-navbar':
+        return '';
       default:
         return 'bg-[#0a0908]';
     }
@@ -67,7 +67,9 @@ export default function ShowcaseContainer({
   // Handle Fullscreen state
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => setIsFullscreen(true));
+      document.documentElement
+        .requestFullscreen()
+        .then(() => setIsFullscreen(true));
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen().then(() => setIsFullscreen(false));
@@ -81,7 +83,8 @@ export default function ShowcaseContainer({
       setIsFullscreen(!!document.fullscreenElement);
     };
     document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    return () =>
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
   // FETCH SOURCE CODE LOGIC
@@ -98,9 +101,19 @@ export default function ShowcaseContainer({
   }, [activePanel, activeItem, id]);
 
   const DynamicDetails = activeItem?.details;
-  const dynamicCode = propsCode || sourceCode || activeItem?.content || '// No source code found.';
-  const dynamicDescription = propsDescription || activeItem?.description || `Premium ${title} component.`;
-  const dynamicInstall = propsInstall || activeItem?.install || 'npm install framer-motion lucide-react';
+  const dynamicCode =
+    propsCode ||
+    sourceCode ||
+    activeItem?.content ||
+    '// No source code found.';
+  const dynamicDescription =
+    propsDescription ||
+    activeItem?.description ||
+    `Premium ${title} component.`;
+  const dynamicInstall =
+    propsInstall ||
+    activeItem?.install ||
+    'npm install framer-motion lucide-react';
 
   const copyToClipboard = async (text: string) => {
     await navigator.clipboard.writeText(text);
@@ -143,9 +156,15 @@ export default function ShowcaseContainer({
                     onClick={() => setSidebarOpen(false)}
                     className='group flex items-center gap-4 py-2'
                   >
-                    <div className={`h-px transition-all duration-300 ${isActive ? 'w-6 bg-white' : 'w-3 bg-zinc-800 group-hover:bg-zinc-500'}`} />
-                    <span className={`text-[13px] transition-colors ${isActive ? 'text-white font-medium' : 'text-zinc-500 group-hover:text-zinc-300'}`}>
-                      <span className='font-mono mr-2 opacity-30'>{String(index + 1).padStart(2, '0')}</span>
+                    <div
+                      className={`h-px transition-all duration-300 ${isActive ? 'w-6 bg-white' : 'w-3 bg-zinc-800 group-hover:bg-zinc-500'}`}
+                    />
+                    <span
+                      className={`text-[13px] transition-colors ${isActive ? 'text-white font-medium' : 'text-zinc-500 group-hover:text-zinc-300'}`}
+                    >
+                      <span className='font-mono mr-2 opacity-30'>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                       {comp.name}
                     </span>
                   </Link>
@@ -198,18 +217,25 @@ export default function ShowcaseContainer({
 
             {/* FLOATING TOOLBAR */}
             <div className='absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-[#161616]/90 border border-white/10 p-1.5 rounded-2xl shadow-2xl backdrop-blur-xl z-[120]'>
-              <button onClick={toggleFullscreen} className='p-2.5 rounded-xl cursor-pointer text-zinc-500 hover:text-white hover:bg-white/5 transition-all'>
+              <button
+                onClick={toggleFullscreen}
+                className='p-2.5 rounded-xl cursor-pointer text-zinc-500 hover:text-white hover:bg-white/5 transition-all'
+              >
                 <Maximize size={18} />
               </button>
               <button
-                onClick={() => setActivePanel(activePanel === 'info' ? null : 'info')}
+                onClick={() =>
+                  setActivePanel(activePanel === 'info' ? null : 'info')
+                }
                 className={`p-2.5 rounded-xl cursor-pointer transition-all ${activePanel === 'info' ? 'bg-white text-black' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
               >
                 <Info size={18} />
               </button>
               <div className='w-px h-4 bg-white/10 mx-1' />
               <button
-                onClick={() => setActivePanel(activePanel === 'code' ? null : 'code')}
+                onClick={() =>
+                  setActivePanel(activePanel === 'code' ? null : 'code')
+                }
                 className={`p-2.5 rounded-xl transition-all cursor-pointer ${activePanel === 'code' ? 'bg-white text-black' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
               >
                 <Code2 size={18} />
@@ -275,7 +301,11 @@ export default function ShowcaseContainer({
                             onClick={() => copyToClipboard(dynamicCode)}
                             className='absolute top-4 right-4 p-2 bg-white/5 rounded-md text-zinc-400 cursor-pointer z-10 hover:bg-white/10 transition-colors'
                           >
-                            {copied ? <Check size={14} className='text-white' /> : <Copy size={14} />}
+                            {copied ? (
+                              <Check size={14} className='text-white' />
+                            ) : (
+                              <Copy size={14} />
+                            )}
                           </button>
                           <SyntaxHighlighter
                             language='tsx'
@@ -331,12 +361,18 @@ export default function ShowcaseContainer({
                               Installation
                             </h4>
                             <div className='bg-black p-6 rounded-2xl border border-white/10 font-mono text-xs flex items-center justify-between group transition-all hover:border-white/20'>
-                              <span className='text-zinc-300'>{dynamicInstall}</span>
+                              <span className='text-zinc-300'>
+                                {dynamicInstall}
+                              </span>
                               <button
                                 onClick={() => copyToClipboard(dynamicInstall)}
                                 className='p-2 hover:bg-white/5 rounded-md text-zinc-500 hover:text-white cursor-pointer transition-colors'
                               >
-                                {copied ? <Check size={14} /> : <Copy size={14} />}
+                                {copied ? (
+                                  <Check size={14} />
+                                ) : (
+                                  <Copy size={14} />
+                                )}
                               </button>
                             </div>
                           </section>

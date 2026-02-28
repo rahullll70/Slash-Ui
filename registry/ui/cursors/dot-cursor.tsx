@@ -9,7 +9,7 @@ const CustomCursor = () => {
 
   useEffect(() => {
     
-    document.body.style.cursor = 'none';
+    // document.body.style.cursor = 'none';
     
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
