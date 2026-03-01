@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="relative z-10 overflow-hidden text-center">
           <h1 className='text-center text-4xl md:text-6xl font-switzer capitalize font-bold tracking-tighter leading-tight text-neutral-100 overflow-hidden'>
             Start slashing your UI <br />
-            development with <span className='italic font-hoshiko text-red-500 tracking-wider'>Slash/Ui</span> today!
+            development with <span className='italic font-hoshiko text-red-500 tracking-wider px-5'>Slash/Ui</span> today!
           </h1>
           
           <div className="flex justify-center mt-10 overflow-x-hidden">
@@ -43,7 +43,7 @@ const Footer = () => {
             Designed and Developed by{' '}
             <a
               className='italic text-neutral-300 hover:text-white transition-colors duration-300 border-b border-neutral-700 hover:border-white'
-              href='https://twitter.com/yourhandle'
+              href='https://x.com/rahulll_parihar'
               target='_blank'
               rel='noopener noreferrer'
             >
