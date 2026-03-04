@@ -24,4 +24,12 @@ export const registry = [
     category: 'navbars',
     install: 'npm install lucide-react framer-motion gsap',
   },
+
+  {
+    name: 'minimal-scrollbar',
+    type: 'ui',
+    files: ['ui/scrollbars/minimal-scrollbar.tsx'],
+    category: 'scrollbars',
+    install: '',
+  }
 ];

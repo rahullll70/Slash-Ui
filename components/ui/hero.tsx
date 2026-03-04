@@ -1,6 +1,7 @@
 'use client';
 
 import React, { JSX, useState } from 'react';
+import Link from 'next/link';
 import { ChevronRight, Terminal, Copy, Check } from 'lucide-react';
 
 const Hero = (): JSX.Element => {
@@ -20,29 +21,16 @@ const Hero = (): JSX.Element => {
   return (
     <section className='relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden'>
       {/* --- BACKGROUND IMAGE PROPERTIES --- */}
-      <div className='absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none opacity-5'>
-        {/* <img
-          src='/images/slash_2.svg'
-          alt='Background Texture'
-          className='
-            w-full h-full 
-            object-cover 
-            object-center 
-            brightness-110 
-            contrast-125
-          '
-        /> */}
-      </div>
+      <div className='absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none opacity-5'></div>
 
       {/* --- GRID OVERLAY --- */}
       <div className='absolute inset-0 z-[1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none opacity-20' />
 
       {/* --- CONTENT CONTAINER WITH ISOLATION --- */}
-      <div className='relative z-10 container mx-auto px-6 flex flex-col items-center isolation-isolate'>
-        <h1 className='max-w-4xl text-center text-5xl font-beVietnamPro  tracking-tight md:text-7xl lg:text-8xl leading-[0.9] text-white mix-blend-difference'>
-          A NEW STANDARD <br />
-          <span className='7'>MODERN</span> <br />
-          UI COMPONENTS
+      <div className='relative z-10 container mt-50 mx-auto px-6 flex flex-col items-center isolation-isolate'>
+        <h1 className='max-w-4xl text-center text-3xl font-beVietnamPro  tracking-tight md:text-5xl lg:text-7xl leading-[0.2] text-white mix-blend-difference'>
+          SLASH/UI <br />
+        <span className='font-sans italic text-8xl'>components</span>  
         </h1>
 
         <p className='mt-8 max-w-2xl text-center font-cartographCF text-zinc-400 leading-relaxed md:text-sm mix-blend-difference'>
@@ -50,13 +38,16 @@ const Hero = (): JSX.Element => {
           React and Tailwind. Stop styling from scratch and start building.
         </p>
 
-        <div className='mt-20 flex flex-col items-center gap-4 sm:flex-row font-cartographCF'>
-          <button className='relative z-30 h-14 px-8 rounded-xl text-sm bg-white text-black font-bold hover:bg-zinc-200 cursor-pointer transition-all shadow-[0_0_40px_rgba(255,255,255,0.15)] flex items-center gap-4 group'>
+        <div className='mt-30 flex flex-col items-center gap-4 sm:flex-row font-cartographCF'>
+          <Link
+            href='/component'
+            className='relative z-30 h-14 px-8 rounded-xl text-sm bg-white text-black font-bold hover:bg-zinc-200 cursor-pointer transition-all shadow-[0_0_40px_rgba(255,255,255,0.15)] flex items-center gap-4 group'
+          >
             Explore Components
             <div className='flex items-center justify-center transition-transform group-hover:translate-x-1'>
               <ChevronRight size={18} className='text-black' />
             </div>
-          </button>
+          </Link>
 
           <div
             onClick={handleCopy}

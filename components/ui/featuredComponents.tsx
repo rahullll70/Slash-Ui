@@ -59,18 +59,18 @@ const FeaturedComponents = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px]'>
           
          
-          <Link href={`/component/reveal`}>
-            <ComponentCard title="Image Reveal" videoSrc={getComp("reveal")?.video} />
+          <Link href={`/component/`}>
+            <ComponentCard title="" videoSrc={getComp("reveal")?.video} />
           </Link>
 
           {/* 2. Navbar */}
           <Link href={`/component/floating-navbar`} className="lg:col-span-2">
-            <ComponentCard title="Navbar" videoSrc={getComp("navbar")?.video} />
+            <ComponentCard title="Floating Navbar" videoSrc={getComp("navbar")?.video} />
           </Link>
 
           {/* 3. Custom ScrollBar */}
-          <Link href={`/component/scrollbar`} className="lg:row-span-3">
-            <ComponentCard title="Custom ScrollBar" videoSrc={getComp("scrollbar")?.video} />
+          <Link href={`/component/minimal-scrollbar`} className="lg:row-span-3">
+            <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video} />
           </Link>
 
           {/* 4. Custom Cursor */}
@@ -81,8 +81,8 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 5. Devouring Details */}
-          <Link href={`/component/details`}>
-            <ComponentCard title="Devouring Details" videoSrc={getComp("details")?.video} />
+          <Link href={`/component/`}>
+            <ComponentCard title="" videoSrc={getComp("details")?.video} />
           </Link>
 
           {/* 6. Neubrutal Button */}
@@ -94,13 +94,13 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 7. Creative Layouts */}
-          <Link href={`/component/creative-grid`} className="lg:col-span-3">
-            <ComponentCard title="Creative Layouts" videoSrc={getComp("creative-grid")?.video} />
+          <Link href={`/component/`} className="lg:col-span-3">
+            <ComponentCard title="" videoSrc={getComp("creative-grid")?.video} />
           </Link>
 
           {/* 8. User Feedback */}
-          <Link href={`/component/feedback`}>
-            <ComponentCard title="User Feedback" videoSrc={getComp("feedback")?.video}>
+          <Link href={`/component/`}>
+            <ComponentCard title="" videoSrc={getComp("feedback")?.video}>
                 <div className="text-2xl font-bold opacity-50 transition-opacity">?</div>
             </ComponentCard>
           </Link>

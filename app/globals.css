@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-/* Apply background to body and html instead of everything */
+
 html,
 body {
   background-color: var(--color-dark);
@@ -57,6 +57,3 @@ body {
   display: none;
 }
 
-.hide-cursor {
-  cursor: none;
-}

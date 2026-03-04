@@ -85,8 +85,8 @@ const ComponentsPage = () => {
         <section>
           <div className='mb-12'>
             <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-              Out of the box{' '}
-              <span className='text-zinc-500 font-normal text-lg'>[06]</span>
+              Some Random Components{' '}
+              
             </h2>
             <p className='text-zinc-500 text-sm mt-2'>
               Collection of interactive components [Click to view]
@@ -120,10 +120,7 @@ const ComponentsPage = () => {
 
             <Link href='/component/dynamic-island' className='block'>
               <ComponentCard title='Dynamic island' author='skiper4'>
-                <div className='w-32 h-10 bg-black rounded-full border border-zinc-800 flex items-center px-4 gap-2'>
-                  <div className='w-2 h-2 rounded-full bg-red-500' />
-                  <div className='w-12 h-1 bg-zinc-800 rounded-full' />
-                </div>
+                
               </ComponentCard>
             </Link>
 

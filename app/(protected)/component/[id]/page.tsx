@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Index } from '@/__registry__';
-import ShowcaseContainer from '@/components/ShowcaseContainer';
+import ShowcaseContainer from '@/components/ui/ShowcaseContainer';
 
 export default async function Page({
   params,

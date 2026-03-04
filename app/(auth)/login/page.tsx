@@ -1,0 +1,82 @@
+'use client';
+
+import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { sendOtp, verifyOtp } from '@/lib/actions/auth.action';
+
+export default function LoginPage() {
+  const [step, setStep] = useState<'email' | 'otp'>('email');
+  const [email, setEmail] = useState('');
+
+  return (
+    <div className='min-h-screen flex flex-col items-center justify-center bg-black text-white px-4 font-sans selection:bg-zinc-800'>
+      <div className='w-full max-w-2xl'>
+        {step === 'email' ? (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData();
+              formData.append('email', email);
+              sendOtp(formData);
+              setStep('otp');
+            }}
+            className='relative group'
+          >
+            <input
+              type='email'
+              autoFocus
+              required
+              value={email}
+              placeholder='you@example.com'
+              onChange={(e) => setEmail(e.target.value)}
+              className='w-full bg-transparent text-4xl md:text-5xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all duration-500 placeholder:text-zinc-800'
+            />
+            <button
+              type='submit'
+              className='absolute right-0 top-1/2 -translate-y-1/2 p-2 text-zinc-500 hover:text-white transition-colors'
+            >
+              <ArrowRight size={32} strokeWidth={1.5} />
+            </button>
+          </form>
+        ) : (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+
+              const formData = new FormData(e.currentTarget);
+              formData.append('email', email);
+
+              await verifyOtp(formData);
+            }}
+            className='space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700'
+          >
+            <label htmlFor='otp'>
+              Enter the 6-digit code sent to your email
+            </label>
+            <div className='relative group'>
+              <input
+                type='text'
+                name='otp'
+                autoFocus
+                maxLength={6}
+                placeholder='000000'
+                className='w-full bg-transparent text-4xl md:text-6xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all text-center tracking-[1em] placeholder:text-zinc-900'
+              />
+              <button
+                type='submit'
+                className='absolute right-0 top-1/2 -translate-y-1/2 p-2 text-zinc-500 hover:text-white transition-colors'
+              >
+                <ArrowRight size={32} strokeWidth={1.5} />
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+
+      {/* Footer Branding like in image 2 */}
+      <footer className='fixed bottom-8 text-md text-zinc-600 uppercase font-hoshiko font-bold'>
+        Slash/ui
+      </footer>
+    </div>
+  );
+}

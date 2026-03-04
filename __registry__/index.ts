@@ -61,6 +61,28 @@ export const Index: Record<string, any> = {
         height: 'h-[200vh]',
       },
     },
+
+    'minimal-scrollbar': {
+      name: 'minimal-scrollbar',
+      type: 'ui',
+      component: React.lazy(
+        () => import('@/registry/ui/scrollbars/minimal-scrollbar'),
+      ),
+      details: React.lazy(
+        () => import('@/registry/details/scrollbars/minimal-scrollbar-details'),
+      ),
+      files: ['registry/ui/scrollbars/minimal-scrollbar.tsx'],
+      category: 'scrollbars',
+      content: '',
+      description: 'A minimalistic scrollbar component with a clean design.',
+
+      meta: {
+        bgColor: 'bg-[#0A0A0A]',
+        scrollable: true,
+        height: 'h-[200vh]',
+      },
+    },
+
     //  more components...
   },
 };
