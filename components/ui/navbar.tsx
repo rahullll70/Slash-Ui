@@ -7,17 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSearch } from '@/hooks/use-component-search';
 import { Slant as Hamburger } from 'hamburger-react';
 
-const menuLinks = [
-  { label: 'How to Use', path: '/how-to-use', tag: 'Guide' },
-  { label: 'Legacy Version', path: '/legacy', tag: null },
-  { label: 'Pricing', path: '/pricing', tag: 'Free' },
-  { label: 'Components', path: '/component', tag: '105+' },
-  { label: 'Get Support', path: '/support', tag: null },
-  { label: 'Founder', path: '/founder', tag: null },
-  { label: 'Account', path: '/account', tag: null },
-  { label: 'Logout', path: '/logout', tag: null },
-];
-
 const Navbar: React.FC = () => {
   const { searchQuery, setSearchQuery, filteredItems, staticPages } =
     useSearch();
@@ -26,6 +15,17 @@ const Navbar: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch('/api/me');
+      const data = await res.json();
+      setUserEmail(data.user?.email || null);
+    }
+
+    getUser();
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -73,13 +73,36 @@ const Navbar: React.FC = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
+  // ADD THIS HERE
+  const menuLinks = [
+    { label: 'Quick Start', path: '/docs', tag: 'Guide' },
+    { label: 'Pricing', path: '/pricing', tag: 'Free' },
+    { label: 'Components', path: '/component', tag: '105+' },
+    { label: 'Get Support', path: '/support', tag: null },
+
+    ...(userEmail
+      ? [
+          { label: 'Account', path: '/account', tag: userEmail },
+
+          { label: 'Logout', path: '/logout', tag: null },
+        ]
+      : [{ label: 'Login', path: '/login', tag: null }]),
+  ];
+
   if (!mounted) return null;
 
   return (
     <>
       {/* ── NAVBAR — always capsule ── */}
       <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-4 px-6 pointer-events-none'>
-        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900/80 backdrop-blur-lg border border-zinc-800 rounded-2xl shadow-2xl pointer-events-auto'>
+        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900/80 backdrop-blur-3xl border border-zinc-800 rounded-2xl  pointer-events-auto'>
           {/* Left */}
           <div className='flex items-center gap-8'>
             <Link href='/' className='font-bold text-white text-lg'>
@@ -145,61 +168,75 @@ const Navbar: React.FC = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
               onClick={() => setIsMenuOpen(false)}
-              className='fixed inset-0 z-[150] bg-black/50 backdrop-blur-sm'
+              className='fixed inset-0 z-[150]  backdrop-blur-md'
             />
+
+            {/* Sidebar Container */}
             <motion.div
-              initial={{ x: '100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className='fixed top-0 right-0 h-full w-full max-w-sm z-[160] bg-zinc-950 border-l border-zinc-800/60 flex flex-col'
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className='fixed inset-0 z-[160] flex flex-col justify-center items-center bg-transparent pointer-events-none'
             >
-              <nav className='flex-1 overflow-y-auto px-4 py-4 my-10'>
+              <nav className='flex flex-col items-center justify-center w-full max-w-4xl pointer-events-auto'>
                 {menuLinks.map((link, i) => (
                   <motion.div
                     key={link.label}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 + i * 0.04, duration: 0.25 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05, duration: 0.4 }}
+                    className='w-full'
                   >
                     <Link
                       href={link.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className='group flex items-center justify-between px-3 py-3.5 rounded-xl hover:bg-zinc-800/60 transition-all duration-200'
+                      className='group flex flex-col items-center py-2'
                     >
-                      <span className='text-sm font-medium text-zinc-300 group-hover:text-white transition-colors'>
+                      <span className='text-6xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white transition-transform duration-300 group-hover:scale-105'>
                         {link.label}
                       </span>
-                      <div className='flex items-center gap-2'>
-                        {link.tag && (
-                          <span className='px-2 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-800 text-zinc-400 border border-zinc-700'>
-                            {link.tag}
-                          </span>
-                        )}
-                        <ArrowUpRight
-                          size={14}
-                          className='text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all'
-                        />
-                      </div>
+
+                      {/* Optional Tag (Small and subtle like the image) */}
+                      {link.tag && (
+                        <span className='text-[10px] mt-2 opacity-50  tracking-widest'>
+                          {link.tag}
+                        </span>
+                      )}
                     </Link>
-                    {(link.label === 'Pricing' ||
-                      link.label === 'Get Support') && (
-                      <div className='mx-3 my-1 border-t border-zinc-800/60' />
-                    )}
                   </motion.div>
                 ))}
               </nav>
+
+              {/* Bottom Footer Section (Privacy/Terms) */}
+              <div
+                className='absolute bottom-10 w-full flex justify-between px-10 text-md font-bold text-zinc-500 uppercase pointer-events-auto 
+               '
+              >
+                <Link
+                  href='/privacy-policy'
+                  className='hover:text-white transition-all duration-500'
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href='/terms-of-service'
+                  className='hover:text-white transition-all duration-500'
+                >
+                  Terms of Service
+                </Link>
+              </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-
       {/* ── SEARCH MODAL ── */}
       <AnimatePresence>
         {isSearchOpen && (

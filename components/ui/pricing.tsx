@@ -91,7 +91,7 @@ const PricingCard = ({
         <div className='relative z-20'>
           <Link
             href={'https://app.archway.finance/payment-requests/HDGAY/public'}
-            className={`w-full py-4 rounded-xl font-beVietnamPro font-bold text-xs transition-all duration-500 flex items-center justify-center cursor-pointer ${
+            className={`w-full py-4 rounded-xl font-beVietnamPro text-xs transition-all duration-500 flex items-center justify-center cursor-pointer ${
               isHighlighted
                 ? 'bg-white text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:bg-zinc-100'
                 : 'bg-transparent text-white border border-white/20 hover:border-white/60'

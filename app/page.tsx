@@ -4,6 +4,7 @@ import Hero from '@/components/ui/hero';
 import Footer from '@/components/ui/footer';
 import FeaturedComponents from '@/components/ui/featuredComponents';
 import Pricing from '@/components/ui/pricing';
+import IndustryProof from '@/components/ui/IndustryProof';
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
       <Navbar />
       <Hero />
       <FeaturedComponents />
+      <IndustryProof />
       <Pricing />
       <Footer />
     </div>
