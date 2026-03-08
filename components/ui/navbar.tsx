@@ -81,7 +81,8 @@ const Navbar: React.FC = () => {
   }, [isMenuOpen]);
 
   // ADD THIS HERE
-  const menuLinks = [
+  const menuLinks = React.useMemo(() => {
+  return [
     { label: 'Quick Start', path: '/docs', tag: 'Guide' },
     { label: 'Pricing', path: '/pricing', tag: 'Free' },
     { label: 'Components', path: '/component', tag: '105+' },
@@ -90,13 +91,11 @@ const Navbar: React.FC = () => {
     ...(userEmail
       ? [
           { label: 'Account', path: '/account', tag: userEmail },
-
           { label: 'Logout', path: '/logout', tag: null },
         ]
       : [{ label: 'Login', path: '/login', tag: null }]),
   ];
-
-  if (!mounted) return null;
+}, [userEmail]);
 
   return (
     <>

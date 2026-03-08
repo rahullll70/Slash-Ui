@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { logout } from '@/lib/actions/auth.action';
 import jwt from 'jsonwebtoken';
-import Navbar from '@/components/ui/navbar';
+
 import Link from 'next/link';
 
 export default async function UserProfile() {
@@ -42,8 +42,6 @@ export default async function UserProfile() {
 
   return (
     <div className='min-h-screen text-white flex items-center justify-center px-4'>
-      
-
       <main className='w-full max-w-xl'>
         <header className='mb-10 text-center'>
           <p className='text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-3'>
@@ -68,7 +66,10 @@ export default async function UserProfile() {
           <Row label='Components Access' value='36+' />
         </div>
 
-        <Link href='/pricing' className='py-4 mt-5 w-full bg-zinc-900 hover:bg-zinc-800 transition-all duration-400 rounded-xl cursor-pointer'>
+        <Link
+          href='/pricing'
+          className='block text-center py-4 mt-5 w-full bg-zinc-900 hover:bg-zinc-800 transition-all duration-400 rounded-xl cursor-pointer'
+        >
           Unlock full access
         </Link>
       </main>
