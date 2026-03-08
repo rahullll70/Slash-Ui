@@ -38,7 +38,7 @@ export default function LoginPage() {
               value={email}
               placeholder='you@example.com'
               onChange={(e) => setEmail(e.target.value)}
-              className='w-full bg-transparent text-4xl md:text-5xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all duration-500 placeholder:text-zinc-800'
+              className='w-full bg-transparent text-xl md:text-5xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all duration-500 placeholder:text-zinc-800'
             />
 
             {loading ? (
@@ -78,7 +78,7 @@ export default function LoginPage() {
                 maxLength={6}
                 disabled={loading}
                 placeholder='000000'
-                className='w-full bg-transparent text-4xl md:text-6xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all text-center tracking-[1em] placeholder:text-zinc-900'
+                className='w-full bg-transparent text-xl md:text-5xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all text-center tracking-[1em] placeholder:text-zinc-900'
               />
 
               {loading ? (

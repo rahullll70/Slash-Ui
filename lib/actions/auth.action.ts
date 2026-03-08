@@ -58,11 +58,10 @@ export async function verifyOtp(formData: FormData) {
       user = await prisma.user.create({ data: { email } });
     }
 
-    /* 🔑 CREATE JWT */
     const token = jwt.sign(
       { email: user.email, id: user.id },
       process.env.JWT_SECRET!,
-      { expiresIn: '7d' }
+      { expiresIn: '7d' },
     );
 
     const cookieStore = await cookies();
@@ -74,7 +73,6 @@ export async function verifyOtp(formData: FormData) {
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     });
-
   } catch (err) {
     console.error(err);
     return { success: false, message: 'Server error' };
@@ -85,8 +83,6 @@ export async function verifyOtp(formData: FormData) {
 
 export async function logout() {
   const cookieStore = await cookies();
-
   cookieStore.delete('access_token');
-
   redirect('/');
 }
