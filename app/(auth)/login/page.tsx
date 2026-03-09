@@ -1,18 +1,48 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { sendOtp, verifyOtp } from '@/lib/actions/auth.action';
+import { Toast } from '@/components/toast';
+
+interface ToastState {
+  id: number;
+  message: string;
+}
+
+function useToast() {
+  const [toasts, setToasts] = useState<ToastState[]>([]);
+
+  const showToast = useCallback((message: string) => {
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, message }]);
+  }, []);
+
+  const removeToast = useCallback((id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  return { toasts, showToast, removeToast };
+}
 
 export default function LoginPage() {
   const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const { toasts, showToast, removeToast } = useToast();
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center  text-white px-4 font-sans selection:bg-zinc-800'>
-      <div className='w-full max-w-2xl'>
+    <div className='min-h-screen flex flex-col items-center justify-center text-white px-4 font-sans selection:bg-zinc-800'>
+      {/* Toast notifications */}
+      {toasts.map((t) => (
+        <Toast
+          key={t.id}
+          message={t.message}
+          onClose={() => removeToast(t.id)}
+        />
+      ))}
 
+      <div className='w-full max-w-2xl'>
         {/* EMAIL STEP */}
         {step === 'email' ? (
           <form
@@ -26,6 +56,7 @@ export default function LoginPage() {
               await sendOtp(formData);
 
               setLoading(false);
+              showToast('OTP sent to your email');
               setStep('otp');
             }}
             className='relative group'
@@ -42,7 +73,7 @@ export default function LoginPage() {
             />
 
             {loading ? (
-              <Loader text="Sending" />
+              <Loader text='Sending' />
             ) : (
               <button
                 type='submit'
@@ -82,7 +113,7 @@ export default function LoginPage() {
               />
 
               {loading ? (
-                <Loader text="Verifying" />
+                <Loader text='Verifying' />
               ) : (
                 <button
                   type='submit'
@@ -110,10 +141,10 @@ function Loader({ text }: { text: string }) {
   return (
     <div className='absolute right-0 top-1/2 -translate-y-1/2 text-zinc-400 text-sm flex items-center gap-1'>
       [{text}
-      <span className="flex">
-        <span className="animate-bounce">.</span>
-        <span className="animate-bounce delay-150">.</span>
-        <span className="animate-bounce delay-300">.</span>
+      <span className='flex'>
+        <span className='animate-bounce'>.</span>
+        <span className='animate-bounce delay-150'>.</span>
+        <span className='animate-bounce delay-300'>.</span>
       </span>
       ]
     </div>
