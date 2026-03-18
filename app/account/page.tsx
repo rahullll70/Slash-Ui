@@ -2,13 +2,27 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { logout } from '@/lib/actions/auth.action';
-import Navbar from '@/components/ui/navbar';
+import jwt from 'jsonwebtoken';
+
+import Link from 'next/link';
 
 export default async function UserProfile() {
-  const cookieStore = await cookies(); 
-  const email = cookieStore.get('user_email')?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get('access_token')?.value;
 
-  if (!email) {
+  if (!token) {
+    redirect('/login');
+  }
+
+  let email: string;
+
+  try {
+    const decoded = jwt.verify(token!, process.env.JWT_SECRET!) as {
+      email: string;
+    };
+
+    email = decoded.email;
+  } catch {
     redirect('/login');
   }
 
@@ -27,8 +41,7 @@ export default async function UserProfile() {
   });
 
   return (
-    <div className='min-h-screen bg-black text-white flex items-center justify-center px-4'>
-        <Navbar /> 
+    <div className='min-h-screen text-white flex items-center justify-center px-4'>
       <main className='w-full max-w-xl'>
         <header className='mb-10 text-center'>
           <p className='text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium mb-3'>
@@ -39,20 +52,26 @@ export default async function UserProfile() {
             {email}
           </h1>
         </header>
-        
+
         <div className='space-y-0 text-sm'>
           <div className='flex justify-between py-2 border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 mb-2'>
             <span>Type</span>
             <span>Details</span>
           </div>
 
-          
           <Row label='Action' value='Logout' isAction action={logout} />
 
           <Row label='Date of join' value={formattedDate} />
           <Row label='Membership' value='Free' />
           <Row label='Components Access' value='36+' />
         </div>
+
+        <Link
+          href='/pricing'
+          className='block text-center py-4 mt-5 w-full bg-zinc-900 hover:bg-zinc-800 transition-all duration-400 rounded-xl cursor-pointer'
+        >
+          Unlock full access
+        </Link>
       </main>
     </div>
   );
@@ -62,7 +81,7 @@ function Row({
   label,
   value,
   isAction = false,
-  action, // Add action prop
+  action,
 }: {
   label: string;
   value: string;
@@ -72,8 +91,8 @@ function Row({
   return (
     <div className='flex items-center justify-between py-5 border-b border-white/10'>
       <span className='text-gray-200'>{label}</span>
+
       {isAction && action ? (
-        /* Use a form for the server action logout */
         <form action={action}>
           <button
             type='submit'

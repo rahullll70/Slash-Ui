@@ -1,17 +1,22 @@
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from 'nodemailer';
 
 export async function sendOtpEmail(email: string, otp: string) {
-  const response = await resend.emails.send({
-    from: 'Slash/Ui <onboarding@resend.dev>',
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_APP_PASSWORD,
+    },
+  });
+
+  const response = await transporter.sendMail({
+    from: `"Slash/UI" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'Your verification code',
     html: `
       <div style="font-family: 'Helvetica Neue', Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #1a1a1a;">
         <div style="margin-bottom: 32px;">
-           <div style="display: flex; align-items: center; gap: 8px; font-weight: 600; letter-spacing: -0.02em;">
-            
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 600; letter-spacing: -0.02em;">
             <span>SLASH/UI</span>
           </div>
         </div>
@@ -38,3 +43,4 @@ export async function sendOtpEmail(email: string, otp: string) {
 
   return response;
 }
+

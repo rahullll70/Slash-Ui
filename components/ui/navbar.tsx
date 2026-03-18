@@ -2,30 +2,34 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Command, X, ArrowUpRight } from 'lucide-react';
+import { Command } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearch } from '@/hooks/use-component-search';
 import { Slant as Hamburger } from 'hamburger-react';
-
-const menuLinks = [
-  { label: 'How to Use', path: '/how-to-use', tag: 'Guide' },
-  { label: 'Legacy Version', path: '/legacy', tag: null },
-  { label: 'Pricing', path: '/pricing', tag: 'Free' },
-  { label: 'Components', path: '/component', tag: '105+' },
-  { label: 'Get Support', path: '/support', tag: null },
-  { label: 'Founder', path: '/founder', tag: null },
-  { label: 'Account', path: '/account', tag: null },
-  { label: 'Logout', path: '/logout', tag: null },
-];
+import { logout } from '@/lib/actions/auth.action';
 
 const Navbar: React.FC = () => {
-  const { searchQuery, setSearchQuery, filteredItems, staticPages } =
-    useSearch();
+  const { searchQuery, setSearchQuery, filteredItems, staticPages } = useSearch();
 
   const [mounted, setMounted] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [authLoaded, setAuthLoaded] = useState(false);
+
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch('/api/me', {
+        credentials: 'include',
+        cache: 'no-store',
+      });
+      const data = await res.json();
+      setUserEmail(data.user?.email || null);
+      setAuthLoaded(true);
+    }
+    getUser();
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -46,9 +50,7 @@ const Navbar: React.FC = () => {
         setSelectedIndex((prev) => (prev + 1) % filteredItems.length);
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setSelectedIndex(
-          (prev) => (prev - 1 + filteredItems.length) % filteredItems.length,
-        );
+        setSelectedIndex((prev) => (prev - 1 + filteredItems.length) % filteredItems.length);
       } else if (e.key === 'Enter') {
         const selected = filteredItems[selectedIndex];
         if (selected) {
@@ -73,13 +75,29 @@ const Navbar: React.FC = () => {
     };
   }, [isMenuOpen]);
 
-  if (!mounted) return null;
+  const menuLinks = React.useMemo(() => {
+    return [
+      { label: 'Quick Start', path: '/docs', tag: 'Guide' },
+      { label: 'Pricing', path: '/pricing', tag: 'Free' },
+      { label: 'Components', path: '/component', tag: '105+' },
+      { label: 'Get Support', path: '/support', tag: null },
+      ...(authLoaded
+        ? userEmail
+        ? [
+            { label: 'Account', path: '/account', tag: userEmail },
+            { label: 'Logout', path: '#logout', tag: null },
+          ]
+        : [{ label: 'Login', path: '/login', tag: null }]
+      : []
+      ),
+    ];
+  }, [userEmail, authLoaded]);
 
   return (
     <>
-      {/* ── NAVBAR — always capsule ── */}
+      {/* ── NAVBAR ── */}
       <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-4 px-6 pointer-events-none'>
-        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900/80 backdrop-blur-lg border border-zinc-800 rounded-2xl shadow-2xl pointer-events-auto'>
+        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900/80 backdrop-blur-3xl border border-zinc-800 rounded-2xl pointer-events-auto'>
           {/* Left */}
           <div className='flex items-center gap-8'>
             <Link href='/' className='font-bold text-white text-lg'>
@@ -89,10 +107,7 @@ const Navbar: React.FC = () => {
               <Link href='/docs' className='hover:text-white transition-colors'>
                 Docs
               </Link>
-              <Link
-                href='/component'
-                className='hover:text-white transition-colors'
-              >
+              <Link href='/component' className='hover:text-white transition-colors'>
                 Components
               </Link>
             </div>
@@ -100,25 +115,23 @@ const Navbar: React.FC = () => {
 
           {/* Right */}
           <div className='flex items-center gap-2'>
-            {/* CMD search trigger */}
             <button
               onClick={() => {
                 setIsSearchOpen(true);
                 setIsMenuOpen(false);
               }}
-              className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700   text-zinc-400 hover:text-white transition-all cursor-pointer'
+              className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
               aria-label='Open search'
             >
               <Command size={16} />
             </button>
 
-            {/* Hamburger — same box size as CMD button */}
             <button
               onClick={() => {
                 setIsMenuOpen((v) => !v);
                 setIsSearchOpen(false);
               }}
-              className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700   text-zinc-400 hover:text-white transition-all cursor-pointer'
+              className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
               aria-label='Open menu'
             >
               <AnimatePresence mode='wait' initial={false}>
@@ -128,11 +141,7 @@ const Navbar: React.FC = () => {
                   </motion.span>
                 ) : (
                   <motion.span key='open'>
-                    <Hamburger
-                      size={16}
-                      toggled={isMenuOpen}
-                      toggle={() => {}}
-                    />
+                    <Hamburger size={16} toggled={isMenuOpen} toggle={() => {}} />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -149,52 +158,72 @@ const Navbar: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
               onClick={() => setIsMenuOpen(false)}
-              className='fixed inset-0 z-[150] bg-black/50 backdrop-blur-sm'
+              className='fixed inset-0 z-[150] backdrop-blur-md'
             />
+
             <motion.div
-              initial={{ x: '100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className='fixed top-0 right-0 h-full w-full max-w-sm z-[160] bg-zinc-950 border-l border-zinc-800/60 flex flex-col'
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className='fixed inset-0 z-[160] flex flex-col justify-center items-center bg-transparent pointer-events-none'
             >
-              <nav className='flex-1 overflow-y-auto px-4 py-4 my-10'>
+              <nav className='flex flex-col items-center justify-center w-full max-w-4xl pointer-events-auto'>
                 {menuLinks.map((link, i) => (
                   <motion.div
                     key={link.label}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 + i * 0.04, duration: 0.25 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05, duration: 0.4 }}
+                    className='w-full'
                   >
-                    <Link
-                      href={link.path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className='group flex items-center justify-between px-3 py-3.5 rounded-xl hover:bg-zinc-800/60 transition-all duration-200'
-                    >
-                      <span className='text-sm font-medium text-zinc-300 group-hover:text-white transition-colors'>
-                        {link.label}
-                      </span>
-                      <div className='flex items-center gap-2'>
+                    {link.label === 'Logout' ? (
+                      <form action={logout} className='w-full'>
+                        <button
+                          type='submit'
+                          onClick={() => setIsMenuOpen(false)}
+                          className='group flex flex-col items-center py-2 w-full'
+                        >
+                          <span className='text-6xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white transition-transform duration-300 group-hover:scale-105'>
+                            Logout
+                          </span>
+                          {link.tag && (
+                            <span className='text-[10px] mt-2 opacity-50 tracking-widest'>
+                              {link.tag}
+                            </span>
+                          )}
+                        </button>
+                      </form>
+                    ) : (
+                      <Link
+                        href={link.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className='group flex flex-col items-center py-2'
+                      >
+                        <span className='text-6xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white transition-transform duration-300 group-hover:scale-105'>
+                          {link.label}
+                        </span>
                         {link.tag && (
-                          <span className='px-2 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-800 text-zinc-400 border border-zinc-700'>
+                          <span className='text-[10px] mt-2 opacity-50 tracking-widest'>
                             {link.tag}
                           </span>
                         )}
-                        <ArrowUpRight
-                          size={14}
-                          className='text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all'
-                        />
-                      </div>
-                    </Link>
-                    {(link.label === 'Pricing' ||
-                      link.label === 'Get Support') && (
-                      <div className='mx-3 my-1 border-t border-zinc-800/60' />
+                      </Link>
                     )}
                   </motion.div>
                 ))}
               </nav>
+
+              <div className='absolute bottom-10 w-full flex justify-between px-10 text-md font-bold text-zinc-500 uppercase pointer-events-auto'>
+                <Link href='/privacy-policy' className='hover:text-white transition-all duration-500'>
+                  Privacy Policy
+                </Link>
+                <Link href='/terms-of-service' className='hover:text-white transition-all duration-500'>
+                  Terms of Service
+                </Link>
+              </div>
             </motion.div>
           </>
         )}
@@ -246,10 +275,7 @@ const Navbar: React.FC = () => {
                           className='flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
                         >
                           <div className='flex items-center gap-3'>
-                            <item.icon
-                              size={16}
-                              className='text-zinc-500 group-hover:text-white'
-                            />
+                            <item.icon size={16} className='text-zinc-500 group-hover:text-white' />
                             <span className='text-sm text-zinc-300 group-hover:text-white'>
                               {item.label}
                             </span>
@@ -260,9 +286,7 @@ const Navbar: React.FC = () => {
                         </Link>
                       ))
                     ) : (
-                      <p className='px-3 py-4 text-sm text-zinc-600'>
-                        No results found...
-                      </p>
+                      <p className='px-3 py-4 text-sm text-zinc-600'>No results found...</p>
                     )}
                   </div>
                 ) : (

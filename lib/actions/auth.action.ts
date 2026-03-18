@@ -1,6 +1,7 @@
 'use server';
 
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { prisma } from '@/lib/prisma';
 import { randomInt } from 'crypto';
 import { sendOtpEmail } from '../email';
@@ -10,28 +11,25 @@ import { redirect } from 'next/navigation';
 export async function sendOtp(formData: FormData) {
   const email = formData.get('email') as string;
 
-  console.log('EMAIL RECEIVED:', email);
-
   const rawOtp = randomInt(100000, 999999).toString();
   const hashedOtp = await bcrypt.hash(rawOtp, 10);
 
   await prisma.otp.create({
     data: {
       email,
-      code: hashedOtp, // ✅ must match schema field name
+      code: hashedOtp,
       expiresAt: new Date(Date.now() + 5 * 60 * 1000),
     },
   });
 
-  const response = await sendOtpEmail(email, rawOtp);
-  console.log('Email send response:', response);
+  await sendOtpEmail(email, rawOtp);
+
+  return { success: true };
 }
 
 export async function verifyOtp(formData: FormData) {
   const email = formData.get('email') as string;
   const otp = formData.get('otp') as string;
-
-  let isSuccess = false; // Track success state
 
   try {
     const record = await prisma.otp.findFirst({
@@ -42,40 +40,49 @@ export async function verifyOtp(formData: FormData) {
       orderBy: { createdAt: 'desc' },
     });
 
-    if (!record) return { success: false, message: 'OTP Expired or not found' };
+    if (!record) {
+      return { success: false, message: 'OTP expired' };
+    }
 
-    const isValid = await bcrypt.compare(otp, record.code);
-    if (!isValid) return { success: false, message: 'Invalid OTP' };
+    const valid = await bcrypt.compare(otp, record.code);
+
+    if (!valid) {
+      return { success: false, message: 'Invalid OTP' };
+    }
 
     await prisma.otp.deleteMany({ where: { email } });
 
     let user = await prisma.user.findUnique({ where: { email } });
+
     if (!user) {
       user = await prisma.user.create({ data: { email } });
     }
 
+    const token = jwt.sign(
+      { email: user.email, id: user.id },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' },
+    );
+
     const cookieStore = await cookies();
-    cookieStore.set('user_email', email, {
+
+    cookieStore.set('access_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      path: '/', // Changed to '/' so it's accessible across the site
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
     });
-
-    isSuccess = true; // Mark as successful
-  } catch (error) {
-    // Check if the error is a redirect error (though it shouldn't be here now)
-    console.error('Auth Error:', error);
-    return { success: false, message: 'A server error occurred' };
+  } catch (err) {
+    console.error(err);
+    return { success: false, message: 'Server error' };
   }
 
-  // CALL REDIRECT OUTSIDE THE TRY/CATCH
-  if (isSuccess) {
-    redirect('/account');
-  }
+  redirect('/account');
 }
 
 export async function logout() {
   const cookieStore = await cookies();
-  cookieStore.delete('user_email'); // Remove the session cookie
-  redirect('/'); // Redirect to Home
+  cookieStore.delete('access_token');
+  redirect('/');
 }
