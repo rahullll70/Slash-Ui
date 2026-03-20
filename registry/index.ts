@@ -1,6 +1,6 @@
 // registry/index.ts
 
-export const registry = [
+export const Index = [
   {
     name: 'neubrutal-button',
     type: 'ui',
