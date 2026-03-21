@@ -184,7 +184,7 @@ const Navbar: React.FC = () => {
                         <button
                           type='submit'
                           onClick={() => setIsMenuOpen(false)}
-                          className='group flex flex-col items-center py-2 w-full'
+                          className='group flex flex-col items-center py-2 w-full cursor-pointer'
                         >
                           <span className='text-6xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white transition-transform duration-300 group-hover:scale-105'>
                             Logout
@@ -264,7 +264,7 @@ const Navbar: React.FC = () => {
                       Results
                     </p>
                     {filteredItems.length > 0 ? (
-                      filteredItems.map((item) => (
+                      filteredItems.map((item: any) => (
                         <Link
                           key={item.path}
                           href={item.path}
@@ -296,8 +296,8 @@ const Navbar: React.FC = () => {
                         {cat}
                       </p>
                       {staticPages
-                        .filter((p) => p.category === cat)
-                        .map((p) => (
+                        .filter((p: any) => p.category === cat)
+                        .map((p: any) => (
                           <Link
                             key={p.label}
                             href={p.path}

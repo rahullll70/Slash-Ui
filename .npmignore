@@ -1,0 +1,6 @@
+.next/
+node_modules/
+prisma/
+src/
+components/
+# We only want the compiled 'dist' folder to go to NPM

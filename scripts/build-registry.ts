@@ -1,6 +1,6 @@
 import { writeFileSync, existsSync, mkdirSync, readFileSync } from 'fs';
 import path from 'path';
-import { registry } from '../registry/index';
+import { Index } from '../registry/index';
 
 const OUTPUT_DIR = path.join(process.cwd(), '__registry__');
 const OUTPUT_PATH = path.join(OUTPUT_DIR, 'index.ts');
@@ -18,7 +18,7 @@ export const Index: Record<string, any> = {
   "default": {
 `;
 
-  registry.forEach((item: any) => {
+  Index.forEach((item: any) => {
     const componentPath = item.files[0].replace(/\.tsx?$/, '');
     const sourceFilePath = path.join(process.cwd(), 'registry', item.files[0]);
     const detailsFilePath = path.join(
