@@ -70,12 +70,12 @@ const FeaturedComponents = () => {
 
           {/* 3. Custom ScrollBar */}
           <Link href={`/component/minimal-scrollbar`} className="lg:row-span-3">
-            <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video} />
+            <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video || '/compVideos/minimal-scrollbar.mp4'} />
           </Link>
 
           {/* 4. Custom Cursor */}
-          <Link href={`/component/dot-cursor`} className="lg:col-span-2 lg:row-span-2">
-            <ComponentCard title="Custom Cursor">
+          <Link href={`/component/stroke-cards`} className="lg:col-span-2 lg:row-span-2">
+            <ComponentCard title="stroke-cards" videoSrc={getComp('stokr-cards')?.video || '/compVideos/stroke-cards.mp4'}>
                 
             </ComponentCard>
           </Link>
@@ -98,7 +98,7 @@ const FeaturedComponents = () => {
             <ComponentCard title="" videoSrc={getComp("creative-grid")?.video} />
           </Link>
 
-          {/* 8. User Feedback */}
+          {/* 8.  */}
           <Link href={`/component/`}>
             <ComponentCard title="" videoSrc={getComp("feedback")?.video}>
                 <div className="text-2xl font-bold opacity-50 transition-opacity">?</div>
