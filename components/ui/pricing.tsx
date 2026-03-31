@@ -30,7 +30,7 @@ const PricingCard = ({
     >
       {isHighlighted && (
         <>
-          <div className='absolute -top-[20%] -right-[20%] w-[70%] h-[70%] bg-white/10 blur-[100px] pointer-events-none' />
+          <div className='absolute -top-[20%] -right-[20%] w-[70%] h-[20%] bg-white/10 blur-[100px] pointer-events-none' />
 
           <div className='absolute inset-0 pointer-events-none z-0'>
             <img
