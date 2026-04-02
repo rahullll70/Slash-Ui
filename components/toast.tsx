@@ -13,7 +13,6 @@ export function Toast({ message, duration = 3000, onClose }: ToastProps) {
 
   useEffect(() => {
     const enterTimer = setTimeout(() => setVisible(true), 10);
-
     const exitTimer = setTimeout(() => {
       setVisible(false);
       setTimeout(() => onClose?.(), 300);
@@ -27,40 +26,22 @@ export function Toast({ message, duration = 3000, onClose }: ToastProps) {
 
   return (
     <div
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+      className={`
+        fixed top-6 right-6 z-50
+        px-5 py-3.5 rounded-2xl
+        bg-zinc-900 border border-zinc-800
+        text-white text-sm font-medium
+        shadow-xl
+        transition-all duration-300 ease-out
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}
+      `}
       role="status"
       aria-live="polite"
     >
-      <div
-        className={`
-          inline-flex items-center gap-2.5
-          bg-[#1c1c1e] text-[#f5f5f5]
-          px-5 py-3 rounded-full
-          text-sm font-medium tracking-wide
-          shadow-[0_2px_8px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,255,255,0.06)]
-          whitespace-nowrap
-          transition-all duration-300 ease-out
-          ${visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-2 scale-95"}
-        `}
-      >
-        <span className="w-[18px] h-[18px] rounded-full bg-white flex items-center justify-center flex-shrink-0">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <path
-              d="M2 5.5L4 7.5L8 3"
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-        {message}
-      </div>
+      {message}
     </div>
   );
 }
-
-// ─── useToast hook ────────────────────────────────────────────────────────────
 
 interface ToastState {
   id: number;
@@ -98,4 +79,3 @@ export function useToast() {
 
   return { showToast, ToastContainer };
 }
-

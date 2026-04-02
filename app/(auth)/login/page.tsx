@@ -1,63 +1,46 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { sendOtp, verifyOtp } from '@/lib/actions/auth.action';
-import { Toast } from '@/components/toast';
-
-interface ToastState {
-  id: number;
-  message: string;
-}
-
-function useToast() {
-  const [toasts, setToasts] = useState<ToastState[]>([]);
-
-  const showToast = useCallback((message: string) => {
-    const id = Date.now();
-    setToasts((prev) => [...prev, { id, message }]);
-  }, []);
-
-  const removeToast = useCallback((id: number) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  }, []);
-
-  return { toasts, showToast, removeToast };
-}
+import { useToast } from '@/components/toast';
 
 export default function LoginPage() {
   const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const { toasts, showToast, removeToast } = useToast();
+  const { showToast, ToastContainer } = useToast();
 
   return (
     <div className='min-h-screen flex flex-col items-center justify-center text-white px-4 font-sans selection:bg-zinc-800'>
-      {/* Toast notifications */}
-      {toasts.map((t) => (
-        <Toast
-          key={t.id}
-          message={t.message}
-          onClose={() => removeToast(t.id)}
-        />
-      ))}
+      
+      {/* Toast container at root level */}
+      <ToastContainer />
 
       <div className='w-full max-w-2xl'>
-        {/* EMAIL STEP */}
         {step === 'email' ? (
           <form
             onSubmit={async (e) => {
               e.preventDefault();
               setLoading(true);
 
-              const formData = new FormData();
-              formData.append('email', email);
-
-              await sendOtp(formData);
-
-              setLoading(false);
-              showToast('OTP sent to your email');
-              setStep('otp');
+              try {
+                const formData = new FormData();
+                formData.append('email', email);
+                await sendOtp(formData);
+                showToast('OTP sent to your email');
+                setTimeout(() => setStep('otp'), 1500);
+              } catch (err: any) {
+                if (
+                  err?.message === 'NEXT_REDIRECT' ||
+                  err?.digest?.startsWith('NEXT_REDIRECT')
+                ) {
+                  throw err;
+                }
+                showToast('Failed to send OTP. Please try again.');
+              } finally {
+                setLoading(false);
+              }
             }}
             className='relative group'
           >
@@ -84,16 +67,30 @@ export default function LoginPage() {
             )}
           </form>
         ) : (
-          /* OTP STEP */
           <form
             onSubmit={async (e) => {
               e.preventDefault();
               setLoading(true);
 
-              const formData = new FormData(e.currentTarget);
-              formData.append('email', email);
+              try {
+                const formData = new FormData(e.currentTarget);
+                formData.append('email', email);
+                
+                showToast('Logged in successfully');
+                await new Promise((res) => setTimeout(res, 1000))
 
-              await verifyOtp(formData);
+                await verifyOtp(formData)
+              } catch (err: any) {
+                if (
+                  err?.message === 'NEXT_REDIRECT' ||
+                  err?.digest?.startsWith('NEXT_REDIRECT')
+                ) {
+                  throw err;
+                }
+                showToast('Invalid OTP. Please try again.');
+              } finally {
+                setLoading(false);
+              }
             }}
             className='space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700'
           >
@@ -127,15 +124,12 @@ export default function LoginPage() {
         )}
       </div>
 
-      {/* Footer Branding */}
       <footer className='fixed bottom-8 text-md text-zinc-600 uppercase font-hoshiko font-bold'>
         Slash/ui
       </footer>
     </div>
   );
 }
-
-/* Loader Component */
 
 function Loader({ text }: { text: string }) {
   return (
