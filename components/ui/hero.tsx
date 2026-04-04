@@ -6,7 +6,7 @@ import { ChevronRight, Terminal, Copy, Check } from 'lucide-react';
 
 const Hero = (): JSX.Element => {
   const [copied, setCopied] = useState<boolean>(false);
-  const installCommand: string = 'npx slash-ui@latest init';
+  const installCommand: string = 'npx slashh-ui@latest init';
 
   const handleCopy = async (): Promise<void> => {
     try {
@@ -33,19 +33,19 @@ const Hero = (): JSX.Element => {
       </video>
 
       <div className='relative z-10 container mx-auto px-6 flex mt-40 flex-col items-center'>
-        <h1 className='max-w-4xl text-center text-3xl font-beVietnamPro tracking-tight md:text-5xl lg:text-8xl text-white'>
+        <h1 className='max-w-4xl text-center text-5xl font-beVietnamPro tracking-tight md:text-7xl leading-2 text-white'>
           SLASH/UI <br />
           <span className='font-sans italic text-6xl md:text-8xl text-zinc-200'>
             components
           </span>
         </h1>
 
-        <p className='mt-8 max-w-2xl text-center font-cartographCF text-zinc-400 leading-relaxed md:text-sm'>
+        <p className='mt-8 max-w-2xl text-center font-cartographCF text-zinc-400 leading-relaxed md:text-sm text-[12px]'>
           A collection of accessible, high-performance components built with
           React and Tailwind. Stop styling from scratch and start building.
         </p>
 
-        <div className='mt-10 flex flex-col items-center gap-4 sm:flex-row font-cartographCF'>
+        <div className='mt-10                                 not-first-of-type: flex flex-col items-center gap-4 sm:flex-row font-cartographCF'>
           <Link
             href='/component'
             className='h-14 px-8 rounded-xl text-sm bg-white text-black font-bold hover:bg-zinc-200 transition-all flex items-center gap-4 group'
@@ -67,7 +67,7 @@ const Hero = (): JSX.Element => {
             </code>
             <div className='ml-2 border-l border-white/10 pl-4'>
               {copied ? (
-                <Check size={16} className='text-green-400' />
+                <Check size={16} className='text-white' />
               ) : (
                 <Copy
                   size={16}

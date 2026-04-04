@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Slash/U!',
-  description: '',
+  title: 'Slash/Ui',
+  description: 'A coolest react components library',
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <SearchProvider>
-            <Navbar />
+            
             
             {children}
           </SearchProvider>
