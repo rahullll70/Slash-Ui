@@ -66,3 +66,11 @@ html.lenis body {
 .lenis.lenis-smooth {
   scroll-behavior: auto;
 }
+
+.parent {
+  perspective: 1000px;
+}
+
+.button {
+  transform-style: preserve-3d;
+}

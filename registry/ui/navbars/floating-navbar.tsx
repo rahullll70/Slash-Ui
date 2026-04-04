@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
@@ -12,9 +12,23 @@ const Navbar = () => {
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const handleScroll = (e: Event) => {
+      const target = e.target as HTMLElement;
+      setScrolled(target.scrollTop > 20);
+    };
+
+    // Listen on the scrollable parent div instead of window
+    const scrollContainer = document.querySelector('[data-scroll-container]');
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll);
+      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    }
+
+    // Fallback to window
+    const handleWindowScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleWindowScroll);
+    return () => window.removeEventListener('scroll', handleWindowScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -31,7 +45,8 @@ const Navbar = () => {
   if (!mounted) return null;
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-6 px-6 pointer-events-none mt-10'>
+    // Change fixed → sticky so it works inside the scrollable div
+    <nav className='sticky top-0 left-0 w-full z-[100] flex justify-center pt-6 px-6 pointer-events-none'>
       <motion.div
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -45,7 +60,7 @@ const Navbar = () => {
         `}
       >
         <Link href='/' className='group flex items-center'>
-          <span className=' text-3xl uppercase tracking-wide font-bold'>
+          <span className='text-3xl uppercase tracking-wide font-bold'>
             Renoh
           </span>
         </Link>
@@ -55,7 +70,7 @@ const Navbar = () => {
             <Link
               key={link.slug}
               href={`/${link.slug}`}
-              className='text-[10px]  font-plex uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors relative group'
+              className='text-[10px] font-plex uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors relative group'
             >
               {link.name}
               <span className='absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-500 group-hover:w-full' />

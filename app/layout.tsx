@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <SearchProvider>
-            <Navbar />
+            
             
             {children}
           </SearchProvider>
