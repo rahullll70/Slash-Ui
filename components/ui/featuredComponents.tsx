@@ -63,7 +63,7 @@ const FeaturedComponents = () => {
             <ComponentCard title="" videoSrc={getComp("reveal")?.video} />
           </Link>
 
-          {/* 2. Navbar */}
+          {/* 2. Floating Navbar */}
           <Link href={`/component/floating-navbar`} className="lg:col-span-2">
             <ComponentCard title="Floating Navbar" videoSrc={getComp("navbar")?.video} />
           </Link>
@@ -73,9 +73,9 @@ const FeaturedComponents = () => {
             <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video || '/compVideos/minimal-scrollbar.mp4'} />
           </Link>
 
-          {/* 4. Custom Cursor */}
+          {/* 4. Stroke Cards */}
           <Link href={`/component/stroke-cards`} className="lg:col-span-2 lg:row-span-2">
-            <ComponentCard title="stroke-cards" videoSrc={getComp('stokr-cards')?.video || '/compVideos/stroke-cards.mp4'}>
+            <ComponentCard title="Stroke Cards" videoSrc={getComp('stroke-cards')?.video || '/compVideos/stroke-cards.mp4'}>
                 
             </ComponentCard>
           </Link>
@@ -93,9 +93,9 @@ const FeaturedComponents = () => {
             />
           </Link>
 
-          {/* 7. Creative Layouts */}
-          <Link href={`/component/`} className="lg:col-span-3">
-            <ComponentCard title="" videoSrc={getComp("creative-grid")?.video} />
+          {/* 7. Arc Slider */}
+          <Link href={`/component/arc-slider`} className="lg:col-span-3">
+            <ComponentCard title="Arc Slider" videoSrc={getComp("arc-slider")?.video || '/compVideos/arc-slider.mp4'} />
           </Link>
 
           {/* 8.  */}
