@@ -94,12 +94,12 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 7. Arc Slider */}
-          <Link href={`/component/arc-slider`} className="lg:col-span-3">
+          <Link href={`/component/arc-slider`} className="lg:col-span-3 lg:row-span-2">
             <ComponentCard title="Arc Slider" videoSrc={getComp("arc-slider")?.video || '/compVideos/arc-slider.mp4'} />
           </Link>
 
           {/* 8.  */}
-          <Link href={`/component/`}>
+          <Link href={`/component/`} className='lg:row-span-2'>
             <ComponentCard title="" videoSrc={getComp("feedback")?.video}>
                 <div className="text-2xl font-bold opacity-50 transition-opacity">?</div>
             </ComponentCard>
