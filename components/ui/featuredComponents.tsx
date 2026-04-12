@@ -70,7 +70,7 @@ const FeaturedComponents = () => {
 
           {/* 3. Custom ScrollBar */}
           <Link href={`/component/minimal-scrollbar`} className="lg:row-span-3">
-            <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video || '/compVideos/minimal-scrollbar.mp4'} />
+            <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video || '/compVideos/infinite-slider.mp4'} />
           </Link>
 
           {/* 4. Stroke Cards */}
