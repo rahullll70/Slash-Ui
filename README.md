@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://your-banner-image-url.png" alt="Slash UI" width="100%" />
+<img src="/public/banner.png" alt="Slash UI" width="100%" />
 
 <br />
 
