@@ -60,7 +60,7 @@ const FeaturedComponents = () => {
           
          
           <Link href={`/component/`}>
-            <ComponentCard title="" videoSrc={getComp("reveal")?.video} />
+            <ComponentCard title="" videoSrc={getComp("strike-reveal")?.video || '/compVideos/strike-reveal.mp4'} />
           </Link>
 
           {/* 2. Floating Navbar */}
