@@ -1,68 +1,54 @@
 <div align="center">
 
-<img src="https://your-banner-image-url.png" alt="Slash UI Banner" width="100%" />
+<img src="https://your-banner-image-url.png" alt="Slash UI" width="100%" />
 
 <br />
 
-# ⚡ Slash UI
+# Slash UI
 
-### A modern component library for the web — crafted for developers who care about motion, feel, and detail.
-
-<br />
-
-[![npm version](https://img.shields.io/npm/v/@ghatak/slash-ui?color=black&label=npm&style=flat-square)](https://www.npmjs.com/package/@ghatak/slash-ui)
-[![npm downloads](https://img.shields.io/npm/dm/@ghatak/slash-ui?color=black&style=flat-square)](https://www.npmjs.com/package/@ghatak/slash-ui)
-[![license](https://img.shields.io/npm/l/@ghatak/slash-ui?color=black&style=flat-square)](./LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-black?style=flat-square)](./CONTRIBUTING.md)
+A modern component library for the web — crafted for developers who care about motion, feel, and detail.
 
 <br />
 
-[**Browse Components**](#components) · [**Quick Start**](#quick-start) · [**CLI Usage**](#cli-usage) · [**Contributing**](#contributing)
-
-<br />
+[Browse Components](#components) · [Quick Start](#quick-start) · [CLI Usage](#cli-usage) · [Contributing](#contributing)
 
 </div>
 
 ---
 
-## ✦ What is Slash UI?
+## What is Slash UI?
 
-**Slash UI** is a CLI-powered component library for Next.js and React apps. It ships production-ready UI components with modern motion design — hover effects, preloaders, transitions, scroll animations, loaders, cursors, and more.
+Slash UI is a CLI-powered component library for Next.js and React apps. It ships production-ready UI components with modern motion design — hover effects, preloaders, transitions, scroll animations, loaders, cursors, and more.
 
-Unlike traditional component libraries, Slash UI copies components **directly into your project** — giving you full ownership and control over every line of code.
-
-> Built for developers who want beautiful UI without sacrificing flexibility.
+Unlike traditional component libraries, Slash UI copies components directly into your project — giving you full ownership and control over every line of code.
 
 ---
 
-## ✦ Features
+## Features
 
-- 🎯 &nbsp;**CLI-first** — add components directly into your codebase
-- 🌀 &nbsp;**Motion-ready** — every component is built with animation in mind
-- 🖱️ &nbsp;**Custom Cursors** — drop-in cursor effects with zero config
-- ⏳ &nbsp;**Preloaders & Loaders** — smooth page entry experiences
-- 🔀 &nbsp;**Transitions** — fluid page and element transitions
-- 📜 &nbsp;**Scroll Effects** — scroll-triggered animations and smooth scrolling
-- 🧩 &nbsp;**Modular** — only add what you need, nothing more
-- 🎨 &nbsp;**Fully customizable** — edit components after adding them
+- CLI-first — add components directly into your codebase
+- Motion-ready — every component is built with animation in mind
+- Custom cursors, preloaders, transitions, scroll effects and more
+- Modular — only add what you need, nothing more
+- Fully customizable — edit components freely after adding them
 
 ---
 
-## ✦ Quick Start
+## Quick Start
 
-### 1. Install the package
+**1. Install the package**
 
 ```bash
 npm install @ghatak/slash-ui --ignore-scripts
 ```
 
-### 2. Add a component via CLI
+**2. Add a component**
 
 ```bash
 npx slash-ui add <component-name>
 ```
 
-### 3. Use it in your project
+**3. Use it in your project**
 
 ```tsx
 import { ButtonPulse } from '@/components/ui/buttons/ButtonPulse'
@@ -74,9 +60,7 @@ export default function Page() {
 
 ---
 
-## ✦ CLI Usage
-
-Slash UI comes with a powerful CLI to manage your components.
+## CLI Usage
 
 ```bash
 npx slash-ui [command]
@@ -89,71 +73,64 @@ npx slash-ui [command]
 
 ---
 
-## ✦ Components
+## Components
 
-Slash UI is organized into categories:
-
-### 🖱️ Cursors
-Custom cursor effects that replace or enhance the default browser cursor.
-
-```bash
-npx slash-ui add cursor-dot
-npx slash-ui add cursor-ring
-```
-
-### 🔘 Buttons
+### Buttons
 Animated, interactive button variants with hover effects.
 
 ```bash
 npx slash-ui add button-magnetic
-npx slash-ui add button-pulse
 ```
 
-### 🧭 Navbars
+### Cursors
+Custom cursor effects that replace or enhance the default browser cursor.
+
+```bash
+npx slash-ui add cursor-dot
+```
+
+### Navbars
 Modern navigation bars with scroll-aware behavior.
 
 ```bash
 npx slash-ui add navbar-glass
-npx slash-ui add navbar-minimal
 ```
 
-### 📜 Scrollbars
+### Scrollbars
 Styled and animated scrollbar components.
 
 ```bash
 npx slash-ui add scrollbar-smooth
 ```
 
-### ⏳ Preloaders & Loaders
+### Preloaders & Loaders
 Page entry animations and loading states.
 
 ```bash
 npx slash-ui add preloader-fade
-npx slash-ui add loader-spin
 ```
 
-### 🔀 Transitions
+### Transitions
 Smooth page and element transition effects.
 
 ```bash
 npx slash-ui add transition-slide
-npx slash-ui add transition-fade
 ```
 
 ---
 
-## ✦ Requirements
+## Requirements
 
-- **Next.js** 13+ (App Router supported)
-- **React** 18+
-- **Tailwind CSS** v3+
-- **Node.js** 18+
+- Next.js 13+
+- React 18+
+- Tailwind CSS v3+
+- Node.js 18+
 
 ---
 
-## ✦ Project Structure
+## Project Structure
 
-After adding components, they'll appear in your project like this:
+After adding components, they will appear in your project like this:
 
 ```
 your-project/
@@ -169,9 +146,9 @@ You own the code — edit freely.
 
 ---
 
-## ✦ Contributing
+## Contributing
 
-Contributions are welcome! If you have a component idea or want to improve an existing one:
+Contributions are welcome. If you have a component idea or want to improve an existing one:
 
 1. Fork the repository
 2. Create a new branch: `git checkout -b feat/your-component`
@@ -180,18 +157,6 @@ Contributions are welcome! If you have a component idea or want to improve an ex
 
 ---
 
-## ✦ License
+## License
 
 MIT © [Rahul Ghatak](https://github.com/ghatak)
-
----
-
-<div align="center">
-
-Made with ⚡ by **Rahul Ghatak**
-
-<br />
-
-⭐ Star this repo if you find it useful!
-
-</div>
