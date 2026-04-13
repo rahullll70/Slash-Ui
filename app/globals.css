@@ -74,3 +74,13 @@ html.lenis body {
 .button {
   transform-style: preserve-3d;
 }
+
+/* Fix hamburger-react internal spacing */
+.hamburger-react {
+  padding: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Command } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearch } from '@/hooks/use-component-search';
-import { Slant as Hamburger } from 'hamburger-react';
 import { logout } from '@/lib/actions/auth.action';
 
 const Navbar: React.FC = () => {
@@ -77,19 +76,18 @@ const Navbar: React.FC = () => {
 
   const menuLinks = React.useMemo(() => {
     return [
-      { label: 'Quick Start', path: '/docs', tag: 'Guide' },
+      { label: 'Quick Start', path: '/docs', tag: 'Docs' },
       { label: 'Pricing', path: '/pricing', tag: 'Free' },
-      { label: 'Components', path: '/component', tag: '105+' },
+      { label: 'Components', path: '/component', tag: '35+' },
       { label: 'Get Support', path: '/support', tag: null },
       ...(authLoaded
         ? userEmail
-        ? [
-            { label: 'Account', path: '/account', tag: userEmail },
-            { label: 'Logout', path: '#logout', tag: null },
-          ]
-        : [{ label: 'Login', path: '/login', tag: null }]
-      : []
-      ),
+          ? [
+              { label: 'Account', path: '/account', tag: userEmail },
+              { label: 'Logout', path: '#logout', tag: null },
+            ]
+          : [{ label: 'Login', path: '/login', tag: null }]
+        : []),
     ];
   }, [userEmail, authLoaded]);
 
@@ -97,7 +95,7 @@ const Navbar: React.FC = () => {
     <>
       {/* ── NAVBAR ── */}
       <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-4 px-6 pointer-events-none'>
-        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900/80 backdrop-blur-3xl border border-zinc-800 rounded-2xl pointer-events-auto'>
+        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900 backdrop-blur-3xl border border-zinc-800 rounded-2xl pointer-events-auto'>
           {/* Left */}
           <div className='flex items-center gap-8'>
             <Link href='/' className='font-bold text-white text-lg'>
@@ -126,25 +124,35 @@ const Navbar: React.FC = () => {
               <Command size={16} />
             </button>
 
+            {/* 2-bar animated menu icon */}
             <button
               onClick={() => {
                 setIsMenuOpen((v) => !v);
                 setIsSearchOpen(false);
               }}
               className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
-              aria-label='Open menu'
+              aria-label='Toggle menu'
             >
-              <AnimatePresence mode='wait' initial={false}>
-                {isMenuOpen ? (
-                  <motion.span key='close'>
-                    <Hamburger size={16} toggled={isMenuOpen} />
-                  </motion.span>
-                ) : (
-                  <motion.span key='open'>
-                    <Hamburger size={16} toggled={isMenuOpen} toggle={() => {}} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              <div className='flex flex-col justify-center items-center w-4 h-4 gap-[5px]'>
+                {/* Top bar — rotates to 45deg and moves down */}
+                <span
+                  className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
+                  style={{
+                    transform: isMenuOpen
+                      ? 'translateY(3.25px) rotate(45deg)'
+                      : 'none',
+                  }}
+                />
+                {/* Bottom bar — rotates to -45deg and moves up */}
+                <span
+                  className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
+                  style={{
+                    transform: isMenuOpen
+                      ? 'translateY(-3.25px) rotate(-45deg)'
+                      : 'none',
+                  }}
+                />
+              </div>
             </button>
           </div>
         </div>
@@ -154,75 +162,135 @@ const Navbar: React.FC = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setIsMenuOpen(false)}
-              className='fixed inset-0 z-[150] backdrop-blur-md'
+              className='fixed inset-0 z-[150]'
             />
 
+            {/* Menu panel */}
             <motion.div
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className='fixed inset-0 z-[160] flex flex-col justify-center items-center bg-transparent pointer-events-none'
+              initial={{ clipPath: 'inset(0 0 100% 0 round 0 0 16px 16px)' }}
+              animate={{ clipPath: 'inset(0 0 0% 0 round 0 0 16px 16px)' }}
+              exit={{ clipPath: 'inset(0 0 100% 0 round 0 0 16px 16px)' }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className='fixed top-0 left-0 right-0 z-[160] flex justify-center px-6 pt-4 pointer-events-none'
             >
-              <nav className='flex flex-col items-center justify-center w-full max-w-4xl pointer-events-auto'>
-                {menuLinks.map((link, i) => (
-                  <motion.div
-                    key={link.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05, duration: 0.4 }}
-                    className='w-full'
-                  >
-                    {link.label === 'Logout' ? (
-                      <form action={logout} className='w-full'>
-                        <button
-                          type='submit'
-                          onClick={() => setIsMenuOpen(false)}
-                          className='group flex flex-col items-center py-2 w-full cursor-pointer'
+              <div className='w-full max-w-[860px] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden pointer-events-auto'>
+
+                {/* Mirrored navbar row */}
+                <div className='flex items-center justify-between px-6 h-13  border-zinc-800'>
+                  <Link href='/' className='font-bold text-white text-lg'>
+                    Slash/Ui
+                  </Link>
+                  <div className='flex items-center gap-2'>
+                    <button
+                      onClick={() => {
+                        setIsSearchOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                      className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
+                    >
+                      <Command size={16} />
+                    </button>
+                    
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
+                      aria-label='Close menu'
+                    >
+                      <div className='flex flex-col justify-center items-center w-4 h-4 gap-[5px]'>
+                        <span
+                          className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
+                          style={{ transform: 'translateY(3.25px) rotate(45deg)' }}
+                        />
+                        <span
+                          className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
+                          style={{ transform: 'translateY(-3.25px) rotate(-45deg)' }}
+                        />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Menu body — 3 columns */}
+                <div className='grid grid-cols-[160px_1fr_160px] gap-4 px-6 py-6'>
+
+                  {/* LEFT — legal */}
+                  <div className='flex flex-col gap-1.5 pt-1'>
+                    <div className='flex flex-col gap-1 mt-4'>
+                      {['Privacy Policy', 'Terms', 'Accessibility'].map((l) => (
+                        <a
+                          key={l}
+                          href='#'
+                          className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors'
                         >
-                          <span className='text-6xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white transition-transform duration-300 group-hover:scale-105'>
-                            Logout
-                          </span>
-                          {link.tag && (
-                            <span className='text-[10px] mt-2 opacity-50 tracking-widest'>
-                              {link.tag}
-                            </span>
-                          )}
-                        </button>
-                      </form>
-                    ) : (
-                      <Link
-                        href={link.path}
-                        onClick={() => setIsMenuOpen(false)}
-                        className='group flex flex-col items-center py-2'
+                          {l}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CENTER — main nav links */}
+                  <nav className='flex flex-col justify-center pl-4  border-zinc-800'>
+                    {menuLinks.map((link, i) => (
+                      <motion.div
+                        key={link.label}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 + i * 0.04, duration: 0.25 }}
                       >
-                        <span className='text-6xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white transition-transform duration-300 group-hover:scale-105'>
-                          {link.label}
-                        </span>
+                        {link.label === 'Logout' ? (
+                          <form action={logout}>
+                            <button
+                              type='submit'
+                              onClick={() => setIsMenuOpen(false)}
+                              className='group flex items-center justify-between w-full py-1.5 cursor-pointer'
+                            >
+                              <span className='text-2xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
+                                Logout
+                              </span>
+                            </button>
+                          </form>
+                        ) : (
+                          <Link
+                            href={link.path}
+                            onClick={() => setIsMenuOpen(false)}
+                            className='group flex items-center justify-between py-1.5'
+                          >
+                            <span className='text-2xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
+                              {link.label}
+                            </span>
+                          </Link>
+                        )}
+                      </motion.div>
+                    ))}
+                  </nav>
+
+                  {/* RIGHT — tags */}
+                  <div className='flex flex-col justify-center gap-0  border-zinc-800 pl-4'>
+                    {menuLinks.map((link, i) => (
+                      <motion.div
+                        key={link.label + '-tag'}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.1 + i * 0.04 }}
+                        className='py-1.5 flex items-center h-[44px]'
+                      >
                         {link.tag && (
-                          <span className='text-[10px] mt-2 opacity-50 tracking-widest'>
+                          <span className='text-[10px] text-zinc-500 tracking-widest uppercase'>
                             {link.tag}
                           </span>
                         )}
-                      </Link>
-                    )}
-                  </motion.div>
-                ))}
-              </nav>
+                      </motion.div>
+                    ))}
+                  </div>
 
-              <div className='absolute bottom-10 w-full flex justify-between px-10 text-md font-bold text-zinc-500 uppercase pointer-events-auto'>
-                <Link href='/privacy-policy' className='hover:text-white transition-all duration-500'>
-                  Privacy Policy
-                </Link>
-                <Link href='/terms-of-service' className='hover:text-white transition-all duration-500'>
-                  Terms of Service
-                </Link>
+                </div>
               </div>
             </motion.div>
           </>
