@@ -59,8 +59,8 @@ const FeaturedComponents = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px]'>
           
          
-          <Link href={`/component/strike-reveal`}>
-            <ComponentCard title="Strike Reveal" videoSrc={getComp("reveal")?.video} />
+          <Link href={`/component/`}>
+            <ComponentCard title="" videoSrc={getComp("reveal")?.video} />
           </Link>
 
           {/* 2. Floating Navbar */}
