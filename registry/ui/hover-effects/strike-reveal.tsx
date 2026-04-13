@@ -48,6 +48,7 @@ const StrikeReveal: React.FC<StrikeRevealProps> = ({ label, href = "#" }) => {
         hover:before:w-full
       "
     >
+      Interaction
       {label}
     </a>
   );

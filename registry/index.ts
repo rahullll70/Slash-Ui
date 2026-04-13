@@ -6,7 +6,7 @@ export const Index = [
     type: 'ui',
     files: ['ui/buttons/neubrutal-button.tsx'],
     category: 'buttons',
-    install: 'npm install framer-motion lucide-react',
+    install: 'npm install framer-motion',
   },
 
   {
@@ -18,11 +18,11 @@ export const Index = [
   },
 
   {
-    name: 'flaoting-navbar',
+    name: 'floating-navbar',
     type: 'ui',
     files: ['ui/navbars/floating-navbar.tsx'],
     category: 'navbars',
-    install: 'npm install lucide-react framer-motion gsap',
+    install: 'npm install gsap',
   },
 
   {
@@ -31,5 +31,13 @@ export const Index = [
     files: ['ui/scrollbars/minimal-scrollbar.tsx'],
     category: 'scrollbars',
     install: '',
-  }
+  },
+
+  {
+    name: 'strike-reveal',
+    type: 'ui',
+    files: ['ui/hover-effects/strike-reveal.tsx'],
+    category: 'hover-effects',
+    install: '',
+  },
 ];

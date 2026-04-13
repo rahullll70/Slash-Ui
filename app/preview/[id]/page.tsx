@@ -1,22 +1,34 @@
 import React, { Suspense } from 'react';
 import { Index } from '@/__registry__';
 
-const FULLSCREEN_COMPONENTS = ['flaoting-navbar', 'dot-cursor', 'minimal-scrollbar'];
+const FULLSCREEN_COMPONENTS = [
+  'flaoting-navbar',
+  'dot-cursor',
+  'minimal-scrollbar',
+];
 
 const getPreviewBg = (id: string) => {
   switch (id) {
     // Buttons
-    case 'neubrutal-button': return 'bg-[#538F37]';
+    case 'neubrutal-button':
+      return 'bg-[#538F37]';
 
     // Navbars
-    case 'flaoting-navbar': return 'h-[200vh]'
+    case 'floating-navbar':
+      return 'bg-[#f0ebe5]';
 
     // Cursors
-    case 'dot-cursor': return 'cursor-none bg-white';
+    case 'dot-cursor':
+      return 'cursor-none bg-white';
 
     // Scrollbars
-    case 'minimal-scrollbar': return 'h-[100vh]'
-    default: return '';
+    case 'minimal-scrollbar':
+      return 'h-[100vh]';
+    // Hover Effect
+    case 'strike-reveal':
+      return 'bg-[#E8E0DA]';
+    default:
+      return '';
   }
 };
 
@@ -41,13 +53,13 @@ export default async function PreviewPage({
 
   return (
     <div
-  className={`w-full min-h-screen ${getPreviewBg(id)} ${
-    !isFullscreen ? 'flex items-center justify-center p-24' : ''
-  }`}
-  style={{
-    perspective: '1000px',
-  }}
->
+      className={`w-full min-h-screen ${getPreviewBg(id)} ${
+        !isFullscreen ? 'flex items-center justify-center p-24' : ''
+      }`}
+      style={{
+        perspective: '1000px',
+      }}
+    >
       {SelectedComponent ? (
         <Suspense
           fallback={

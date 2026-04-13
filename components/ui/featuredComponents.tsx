@@ -68,9 +68,9 @@ const FeaturedComponents = () => {
             <ComponentCard title="Floating Navbar" videoSrc={getComp("navbar")?.video} />
           </Link>
 
-          {/* 3. Custom ScrollBar */}
-          <Link href={`/component/minimal-scrollbar`} className="lg:row-span-3">
-            <ComponentCard title="Minimal Scrollbar" videoSrc={getComp("minimal-scrollbar")?.video || '/compVideos/infinite-slider.mp4'} />
+          {/* 3. Infinity Slider */}
+          <Link href={`/component/infinity-slider`} className="lg:row-span-3">
+            <ComponentCard title="Infinity Slider" videoSrc={getComp("minimal-scrollbar")?.video || '/compVideos/infinite-slider.mp4'} />
           </Link>
 
           {/* 4. Stroke Cards */}
@@ -101,7 +101,7 @@ const FeaturedComponents = () => {
           {/* 8.  */}
           <Link href={`/component/`} className='lg:row-span-2'>
             <ComponentCard title="" videoSrc={getComp("feedback")?.video}>
-                <div className="text-2xl font-bold opacity-50 transition-opacity">?</div>
+                
             </ComponentCard>
           </Link>
         </div>

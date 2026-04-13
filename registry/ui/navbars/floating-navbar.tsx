@@ -1,113 +1,143 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import gsap from 'gsap';
 
 const Navbar = () => {
-  const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(true);
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // --- Audio Logic (Preserved) ---
   useEffect(() => {
-    setMounted(true);
-
-    const handleScroll = (e: Event) => {
-      const target = e.target as HTMLElement;
-      setScrolled(target.scrollTop > 20);
-    };
-
-    // Listen on the scrollable parent div instead of window
-    const scrollContainer = document.querySelector('[data-scroll-container]');
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    if (!audioElementRef.current) return;
+    if (isAudioPlaying) {
+      audioElementRef.current
+        .play()
+        .catch(() => console.log('Audio blocked by browser'));
+    } else {
+      audioElementRef.current.pause();
     }
+  }, [isAudioPlaying]);
 
-    // Fallback to window
-    const handleWindowScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleWindowScroll);
-    return () => window.removeEventListener('scroll', handleWindowScroll);
+  const toggleAudio = () => {
+    setIsAudioPlaying(!isAudioPlaying);
+    setIsIndicatorActive(!isIndicatorActive);
+  };
+
+  // --- GSAP Lifecycle Management (Pure GSAP) ---
+  useEffect(() => {
+    // Context ensures all animations inside are cleaned up on unmount
+    let ctx = gsap.context(() => {
+      gsap.from(containerRef.current, {
+        y: -50,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'expo.out',
+        delay: 0.5,
+      });
+    }, containerRef);
+
+    return () => ctx.revert(); // Cleanup to prevent memory leaks
   }, []);
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
+  // --- Manual Hover Logic ---
+  const handleHover = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const targets = e.currentTarget.querySelectorAll('.letter');
+    if (!targets.length) return;
+
+    // Manual kill to prevent overlapping animation "fights"
+    gsap.killTweensOf(targets);
+
+    gsap.to(targets, {
+      y: -20,
+      opacity: 0,
+      duration: 0.25,
+      ease: 'power2.in',
+      stagger: 0.02,
+      onComplete: () => {
+        gsap.set(targets, { y: 20 });
+        gsap.to(targets, {
+          y: 0,
+          opacity: 1,
+          duration: 0.25,
+          ease: 'power2.out',
+          stagger: 0.02,
+        });
+      },
+    });
   };
 
   const navLinks = [
-    { name: 'Archives', slug: 'work' },
-    { name: 'Capabilities', slug: 'service' },
-    { name: 'Ethos', slug: 'about' },
+    { name: 'Home', path: '/' },
+    { name: 'Work', path: '/work' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
   ];
 
-  if (!mounted) return null;
-
   return (
-    // Change fixed → sticky so it works inside the scrollable div
-    <nav className='sticky top-0 left-0 w-full z-[100] flex justify-center pt-6 px-6 pointer-events-none'>
-      <motion.div
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`
-          flex items-center justify-between px-6 transition-all duration-500 pointer-events-auto
-          ${
-            scrolled
-              ? 'w-full md:w-[800px] h-14 bg-white/5 backdrop-blur-md border border-white/10 rounded-full shadow-2xl'
-              : 'w-full h-20 bg-transparent border-transparent'
-          }
-        `}
-      >
-        <Link href='/' className='group flex items-center'>
-          <span className='text-3xl uppercase tracking-wide font-bold'>
-            Renoh
-          </span>
-        </Link>
-
-        <div className='hidden md:flex items-center space-x-8'>
-          {navLinks.map((link) => (
-            <Link
-              key={link.slug}
-              href={`/${link.slug}`}
-              className='text-[10px] font-plex uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors relative group'
-            >
-              {link.name}
-              <span className='absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-500 group-hover:w-full' />
-            </Link>
+    <>  
+    <div
+      ref={containerRef}
+      className='fixed left-1/2 -translate-x-1/2 top-8 z-[100] w-auto'
+    >
+      <nav className='flex items-center gap-5 px-6 py-3 rounded-lg bg-zinc-800 backdrop-blur-xl border border-white/10 shadow-2xl'>
+        {/* Audio Visualizer */}
+        <button
+          onClick={toggleAudio}
+          className='flex items-end gap-[3px] h-3 w-5 hover:opacity-80 transition-opacity'
+        >
+          <audio ref={audioElementRef} src='/audio/ambient.mp3' loop />
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className={`w-[1.5px] bg-white transition-all duration-300 ${isIndicatorActive ? 'animate-pulse' : ''}`}
+              style={{
+                height: isIndicatorActive ? `${20 + i * 20}%` : '30%',
+                transitionDelay: `${i * 0.05}s`,
+              }}
+            />
           ))}
-        </div>
+        </button>
 
-        <div className='flex items-center space-x-4'>
-          <button
-            onClick={toggleTheme}
-            className='p-2 hover:bg-white/10 rounded-full transition-colors text-white'
-          >
-            <AnimatePresence mode='wait'>
-              <motion.div
-                key={isDark ? 'dark' : 'light'}
-                initial={{ opacity: 0, rotate: -90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                exit={{ opacity: 0, rotate: 90 }}
-                transition={{ duration: 0.2 }}
+        <div className='w-[0.5px] h-7 bg-white/90' />
+
+        {/* Navigation Links */}
+        <div className='flex items-center gap-8'>
+          {navLinks.map((link) => {
+            const active = pathname === link.path;
+            return (
+              <Link
+                key={link.name}
+                href={link.path}
+                className='relative text-[10px] uppercase tracking-[0.2em] font-sans group text-white'
               >
-                {isDark ? <Sun size={16} /> : <Moon size={16} />}
-              </motion.div>
-            </AnimatePresence>
-          </button>
-
-          <Link href='/contact'>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className='px-4 py-2 bg-white text-black text-[10px] font-plex uppercase tracking-widest rounded-full'
-            >
-              Inquire
-            </motion.div>
-          </Link>
+                <span
+                  className='inline-flex overflow-hidden'
+                  onMouseEnter={handleHover}
+                >
+                  {link.name.split('').map((char, i) => (
+                    <span key={i} className='inline-block overflow-hidden'>
+                      <span className='letter inline-block'>
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    </span>
+                  ))}
+                </span>
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-[1px] bg-white transition-all duration-700 ease-in-out ${active ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-50'}`}
+                />
+              </Link>
+            );
+          })}
         </div>
-      </motion.div>
-    </nav>
+      </nav>
+    </div>
+    </>
   );
 };
 
