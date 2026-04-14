@@ -65,7 +65,7 @@ const FeaturedComponents = () => {
 
           {/* 2. Floating Navbar */}
           <Link href={`/component/floating-navbar`} className="lg:col-span-2">
-            <ComponentCard title="Floating Navbar" videoSrc={getComp("navbar")?.video} />
+            <ComponentCard title="Floating Navbar" videoSrc={getComp("navbar")?.video || '/compVideos/floating-navbar.mp4'} />
           </Link>
 
           {/* 3. Infinity Slider */}
