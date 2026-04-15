@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
               { label: 'Account', path: '/account', tag: userEmail },
               { label: 'Logout', path: '#logout', tag: null },
             ]
-          : [{ label: 'Login', path: '/login', tag: null }]
+          : [{ label: 'Login', path: '/login', tag: 'NOT LOGGED IN' }]
         : []),
     ];
   }, [userEmail, authLoaded]);
