@@ -100,7 +100,7 @@ const FeaturedComponents = () => {
 
           {/* 8.  */}
           <Link href={`/component/`} className='lg:row-span-2'>
-            <ComponentCard title="" videoSrc={getComp("feedback")?.video}>
+            <ComponentCard title="" videoSrc={getComp("feedback")?.video || '/compVideos/animated-header.mp4'}>
                 
             </ComponentCard>
           </Link>
