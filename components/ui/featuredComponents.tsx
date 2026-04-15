@@ -80,9 +80,9 @@ const FeaturedComponents = () => {
             </ComponentCard>
           </Link>
 
-          {/* 5. Devouring Details */}
+          {/* 5.  Dot Cursor */}
           <Link href={`/component/`}>
-            <ComponentCard title="" videoSrc={getComp("details")?.video} />
+            <ComponentCard title="" videoSrc={getComp("details")?.video || '/compVideos/dot-cursor.mp4'} />
           </Link>
 
           {/* 6. Neubrutal Button */}
