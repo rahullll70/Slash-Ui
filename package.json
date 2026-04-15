@@ -15,9 +15,9 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "tsc",
+    "build": "tsc && next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "next lint",
     "build:registry": "tsx scripts/build-registry.ts"
   },
   "dependencies": {
