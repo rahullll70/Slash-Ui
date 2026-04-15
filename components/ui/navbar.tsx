@@ -8,7 +8,8 @@ import { useSearch } from '@/hooks/use-component-search';
 import { logout } from '@/lib/actions/auth.action';
 
 const Navbar: React.FC = () => {
-  const { searchQuery, setSearchQuery, filteredItems, staticPages } = useSearch();
+  const { searchQuery, setSearchQuery, filteredItems, staticPages } =
+    useSearch();
 
   const [mounted, setMounted] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -49,7 +50,9 @@ const Navbar: React.FC = () => {
         setSelectedIndex((prev) => (prev + 1) % filteredItems.length);
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setSelectedIndex((prev) => (prev - 1 + filteredItems.length) % filteredItems.length);
+        setSelectedIndex(
+          (prev) => (prev - 1 + filteredItems.length) % filteredItems.length,
+        );
       } else if (e.key === 'Enter') {
         const selected = filteredItems[selectedIndex];
         if (selected) {
@@ -105,7 +108,10 @@ const Navbar: React.FC = () => {
               <Link href='/docs' className='hover:text-white transition-colors'>
                 Docs
               </Link>
-              <Link href='/component' className='hover:text-white transition-colors'>
+              <Link
+                href='/component'
+                className='hover:text-white transition-colors'
+              >
                 Components
               </Link>
             </div>
@@ -181,7 +187,6 @@ const Navbar: React.FC = () => {
               className='fixed top-0 left-0 right-0 z-[160] flex justify-center px-6 pt-4 pointer-events-none'
             >
               <div className='w-full max-w-[860px] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden pointer-events-auto'>
-
                 {/* Mirrored navbar row */}
                 <div className='flex items-center justify-between px-6 h-13  border-zinc-800'>
                   <Link href='/' className='font-bold text-white text-lg'>
@@ -197,7 +202,7 @@ const Navbar: React.FC = () => {
                     >
                       <Command size={16} />
                     </button>
-                    
+
                     <button
                       onClick={() => setIsMenuOpen(false)}
                       className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
@@ -206,11 +211,15 @@ const Navbar: React.FC = () => {
                       <div className='flex flex-col justify-center items-center w-4 h-4 gap-[5px]'>
                         <span
                           className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
-                          style={{ transform: 'translateY(3.25px) rotate(45deg)' }}
+                          style={{
+                            transform: 'translateY(3.25px) rotate(45deg)',
+                          }}
                         />
                         <span
                           className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
-                          style={{ transform: 'translateY(-3.25px) rotate(-45deg)' }}
+                          style={{
+                            transform: 'translateY(-3.25px) rotate(-45deg)',
+                          }}
                         />
                       </div>
                     </button>
@@ -218,11 +227,10 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {/* Menu body — 3 columns */}
-                <div className='grid grid-cols-[160px_1fr_160px] gap-4 px-6 py-6'>
-
-                  {/* LEFT — legal */}
-                  <div className='flex flex-col gap-1.5 pt-1'>
-                    <div className='flex flex-col gap-1 mt-4'>
+                <div className='grid md:grid-cols-[160px_1fr_160px] grid-cols-1 gap-8 md:gap-4 px-6 py-10 md:py-6'>
+                  {/* LEFT — legal (Hidden on very small screens or moved to bottom) */}
+                  <div className='flex flex-col gap-1.5 pt-1 order-3 md:order-1'>
+                    <div className='flex flex-row md:flex-col gap-4 md:gap-1 mt-4'>
                       {['Privacy Policy', 'Terms', 'Accessibility'].map((l) => (
                         <a
                           key={l}
@@ -236,7 +244,7 @@ const Navbar: React.FC = () => {
                   </div>
 
                   {/* CENTER — main nav links */}
-                  <nav className='flex flex-col justify-center pl-4  border-zinc-800'>
+                  <nav className='flex flex-col justify-center md:pl-4 border-zinc-800 order-1 md:order-2'>
                     {menuLinks.map((link, i) => (
                       <motion.div
                         key={link.label}
@@ -251,7 +259,7 @@ const Navbar: React.FC = () => {
                               onClick={() => setIsMenuOpen(false)}
                               className='group flex items-center justify-between w-full py-1.5 cursor-pointer'
                             >
-                              <span className='text-2xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
+                              <span className='text-3xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
                                 Logout
                               </span>
                             </button>
@@ -262,7 +270,7 @@ const Navbar: React.FC = () => {
                             onClick={() => setIsMenuOpen(false)}
                             className='group flex items-center justify-between py-1.5'
                           >
-                            <span className='text-2xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
+                            <span className='text-3xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
                               {link.label}
                             </span>
                           </Link>
@@ -271,8 +279,8 @@ const Navbar: React.FC = () => {
                     ))}
                   </nav>
 
-                  {/* RIGHT — tags */}
-                  <div className='flex flex-col justify-center gap-0  border-zinc-800 pl-4'>
+                  {/* RIGHT — tags (Hidden on mobile to keep focus on links) */}
+                  <div className='hidden md:flex flex-col justify-center gap-0 border-zinc-800 pl-4 order-2 md:order-3'>
                     {menuLinks.map((link, i) => (
                       <motion.div
                         key={link.label + '-tag'}
@@ -289,7 +297,6 @@ const Navbar: React.FC = () => {
                       </motion.div>
                     ))}
                   </div>
-
                 </div>
               </div>
             </motion.div>
@@ -343,7 +350,10 @@ const Navbar: React.FC = () => {
                           className='flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
                         >
                           <div className='flex items-center gap-3'>
-                            <item.icon size={16} className='text-zinc-500 group-hover:text-white' />
+                            <item.icon
+                              size={16}
+                              className='text-zinc-500 group-hover:text-white'
+                            />
                             <span className='text-sm text-zinc-300 group-hover:text-white'>
                               {item.label}
                             </span>
@@ -354,7 +364,9 @@ const Navbar: React.FC = () => {
                         </Link>
                       ))
                     ) : (
-                      <p className='px-3 py-4 text-sm text-zinc-600'>No results found...</p>
+                      <p className='px-3 py-4 text-sm text-zinc-600'>
+                        No results found...
+                      </p>
                     )}
                   </div>
                 ) : (
