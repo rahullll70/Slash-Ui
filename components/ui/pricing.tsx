@@ -1,11 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Check, Zap } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PricingCard = ({
-  
   tier,
   price,
   description,
@@ -22,7 +25,7 @@ const PricingCard = ({
 }) => {
   return (
     <div
-      className={`relative flex flex-col p-8 rounded-3xl border transition-all duration-500 overflow-hidden h-full ${
+      className={`pricing-card relative flex flex-col p-8 rounded-3xl border transition-all duration-500 overflow-hidden h-full opacity-0 translate-y-8 ${
         isHighlighted
           ? 'border-white bg-neutral-900 shadow-[0_0_50px_-12px_rgba(255,255,255,0.2)]'
           : 'border-white/10 bg-neutral-900 text-zinc-400'
@@ -31,7 +34,6 @@ const PricingCard = ({
       {isHighlighted && (
         <>
           <div className='absolute -top-[20%] -right-[20%] w-[70%] h-[20%] bg-white/10 blur-[100px] pointer-events-none' />
-
           <div className='absolute inset-0 pointer-events-none z-0'>
             <img
               src='/images/PricingSlash.svg'
@@ -39,31 +41,22 @@ const PricingCard = ({
               className='w-full h-full object-cover scale-150 rotate-[-5deg] opacity-90'
             />
           </div>
-
           <div className='absolute inset-0 rounded-3xl border border-white/20 animate-pulse pointer-events-none' />
         </>
       )}
 
-      <div
-        className={`relative flex flex-col h-full ${isHighlighted ? 'z-10 mix-blend-difference' : 'z-10'}`}
-      >
+      <div className={`relative flex flex-col h-full ${isHighlighted ? 'z-10 mix-blend-difference' : 'z-10'}`}>
         <div className='mb-8'>
-          <h3
-            className={`text-xs uppercase font-mono tracking-widest ${isHighlighted ? 'text-white' : 'text-zinc-500'}`}
-          >
+          <h3 className={`text-xs uppercase font-mono tracking-widest ${isHighlighted ? 'text-white' : 'text-zinc-500'}`}>
             {tier}
           </h3>
-          <p
-            className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-white' : 'text-zinc-400'}`}
-          >
+          <p className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-white' : 'text-zinc-400'}`}>
             {description}
           </p>
         </div>
 
         <div className='mb-8 flex items-baseline gap-1'>
-          <span
-            className={`text-6xl font-black tracking-tighter ${isHighlighted ? 'text-white' : 'text-zinc-100'}`}
-          >
+          <span className={`text-6xl font-black tracking-tighter ${isHighlighted ? 'text-white' : 'text-zinc-100'}`}>
             {price}
           </span>
           <span className='text-zinc-500 text-[10px] uppercase tracking-widest ml-2'>
@@ -73,24 +66,16 @@ const PricingCard = ({
 
         <div className='space-y-4 mb-10 flex-grow'>
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className='flex items-center gap-3 text-[13px] font-cartographCF'
-            >
-              <Check
-                size={14}
-                className={isHighlighted ? 'text-white' : 'text-zinc-600'}
-              />
-              <span className={isHighlighted ? 'text-white' : 'text-zinc-500'}>
-                {feature}
-              </span>
+            <div key={index} className='flex items-center gap-3 text-[13px] font-cartographCF'>
+              <Check size={14} className={isHighlighted ? 'text-white' : 'text-zinc-600'} />
+              <span className={isHighlighted ? 'text-white' : 'text-zinc-500'}>{feature}</span>
             </div>
           ))}
         </div>
 
         <div className='relative z-20'>
           <Link
-            href={'https://app.archway.finance/payment-requests/HDGAY/public'}
+            href={href}
             className={`w-full py-4 rounded-xl font-beVietnamPro text-xs transition-all duration-500 flex items-center justify-center cursor-pointer ${
               isHighlighted
                 ? 'bg-white text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:bg-zinc-100'
@@ -106,20 +91,57 @@ const PricingCard = ({
 };
 
 const Pricing = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%", // Starts when the top of the section hits 70% of viewport height
+        }
+      });
+
+      // Text Reveal Animation
+      tl.to(".pricing-reveal", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "expo.out",
+        stagger: 0.1
+      })
+      // Cards Stagger Reveal
+      .to(".pricing-card", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "expo.out",
+        stagger: 0.2
+      }, "-=0.6");
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className='w-full py-32 px-8 '>
+    <section ref={sectionRef} className='w-full py-32 px-8'>
       <div className='max-w-4xl mx-auto'>
         <div className='flex flex-col items-center text-center mb-20'>
-          <div className='flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-zinc-950 mb-6'>
+          <div className='pricing-reveal translate-y-4 opacity-0 flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-zinc-950 mb-6'>
             <Zap size={12} className='text-white' />
             <span className='text-[10px] font-bold text-zinc-400 uppercase tracking-widest'>
               Pricing Plans
             </span>
           </div>
-          <h2 className='text-5xl font-black text-white uppercase tracking-tighter mb-6'>
-            Unlock the Full Library
+          
+          <h2 className='block overflow-hidden mb-6'>
+            <span className='pricing-reveal block text-5xl font-black text-white uppercase tracking-tighter translate-y-full opacity-0'>
+              Unlock the Full Library
+            </span>
           </h2>
-          <p className='text-zinc-500 text-sm max-w-lg leading-relaxed'>
+
+          <p className='pricing-reveal translate-y-4 opacity-0 text-zinc-500 text-sm max-w-lg leading-relaxed'>
             Professional-grade UI components for Next.js and Tailwind. Choose
             the pack that fits your scale.
           </p>
@@ -140,7 +162,6 @@ const Pricing = () => {
           />
 
           <PricingCard
-          
             tier='Premium'
             isHighlighted={true}
             price='$129'
