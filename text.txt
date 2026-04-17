@@ -1,4 +1,0 @@
-1. add animations in text reaval 
-2. add animation on slash svg
-3. make menu ui better
-4. make featured component video better

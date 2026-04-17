@@ -40,4 +40,37 @@ export const Index = [
     category: 'hover-effects',
     install: '',
   },
+
+  {
+    name: 'infinity-slider',
+    type: 'ui',
+    files: ['ui/3d-sliders/infinity-slider.tsx'],
+    category: '3d-sliders',
+    install: ''
+  },
+
+  {
+    name: 'stroke-cards',
+    type: 'ui',
+    files: ['ui/cards/stroke-cards.tsx'],
+    category: 'cards',
+    install: ''
+
+  },
+
+  {
+    name: 'arc-slider',
+    type: 'ui',
+    files: ['ui/3d-sliders/arc-slider.tsx'],
+    category: '3d-sliders',
+    install: ''
+  },
+
+  {
+    name: 'animated-header',
+    type: 'ui',
+    files: ['ui/scroll-effects/animated-header.tsx'],
+    category: 'scroll-effects',
+    install: 'install gsap lenis split/type'
+  }
 ];

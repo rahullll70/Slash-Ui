@@ -55,6 +55,7 @@ export const Index: Record<string, any> = {
 
   writeFileSync(OUTPUT_PATH, indexContent);
   console.log('✅ Slash UI Registry updated!');
+  //npm run build:registry
 }
 
 buildRegistry();

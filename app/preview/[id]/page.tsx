@@ -5,6 +5,10 @@ const FULLSCREEN_COMPONENTS = [
   'flaoting-navbar',
   'dot-cursor',
   'minimal-scrollbar',
+  'arc-slider',
+  'infinity-slider',
+  'stroke-cards',
+  'animated-header',
 ];
 
 const getPreviewBg = (id: string) => {
@@ -27,6 +31,23 @@ const getPreviewBg = (id: string) => {
     // Hover Effect
     case 'strike-reveal':
       return 'bg-[#E8E0DA]';
+
+    //3d sliders
+    case 'infinity-slider':
+      return 'w-full h-screen';
+
+    case 'arc-slider':
+      return '';
+
+    // scroll effects
+    case 'animated-header':
+      return '';
+
+    // hover effect
+
+    case 'stroke-cards':
+      return 'h-[200vh] bg-[#fff]';
+
     default:
       return '';
   }

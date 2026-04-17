@@ -81,8 +81,8 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 5.  Dot Cursor */}
-          <Link href={`/component/`}>
-            <ComponentCard title="" videoSrc={getComp("details")?.video || '/compVideos/dot-cursor.mp4'} />
+          <Link href={`/component/dot-cursor`}>
+            <ComponentCard title="Dot Curosr" videoSrc={getComp("details")?.video || '/compVideos/dot-cursor.mp4'} />
           </Link>
 
           {/* 6. Neubrutal Button */}
@@ -99,8 +99,8 @@ const FeaturedComponents = () => {
           </Link>
 
           {/* 8.  */}
-          <Link href={`/component/`} className='lg:row-span-2'>
-            <ComponentCard title="" videoSrc={getComp("feedback")?.video || '/compVideos/animated-header.mp4'}>
+          <Link href={`/component/animated-header`} className='lg:row-span-2'>
+            <ComponentCard title="Animated Header" videoSrc={getComp("feedback")?.video || '/compVideos/animated-header.mp4'}>
                 
             </ComponentCard>
           </Link>

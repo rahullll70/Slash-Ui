@@ -45,18 +45,26 @@ const PricingCard = ({
         </>
       )}
 
-      <div className={`relative flex flex-col h-full ${isHighlighted ? 'z-10 mix-blend-difference' : 'z-10'}`}>
+      <div
+        className={`relative flex flex-col h-full ${isHighlighted ? 'z-10 mix-blend-difference' : 'z-10'}`}
+      >
         <div className='mb-8'>
-          <h3 className={`text-xs uppercase font-mono tracking-widest ${isHighlighted ? 'text-white' : 'text-zinc-500'}`}>
+          <h3
+            className={`text-xs uppercase font-mono tracking-widest ${isHighlighted ? 'text-white' : 'text-zinc-500'}`}
+          >
             {tier}
           </h3>
-          <p className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-white' : 'text-zinc-400'}`}>
+          <p
+            className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-white' : 'text-zinc-400'}`}
+          >
             {description}
           </p>
         </div>
 
         <div className='mb-8 flex items-baseline gap-1'>
-          <span className={`text-6xl font-black tracking-tighter ${isHighlighted ? 'text-white' : 'text-zinc-100'}`}>
+          <span
+            className={`text-6xl font-black tracking-tighter ${isHighlighted ? 'text-white' : 'text-zinc-100'}`}
+          >
             {price}
           </span>
           <span className='text-zinc-500 text-[10px] uppercase tracking-widest ml-2'>
@@ -66,9 +74,17 @@ const PricingCard = ({
 
         <div className='space-y-4 mb-10 flex-grow'>
           {features.map((feature, index) => (
-            <div key={index} className='flex items-center gap-3 text-[13px] font-cartographCF'>
-              <Check size={14} className={isHighlighted ? 'text-white' : 'text-zinc-600'} />
-              <span className={isHighlighted ? 'text-white' : 'text-zinc-500'}>{feature}</span>
+            <div
+              key={index}
+              className='flex items-center gap-3 text-[13px] font-cartographCF'
+            >
+              <Check
+                size={14}
+                className={isHighlighted ? 'text-white' : 'text-zinc-600'}
+              />
+              <span className={isHighlighted ? 'text-white' : 'text-zinc-500'}>
+                {feature}
+              </span>
             </div>
           ))}
         </div>
@@ -98,27 +114,30 @@ const Pricing = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%", // Starts when the top of the section hits 70% of viewport height
-        }
+          start: 'top 70%', // Starts when the top of the section hits 70% of viewport height
+        },
       });
 
       // Text Reveal Animation
-      tl.to(".pricing-reveal", {
+      tl.to('.pricing-reveal', {
         y: 0,
         opacity: 1,
         duration: 1,
-        ease: "expo.out",
-        stagger: 0.1
+        ease: 'expo.out',
+        stagger: 0.1,
       })
-      // Cards Stagger Reveal
-      .to(".pricing-card", {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "expo.out",
-        stagger: 0.2
-      }, "-=0.6");
-
+        // Cards Stagger Reveal
+        .to(
+          '.pricing-card',
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: 'expo.out',
+            stagger: 0.2,
+          },
+          '-=1',
+        );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -134,7 +153,7 @@ const Pricing = () => {
               Pricing Plans
             </span>
           </div>
-          
+
           <h2 className='block overflow-hidden mb-6'>
             <span className='pricing-reveal block text-5xl font-black text-white uppercase tracking-tighter translate-y-full opacity-0'>
               Unlock the Full Library

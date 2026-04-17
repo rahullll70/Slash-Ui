@@ -2,21 +2,22 @@
 
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
+import { BadgeAlert } from 'lucide-react';
 
 interface ComponentCardProps {
   title: string;
-  author: string;
   videoSrc?: string;
   children?: React.ReactNode;
   span?: string;
+  showBadge?: boolean;
 }
 
 const ComponentCard = ({
   title,
-  author,
   videoSrc,
   children,
   span = '',
+  showBadge = false,
 }: ComponentCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -69,9 +70,17 @@ const ComponentCard = ({
         <h3 className='text-sm font-medium text-zinc-400 group-hover:text-white transition-colors'>
           {title}
         </h3>
-        <span className='text-[10px] text-zinc-600 font-mono italic'>
-          {author || 'skiper'}
-        </span>
+
+        {showBadge && (
+          <div className='group/tooltip relative flex items-center'>
+            <BadgeAlert className='w-4 h-4 text-cyan-400' />
+
+            {/* Tooltip Bubble */}
+            <span className='absolute bottom-full mb-2 hidden group-hover/tooltip:block bg-zinc-800 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap'>
+              New
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -86,7 +95,6 @@ const ComponentsPage = () => {
           <div className='mb-12'>
             <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
               Some Random Components{' '}
-              
             </h2>
             <p className='text-zinc-500 text-sm mt-2'>
               Collection of interactive components [Click to view]
@@ -94,55 +102,141 @@ const ComponentsPage = () => {
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
-            <Link href='/component/image-reveal' className='block'>
+            <Link href='/component/stike-reveal' className='block'>
               <ComponentCard
-                title='Image reveal'
-                author='skiper1'
-                videoSrc='/videos/reveal-demo.mp4'
+                title='Strike Reveal'
+                videoSrc='/compVideos/strike-reveal.mp4'
+                showBadge
               />
             </Link>
 
-            <Link href='/component/hover-members' className='lg:col-span-2'>
+            <Link href='/component/floating-navbar' className='lg:col-span-2'>
               <ComponentCard
-                title='Hover members'
-                author='skiper2'
-                videoSrc='/videos/members-demo.mp4'
+                title='floating-navbar'
+                videoSrc='/compVideos/floating-navbar.mp4'
+                showBadge
               />
             </Link>
 
-            <Link href='/component/drag-scroll' className='lg:row-span-2'>
+            <Link href='/component/infinity-slider' className='lg:row-span-2'>
               <ComponentCard
-                title='Things drag and scroll'
-                author='skiper3'
-                videoSrc='/videos/drag-demo.mp4'
+                title='Infinity Slider'
+                videoSrc='/compVideos/infinite-slider.mp4'
+                showBadge
               />
             </Link>
 
-            <Link href='/component/dynamic-island' className='block'>
-              <ComponentCard title='Dynamic island' author='skiper4'>
-                
-              </ComponentCard>
-            </Link>
-
-            <Link href='/component/devouring-details' className='lg:col-span-2'>
+            <Link href='/component/stroke-cards' className='block'>
               <ComponentCard
-                title='Devouring details'
-                author='skiper5'
-                videoSrc='/videos/details-demo.mp4'
+                title='Stroke Cards'
+                videoSrc='/compVideos/stroke-cards.mp4'
+                showBadge
               />
             </Link>
 
-            <Link href='/component/scrollbar' className='block'>
+            <Link href='/component/arc-slider' className='lg:col-span-2'>
               <ComponentCard
-                title='Anime js scrollbar'
-                author='skiper6'
-                videoSrc='/videos/scrollbar.mp4'
+                title='Arc Slider'
+                videoSrc='/compVideos/arc-slider.mp4'
+                showBadge
+              />
+            </Link>
+
+            <Link href='/component/dot-cursor' className='block'>
+              <ComponentCard
+                title='Dot Curser'
+                videoSrc='/compVideos/dot-cursor.mp4'
+                showBadge
+              />
+            </Link>
+
+            <Link href='/component/animated-header' className='lg:col-span-2'>
+              <ComponentCard
+                title='Animated Header'
+                videoSrc='/compVideos/animated-header.mp4'
+                showBadge
+              />
+            </Link>
+            <Link href='/component/neubrutal-button' className='block'>
+              <ComponentCard
+                title='Neubrutal-button'
+                videoSrc='/compVideos/neubrutal-button.mp4'
+                showBadge
               />
             </Link>
           </div>
         </section>
 
-        {/* You can add 2nd and 3rd Groups below following the same pattern */}
+        {/* Group 2: 3d components */}
+        <section>
+          <div className='mb-12'>
+            <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
+              Some Random Components{' '}
+            </h2>
+            <p className='text-zinc-500 text-sm mt-2'>
+              Collection of interactive components [Click to view]
+            </p>
+          </div>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
+            <Link href='/component/stike-reveal' className='block'>
+              <ComponentCard
+                title='Strike Reveal'
+                videoSrc='/compVideos/strike-reveal.mp4'
+              />
+            </Link>
+
+            <Link href='/component/floating-navbar' className='lg:col-span-2'>
+              <ComponentCard
+                title='floating-navbar'
+                videoSrc='/compVideos/floating-navbar.mp4'
+              />
+            </Link>
+
+            <Link href='/component/infinity-slider' className='lg:row-span-2'>
+              <ComponentCard
+                title='Infinity Slider'
+                videoSrc='/compVideos/infinite-slider.mp4'
+              />
+            </Link>
+
+            <Link href='/component/stroke-cards' className='block'>
+              <ComponentCard
+                title='Stroke Cards'
+                videoSrc='/compVideos/stroke-cards.mp4'
+              />
+            </Link>
+
+            <Link href='/component/arc-slider' className='lg:col-span-2'>
+              <ComponentCard
+                title='Arc Slider'
+                videoSrc='/compVideos/arc-slider.mp4'
+              />
+            </Link>
+
+            <Link href='/component/dot-cursor' className='block'>
+              <ComponentCard
+                title='Dot Curser'
+                videoSrc='/compVideos/dot-cursor.mp4'
+              />
+            </Link>
+
+            <Link href='/component/animated-header' className='lg:col-span-2'>
+              <ComponentCard
+                title='Animated Header'
+                videoSrc='/compVideos/animated-header.mp4'
+              />
+            </Link>
+            <Link href='/component/neubrutal-button' className='block'>
+              <ComponentCard
+                title='Neubrutal-button'
+                videoSrc='/compVideos/neubrutal-button.mp4'
+              />
+            </Link>
+          </div>
+        </section>
+
+        {/* You can add 3nd and 4th Groups below following the same pattern */}
       </div>
     </div>
   );

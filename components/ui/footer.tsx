@@ -30,7 +30,7 @@ const Footer = () => {
 
       // 1. Slash reveal for the top logo
       tl.fromTo(logoRef.current, 
-        { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)', scale: 1.1 },
+        { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)', scale: 1.3 },
         { 
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', 
           scale: 1, 
