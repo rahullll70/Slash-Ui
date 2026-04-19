@@ -13,40 +13,39 @@ const PricingCard = ({
   price,
   description,
   features,
-  href,
   isHighlighted = false,
 }: {
   tier: string;
   price: string;
   description: string;
   features: string[];
-  href: string;
   isHighlighted?: boolean;
 }) => {
   return (
     <div
       className={`pricing-card relative flex flex-col p-8 rounded-3xl border transition-all duration-500 overflow-hidden h-full opacity-0 translate-y-8 ${
         isHighlighted
-          ? 'border-white bg-neutral-900 shadow-[0_0_50px_-12px_rgba(255,255,255,0.2)]'
-          : 'border-white/10 bg-neutral-900 text-zinc-400'
+          ? // Changed: Removed border-white and used a subtle zinc border to match the dark theme
+            'bg-neutral-900 border-zinc-800/40 shadow-[0_0_50px_-12px_rgba(255,255,255,0.1)]'
+          : 'border-zinc-800/40 bg-neutral-900 text-zinc-400'
       }`}
     >
       {isHighlighted && (
         <>
-          <div className='absolute -top-[20%] -right-[20%] w-[70%] h-[20%] bg-white/10 blur-[100px] pointer-events-none' />
+          <div className='absolute -top-[20%] -right-[20%] w-[70%] h-[20%] bg-white/5 blur-[100px] pointer-events-none' />
           <div className='absolute inset-0 pointer-events-none z-0'>
             <img
               src='/images/PricingSlash.svg'
               alt=''
-              className='w-full h-full object-cover scale-150 rotate-[-5deg] opacity-90'
+              className='w-full h-full object-cover scale-150 rotate-[-5deg] opacity-90 backdrop-blur-5xl '
             />
           </div>
-          <div className='absolute inset-0 rounded-3xl border border-white/20 animate-pulse pointer-events-none' />
+          <div className='w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-700/10 via-transparent to-transparent opacity-50' />
         </>
       )}
 
       <div
-        className={`relative flex flex-col h-full ${isHighlighted ? 'z-10 mix-blend-difference' : 'z-10'}`}
+        className={`relative flex flex-col h-full z-10 ${isHighlighted ? 'z-10 mix-blend-difference' : 'z-10'}`}
       >
         <div className='mb-8'>
           <h3
@@ -55,7 +54,7 @@ const PricingCard = ({
             {tier}
           </h3>
           <p
-            className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-white' : 'text-zinc-400'}`}
+            className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-zinc-200' : 'text-zinc-400'}`}
           >
             {description}
           </p>
@@ -74,15 +73,14 @@ const PricingCard = ({
 
         <div className='space-y-4 mb-10 flex-grow'>
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className='flex items-center gap-3 text-[13px] font-cartographCF'
-            >
+            <div key={index} className='flex items-center gap-3 text-[13px]'>
               <Check
                 size={14}
                 className={isHighlighted ? 'text-white' : 'text-zinc-600'}
               />
-              <span className={isHighlighted ? 'text-white' : 'text-zinc-500'}>
+              <span
+                className={isHighlighted ? 'text-zinc-300' : 'text-zinc-500'}
+              >
                 {feature}
               </span>
             </div>
@@ -90,21 +88,21 @@ const PricingCard = ({
         </div>
 
         <div className='relative z-20'>
-          <Link
-            href={href}
-            className={`w-full py-4 rounded-xl font-beVietnamPro text-xs transition-all duration-500 flex items-center justify-center cursor-pointer ${
+          <div
+            className={`w-full py-4 rounded-xl text-sm font-bold transition-all duration-500 flex items-center justify-center cursor-not-allowed ${
               isHighlighted
-                ? 'bg-white text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:bg-zinc-100'
-                : 'bg-transparent text-white border border-white/20 hover:border-white/60'
+                ? 'bg-white text-black hover:bg-zinc-200'
+                : 'bg-transparent text-white border border-white/10 hover:border-white/20'
             }`}
           >
-            Select {tier}
-          </Link>
+            Coming Soon
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 const Pricing = () => {
   const sectionRef = useRef(null);
@@ -169,8 +167,8 @@ const Pricing = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch'>
           <PricingCard
             tier='Standard'
-            price='$50'
-            href='https://app.archway.finance/payment-requests/HDGAY/public'
+            price='$00'
+            // add href 
             description='Perfect for individual projects and hobbyists.'
             features={[
               '30+ Open Source Components',
@@ -183,8 +181,8 @@ const Pricing = () => {
           <PricingCard
             tier='Premium'
             isHighlighted={true}
-            price='$129'
-            href='https://app.archway.finance/payment-requests/HDGAY/public'
+            price='$00'
+            // add href
             description='Full access for professionals and agency work.'
             features={[
               '100+ Premium Components',

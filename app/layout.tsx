@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/ui/navbar';
 import { SearchProvider } from '@/hooks/use-component-search';
 import SmoothScroll from '@/components/smooth-scroll';
 
@@ -31,11 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
       >
         <SmoothScroll>
-          <SearchProvider>
-            
-            
-            {children}
-          </SearchProvider>
+          <SearchProvider>{children}</SearchProvider>
         </SmoothScroll>
       </body>
     </html>

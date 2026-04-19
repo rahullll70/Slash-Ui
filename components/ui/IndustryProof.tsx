@@ -116,7 +116,7 @@ export default function IndustryProof() {
   return (
     <section className='relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden '>
       {/* 2. Bottom fade-out (Transitions to the next section) */}
-      {/* <div className='absolute  bottom-0 left-0 right-0 h-74 bg-gradient-to-t from-white/[0.1] to-transparent pointer-events-none' /> */}
+      <div className='absolute  bottom-0 left-0 right-0 h-74 bg-gradient-to-t from-white/[0.1] to-transparent pointer-events-none' />
 
       {/* --- CONTENT --- */}
       <div
