@@ -26,7 +26,6 @@ export const Index: Record<string, any> = {
       ? readFileSync(sourceFilePath, 'utf8')
       : '';
 
-    // Helper to sanitize strings for the generated file
     const escape = (str: string) =>
       (str || '').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 
@@ -42,9 +41,6 @@ export const Index: Record<string, any> = {
       dependencies: ${JSON.stringify(item.dependencies || [])},
       interactionType: ${JSON.stringify(item.interactionType || [])},
       howToUse: \`${escape(item.howToUse)}\`,
-      keepInMind: \`${escape(item.keepInMind)}\`,
-      contact: "${item.contact || ''}",
-      license: "${item.license || ''}",
     },
 `;
   });
@@ -53,7 +49,7 @@ export const Index: Record<string, any> = {
 };`;
 
   writeFileSync(OUTPUT_PATH, indexContent);
-  console.log('✅ Slash UI Registry updated (Details removed)!');
+  console.log('✅ Slash UI Registry updated');
 }
 
 buildRegistry();

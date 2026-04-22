@@ -48,34 +48,19 @@ interface MeshUserData {
 //   },
 // ];
 
-// const SLIDES: Slide[] = [
-//   {
-//     name: 'Vanguard Oversize',
-//     img: 'https://picsum.photos/800/1200?random=1',
-//   },
-//   { name: 'Arcane Graphic', img: 'https://picsum.photos/800/1200?random=2' },
-//   { name: 'Zenith Monolith', img: 'https://picsum.photos/800/1200?random=3' },
-//   { name: 'Echo Box Tee', img: 'https://picsum.photos/800/1200?random=4' },
-//   { name: 'Linear Core', img: 'https://picsum.photos/800/1200?random=5' },
-//   { name: 'Origin Heavy', img: 'https://picsum.photos/800/1200?random=6' },
-//   { name: 'Cipher Street', img: 'https://picsum.photos/800/1200?random=7' },
-//   { name: 'Nomad Essential', img: 'https://picsum.photos/800/1200?random=8' },
-//   { name: 'Aspect Relaxed', img: 'https://picsum.photos/800/1200?random=9' },
-// ];
-
 const SLIDES: Slide[] = [
   {
     name: 'Vanguard Oversize',
-    img: '/img-1.jpg',
+    img: 'https://picsum.photos/800/1200?random=1',
   },
-  { name: 'Arcane Graphic', img: '/img-2.jpg' },
-  { name: 'Zenith Monolith', img: '/img-3.jpg' },
-  { name: 'Echo Box Tee', img: '/img-4.jpg' },
-  { name: 'Linear Core', img: '/img-5.jpg' },
-  { name: 'Origin Heavy', img: '/img-6.jpg' },
-  { name: 'Cipher Street', img: '/img-7.jpg' },
-  { name: 'Nomad Essential', img: '/img-8.jpg' },
-  { name: 'Aspect Relaxed', img: '/img-9.jpg' },
+  { name: 'Arcane Graphic', img: 'https://picsum.photos/800/1200?random=2' },
+  { name: 'Zenith Monolith', img: 'https://picsum.photos/800/1200?random=3' },
+  { name: 'Echo Box Tee', img: 'https://picsum.photos/800/1200?random=4' },
+  { name: 'Linear Core', img: 'https://picsum.photos/800/1200?random=5' },
+  { name: 'Origin Heavy', img: 'https://picsum.photos/800/1200?random=6' },
+  { name: 'Cipher Street', img: 'https://picsum.photos/800/1200?random=7' },
+  { name: 'Nomad Essential', img: 'https://picsum.photos/800/1200?random=8' },
+  { name: 'Aspect Relaxed', img: 'https://picsum.photos/800/1200?random=9' },
 ];
 
 const DEFAULT_CONFIG: SliderConfig = {

@@ -1,6 +1,6 @@
 'use client';
 
-import { atomDark as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import React, { useState, useEffect } from 'react';
@@ -22,6 +22,7 @@ import {
   LoaderCircle,
   MousePointer2,
   Rocket,
+  Mail,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Index } from '@/__registry__';
@@ -70,9 +71,6 @@ export default function ShowcaseContainer({
   dependencies: propsDependencies,
   interactionType: propsInteraction,
   howToUse: propsHowToUse,
-  keepInMind: propsKeepInMind,
-  contact: propsContact,
-  license: propsLicense,
 }: {
   children: React.ReactNode;
   title: string;
@@ -82,9 +80,6 @@ export default function ShowcaseContainer({
   dependencies?: string[];
   interactionType?: Interaction[];
   howToUse?: string;
-  keepInMind?: string;
-  contact?: string;
-  license?: string;
 }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [activePanel, setActivePanel] = useState<'code' | 'info' | null>(null);
@@ -97,7 +92,15 @@ export default function ShowcaseContainer({
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(true);
 
-  const activeItem = Object.values(Index).find((c: any) => c.name === id);
+  const activeItem = React.useMemo(() => {
+    if (!id) return null;
+
+    const normalizedId = id.toString().toLowerCase();
+
+    return normalizeRegistryToList(Index).find(
+      (c: any) => c?.name?.toLowerCase() === normalizedId,
+    );
+  }, [id]);
 
   useEffect(() => {
     setIframeLoading(true);
@@ -169,9 +172,6 @@ export default function ShowcaseContainer({
   const dynamicInteraction =
     propsInteraction || activeItem?.interactionType || [];
   const dynamicHowToUse = propsHowToUse || activeItem?.howToUse || '';
-  const dynamicKeepInMind = propsKeepInMind || activeItem?.keepInMind || '';
-  const dynamicContact = propsContact || activeItem?.contact || '';
-  const dynamicLicense = propsLicense || activeItem?.license || '';
 
   const list = normalizeRegistryToList(Index);
 
@@ -429,7 +429,7 @@ export default function ShowcaseContainer({
                           <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
                             Description
                           </h4>
-                          <div className='font-semibold text-zinc-300'>
+                          <div className='font-cartographCF '>
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>
                               {dynamicDescription}
                             </ReactMarkdown>
@@ -446,7 +446,7 @@ export default function ShowcaseContainer({
                                 (dep: string, i: number) => (
                                   <span
                                     key={i}
-                                    className='px-2 py-1 bg-white/5 border border-white/10 rounded-md text-xs font-mono text-zinc-400'
+                                    className='px-2 py-1 bg-white/5 border border-white/10 rounded-md text-xs font-cartographCF text-zinc-400'
                                   >
                                     {dep}
                                   </span>
@@ -460,8 +460,8 @@ export default function ShowcaseContainer({
                           <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
                             Installation
                           </h4>
-                          <div className='bg-black p-4 rounded-xl border border-white/10 font-mono text-xs flex items-center justify-between'>
-                            <span className='text-zinc-300'>
+                          <div className='bg-black p-4 rounded-xl border border-white/10 font-mono text-sm flex items-center justify-between'>
+                            <span className='text-zinc-300 font-cartographCF'>
                               {dynamicInstall}
                             </span>
                             <button
@@ -485,13 +485,14 @@ export default function ShowcaseContainer({
                             <div className='space-y-4'>
                               {dynamicInteraction.map(
                                 (item: Interaction, i: number) => (
-                                  <div key={i} className='flex gap-2 text-xs'>
-                                    <span className='text-zinc-500 font-mono'>
+                                  <div
+                                    key={i}
+                                    className='flex gap-2 font-cartographCF bg-zinc-900 py-5 px-1 rounded-md text-sm'
+                                  >
+                                    <span className='text-zinc-500'>
                                       {item.type}:
                                     </span>
-                                    <span className='text-zinc-300'>
-                                      {item.description}
-                                    </span>
+                                    <span className=''>{item.description}</span>
                                   </div>
                                 ),
                               )}
@@ -504,49 +505,69 @@ export default function ShowcaseContainer({
                             <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
                               How to use
                             </h4>
-                            <div className='bg-black p-4 rounded-xl border border-white/10 font-mono text-xs overflow-x-auto'>
-                              <pre className='text-zinc-300'>
-                                {dynamicHowToUse}
+                            <div className='bg-black p-4 rounded-xl border border-white/10 font-mono text-sm overflow-x-auto'>
+                              <pre className='text-zinc-300 font-cartographCF'>
+                                <SyntaxHighlighter
+                                  language='tsx'
+                                  style={theme}
+                                  customStyle={{
+                                    margin: 0,
+                                    padding: '0px',
+                                    fontSize: '15px',
+                                    background: 'transparent',
+                                    lineHeight: '1.7',
+                                  }}
+                                >
+                                  {dynamicHowToUse}
+                                </SyntaxHighlighter>
                               </pre>
                             </div>
                           </div>
                         )}
 
-                        {dynamicKeepInMind && (
-                          <div>
-                            <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
-                              Keep in mind
-                            </h4>
-                            <p className='text-sm text-zinc-400'>
-                              {dynamicKeepInMind}
-                            </p>
-                          </div>
-                        )}
+                        <div>
+                          <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
+                            Keep in mind
+                          </h4>
+                          <p className='font-cartographCF'>
+                            Driven by the craft of high-end digital design.
+                            These components are my explorations and modern
+                            takes on industry-leading patterns I’ve encountered
+                            across Awwwards and CodeGrid. I hold the original
+                            creators of these concepts in high regard; this
+                            library is my attempt to reverse-engineer,
+                            standardize, and integrate their brilliance into a
+                            consistent, developer-first toolkit.
+                          </p>
+                        </div>
 
-                        {dynamicContact && (
-                          <div>
-                            <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
-                              Contact
-                            </h4>
+                        <div>
+                          <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
+                            Contact
+                          </h4>
+                          <p className='font-cartographCF flex items-center gap-1'>
+                            Additionlly, if you find any bug or issue related to
+                            component , feel free to drop a dm
                             <a
-                              href={`mailto:${dynamicContact}`}
-                              className='text-sm text-blue-400 hover:underline'
+                              href={`mailto:`}
+                              className='bg-zinc-800 rounded-full py-2 px-2'
                             >
-                              {dynamicContact}
+                              <Mail size={14} className='' />{' '}
                             </a>
-                          </div>
-                        )}
+                          </p>
+                        </div>
 
-                        {dynamicLicense && (
-                          <div>
-                            <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
-                              License & Usage
-                            </h4>
-                            <p className='text-sm text-zinc-400'>
-                              {dynamicLicense}
-                            </p>
-                          </div>
-                        )}
+                        <div>
+                          <h4 className='text-[12px] uppercase text-zinc-600 mb-6'>
+                            License & Usage
+                          </h4>
+                          <p className='font-cartographCF'>
+                            - Free to use and modify in both personal and
+                            commercial projects. <br /> - Attribution to Skiper
+                            UI is required when using the free version. <br /> -
+                            No attribution required with Skiper UI Pro.
+                          </p>
+                        </div>
                       </section>
                     </motion.div>
                   ) : null}

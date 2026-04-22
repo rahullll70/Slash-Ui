@@ -26,9 +26,7 @@ export default async function Page({
       dependencies={activeItem?.dependencies}
       interactionType={activeItem?.interactionType}
       howToUse={activeItem?.howToUse}
-      keepInMind={activeItem?.keepInMind}
-      contact={activeItem?.contact}
-      license={activeItem?.license}
+
     >
       {SelectedComponent ? (
         <Suspense

@@ -44,14 +44,22 @@ export default function NeubrutalButton({
   );
 }
 `,
-      description: `A high-end button with modern hover effects and bold styling.`,
-      install: "npm install framer-motion",
-      dependencies: ["framer-motion"],
-      interactionType: [{"type":"Hover","description":"Interactive hover scaling"}],
-      howToUse: `import { NeubrutalButton } from "@/components/ui/buttons/neubrutal-button";`,
-      keepInMind: `Ensure Framer Motion is installed.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
+      description: `A high-contrast "Neubrutalist" button component. It features a manually constructed layered shadow system to create depth, utilizing outline properties for sharp edges and a built-in "shimmer" effect that triggers upon interaction to provide immediate visual feedback.`,
+      install: "npm install tailwindcss",
+      dependencies: ["tailwindcss"],
+      interactionType: [{"type":"Layered Depth System","description":"Uses stacked, absolute-positioned div elements to simulate a physical, multi-layered \"Neubrutalist\" shadow effect."},{"type":"Mechanical Click Depression","description":"Implements dual-phase translation (via active/group-active) to simulate a physical mechanical button press."},{"type":"Active Glare Swipe","description":"Triggers a skewed div overlay that slides across the button surface on click, providing an animated visual \"glare\" feedback."}],
+      howToUse: `import { NeubrutalButton } from "@/components/ui/buttons/neubrutal-button";
+
+  export default function NeubrutalButton = () => {
+  return (
+    <div>
+      <NeubrutalButton children='Click me!' />
+    </div>
+  );
+};
+    
+
+    `,
     },
     "dot-cursor": {
       name: "dot-cursor",
@@ -95,14 +103,22 @@ const DotCursor = () => {
 };
 
 export default DotCursor;`,
-      description: `A smooth, reactive custom cursor for modern web interfaces.`,
-      install: "npm install framer-motion",
-      dependencies: ["framer-motion"],
-      interactionType: [{"type":"Mouse Move","description":"Follows cursor movement"}],
-      howToUse: `import { DotCursor } from "@/components/ui/cursors/dot-cursor";`,
-      keepInMind: `Set cursor to none on body.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
+      description: `A bespoke, hardware-accelerated custom cursor that enhances immersion. It uses GSAP's physics-based easing to create a sophisticated, slightly delayed follow effect, offering a much more premium feel than the standard OS pointer.`,
+      install: "npm install gsap",
+      dependencies: ["tailwindcss","gsap"],
+      interactionType: [{"type":"Smooth Cursor Follow","description":"Uses GSAP interpolation with custom easing to create a fluid, lagging follow effect on mouse movement."},{"type":"Visual Blend Mode","description":"Utilizes CSS mix-blend-difference to dynamically invert background colors for high-contrast visibility."},{"type":"Responsive Visibility","description":"Automatically hides the element on mobile devices (screens < 768px) to preserve touch-device UX."},{"type":"Non-blocking UX","description":"Implements pointer-events-none to ensure the custom cursor does not interfere with clicking or hovering on page elements."}],
+      howToUse: `import { DotCursor } from "@/components/ui/cursors/dot-cursor";
+    
+    export default function layout = () => {
+    return (
+        <body>
+        // cursor should be always in bottom
+        <DotCursor />
+        </body>
+      )
+    }
+    
+    `,
     },
     "floating-navbar": {
       name: "floating-navbar",
@@ -255,17 +271,23 @@ const Navbar = () => {
 
 export default Navbar;
 `,
-      description: `A sophisticated navigation bar with GSAP animations and audio toggles.`,
+      description: `A sophisticated floating navigation interface designed for immersive, high-end web experiences. It features a persistent state manager for ambient audio, route-aware active states, and proprietary staggered GSAP letter-scramble animations for navigation links.`,
       install: "npm install gsap",
-      dependencies: ["gsap"],
-      interactionType: [{"type":"Scroll","description":"Hides/shows on scroll"}],
-      howToUse: `import { FloatingNavbar } from "@/components/ui/navbars/floating-navbar";`,
-      keepInMind: `Requires GSAP integration.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
+      dependencies: ["gsap","tailwindcss"],
+      interactionType: [{"type":"Entrance Animation","description":"GSAP-powered slide-in and fade-in effect on mount."},{"type":"Audio Toggle","description":"Interactive button that plays/pauses ambient audio with visual feedback."},{"type":"Staggered Hover","description":"Letter-by-letter vertical scramble animation on navigation links."},{"type":"Path Detection","description":"Automatically highlights the active route with an animated underline."}],
+      howToUse: `import { FloatingNavbar } from "@/components/ui/navbars/floating-navbar";
+    
+    export default function layout = () => {
+    return (
+        <body>
+        <FloatingNavbar />
+        </body>
+      )
+    }
+    `,
     },
-    "minimal-scrollbar": {
-      name: "minimal-scrollbar",
+    "VisualScrollbar": {
+      name: "VisualScrollbar",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/scrollbars/minimal-scrollbar")),
       files: ["ui/scrollbars/minimal-scrollbar.tsx"],
@@ -473,14 +495,11 @@ const VisualScrollbar = () => {
 };
 
 export default VisualScrollbar;`,
-      description: `Custom, minimalist scrollbar with smooth transition properties.`,
-      install: "",
-      dependencies: [],
-      interactionType: [{"type":"Scroll","description":"Native scroll behavior"}],
+      description: `A performance-oriented visual scroll indicator that maps the document's vertical scroll percentage to a custom UI thumb. Built with requestAnimationFrame and passive event listeners to ensure 60fps synchronization, preventing jank during heavy scroll operations`,
+      install: "npm install gsap",
+      dependencies: ["tailwindcss","gsap"],
+      interactionType: [{"type":"Scroll Progress Tracking","description":"Maps the document scroll position to a percentage-based vertical translation of the thumb."},{"type":"Performance-Optimized Renders","description":"Uses requestAnimationFrame and passive event listeners to ensure smooth performance without main-thread blocking."},{"type":"Responsive Geometry","description":"Calculates track dimensions and offsets dynamically on resize to accommodate layout changes."}],
       howToUse: `import { MinimalScrollbar } from "@/components/ui/scrollbars/minimal-scrollbar";`,
-      keepInMind: `CSS-only implementation.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
     },
     "strike-reveal": {
       name: "strike-reveal",
@@ -545,14 +564,11 @@ const StrikeReveal: React.FC<StrikeRevealProps> = ({ label, href = "#" }) => {
 };
 
 export default StrikeReveal;`,
-      description: `Text reveal effect with a striking diagonal animation.`,
+      description: `A sophisticated "Kukuri" typography interaction designed for high-impact headlines or navigation. It utilizes CSS pseudo-elements to decouple the underline transition from the text color reveal, creating a layered, multi-stage animation that feels fluid and precise. The effect uses attribute-based data binding to ensure the revealing text aligns perfectly with the original label.`,
       install: "",
       dependencies: ["framer-motion"],
-      interactionType: [{"type":"Hover","description":"Staggered reveal animation"}],
+      interactionType: [{"type":"Dual-Stage Line Strike","description":"Uses the ::after pseudo-element with a cubic-bezier transition to sweep a horizontal strike-through line across the component."},{"type":"Text Mask Reveal","description":"Utilizes the ::before pseudo-element and the data-letters attribute to trigger a width-based mask reveal of the colored text on hover."},{"type":"Fluid Typography","description":"Implements the clamp() function to ensure responsive text scaling across diverse viewport widths while maintaining aspect ratios."}],
       howToUse: `import { StrikeReveal } from "@/components/ui/hover-effects/strike-reveal";`,
-      keepInMind: `Best for headers.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
     },
     "infinity-slider": {
       name: "infinity-slider",
@@ -610,34 +626,19 @@ interface MeshUserData {
 //   },
 // ];
 
-// const SLIDES: Slide[] = [
-//   {
-//     name: 'Vanguard Oversize',
-//     img: 'https://picsum.photos/800/1200?random=1',
-//   },
-//   { name: 'Arcane Graphic', img: 'https://picsum.photos/800/1200?random=2' },
-//   { name: 'Zenith Monolith', img: 'https://picsum.photos/800/1200?random=3' },
-//   { name: 'Echo Box Tee', img: 'https://picsum.photos/800/1200?random=4' },
-//   { name: 'Linear Core', img: 'https://picsum.photos/800/1200?random=5' },
-//   { name: 'Origin Heavy', img: 'https://picsum.photos/800/1200?random=6' },
-//   { name: 'Cipher Street', img: 'https://picsum.photos/800/1200?random=7' },
-//   { name: 'Nomad Essential', img: 'https://picsum.photos/800/1200?random=8' },
-//   { name: 'Aspect Relaxed', img: 'https://picsum.photos/800/1200?random=9' },
-// ];
-
 const SLIDES: Slide[] = [
   {
     name: 'Vanguard Oversize',
-    img: '/img-1.jpg',
+    img: 'https://picsum.photos/800/1200?random=1',
   },
-  { name: 'Arcane Graphic', img: '/img-2.jpg' },
-  { name: 'Zenith Monolith', img: '/img-3.jpg' },
-  { name: 'Echo Box Tee', img: '/img-4.jpg' },
-  { name: 'Linear Core', img: '/img-5.jpg' },
-  { name: 'Origin Heavy', img: '/img-6.jpg' },
-  { name: 'Cipher Street', img: '/img-7.jpg' },
-  { name: 'Nomad Essential', img: '/img-8.jpg' },
-  { name: 'Aspect Relaxed', img: '/img-9.jpg' },
+  { name: 'Arcane Graphic', img: 'https://picsum.photos/800/1200?random=2' },
+  { name: 'Zenith Monolith', img: 'https://picsum.photos/800/1200?random=3' },
+  { name: 'Echo Box Tee', img: 'https://picsum.photos/800/1200?random=4' },
+  { name: 'Linear Core', img: 'https://picsum.photos/800/1200?random=5' },
+  { name: 'Origin Heavy', img: 'https://picsum.photos/800/1200?random=6' },
+  { name: 'Cipher Street', img: 'https://picsum.photos/800/1200?random=7' },
+  { name: 'Nomad Essential', img: 'https://picsum.photos/800/1200?random=8' },
+  { name: 'Aspect Relaxed', img: 'https://picsum.photos/800/1200?random=9' },
 ];
 
 const DEFAULT_CONFIG: SliderConfig = {
@@ -982,14 +983,11 @@ export default function InfiniteSlider({
   );
 }
 `,
-      description: `A 3D infinite slider loop using physics-based motion.`,
-      install: "",
-      dependencies: ["framer-motion"],
-      interactionType: [{"type":"Drag","description":"Infinite 3D rotation"}],
+      description: `A high-performance WebGL-based infinite scroll component built with Three.js. It features a physics-driven kinetic scrolling engine that supports both touch and mouse interactions with inertia-based momentum. The component applies real-time vertex distortion to images based on scroll velocity, creating a dynamic, high-fidelity motion effect. It includes seamless state synchronization between the 3D scene and the DOM-based UI overlay.`,
+      install: "npm install three tailwindcss",
+      dependencies: ["threejs"],
+      interactionType: [{"type":"Kinetic Drag & Scroll","description":"Implements a physics-based velocity engine using requestAnimationFrame, allowing for smooth momentum-based scrolling with mouse and touch inputs."},{"type":"Vertex Distortion Effect","description":"Calculates scroll velocity to dynamically manipulate plane geometry vertices in real-time, creating a physical \"stretch\" or \"bend\" distortion effect."},{"type":"Infinite Looping Logic","description":"Manages a modular wrapping system that recycles 3D planes seamlessly, allowing for an endless vertical gallery without performance degradation."},{"type":"Active State Synchronization","description":"Continuously tracks the 3D element closest to the viewport center and maps it to the 2D UI components (title and counter) in real-time."}],
       howToUse: `import { InfinitySlider } from "@/components/ui/3d-sliders/infinity-slider";`,
-      keepInMind: `Use hardware-accelerated containers.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
     },
     "stroke-cards": {
       name: "stroke-cards",
@@ -1014,15 +1012,9 @@ interface CardData {
 
 // ─── SVG Path Data ────────────────────────────────────────────────────────────
 
-// FIX: Removed the erroneous "Q -2.09 2.09" at the start (Q needs 4 numbers:
-// control-x control-y end-x end-y — the original had the move point repeated
-// as the Q control which caused "Expected number" parse errors in some engines).
-// Also ensured the path closes cleanly with a space before Z.
 const SWIRL_PATH =
   'M -2.09 2.09 -7.54 0.95 -12.99 -0.18 -19.85 -0.25 -26.71 -0.32 -32.56 1.12 -38.42 2.57 -44.72 4.67 -51.02 6.77 -56.42 9.11 -61.83 11.46 -67.18 14.41 -72.53 17.35 -79.54 21.71 -86.55 26.07 -91.56 28.64 -96.58 31.22 -100.97 33.40 -105.37 35.58 -109.40 37.44 -113.44 39.31 -117.50 40.66 -121.56 42.02 -129.59 43.38 -137.61 44.73 -142.38 44.85 -147.14 44.96 -153.50 43.98 -159.86 43.00 -165.96 40.94 -172.07 38.87 -176.75 36.85 -181.44 34.83 -187.75 30.96 -194.06 27.09 -198.07 20.96 -202.09 14.84 -203.23 7.75 -204.38 0.66 -203.34 -4.22 -202.31 -9.11 -199.29 -13.82 -196.27 -18.53 -192.24 -22.00 -188.21 -25.46 -181.34 -29.51 -174.46 -33.56 -167.83 -36.60 -161.19 -39.64 -153.79 -41.59 -146.39 -43.54 -142.14 -44.44 -137.90 -45.34 -129.05 -46.74 -120.20 -48.14 -111.55 -48.73 -102.89 -49.32 -98.39 -49.58 -93.88 -49.84 -87.83 -49.79 -81.79 -49.75 -74.64 -49.38 -67.50 -49.02 -59.88 -48.56 -52.25 -48.11 -45.28 -47.88 -38.31 -47.65 -32.39 -47.89 -26.48 -48.13 -21.76 -48.64 -17.04 -49.15 -13.10 -50.76 -9.16 -52.36 -7.52 -56.69 -5.88 -61.01 -10.86 -60.15 -15.84 -59.28 -21.73 -60.26 -27.63 -61.23 -34.23 -61.02 -40.83 -60.81 -45.11 -59.83 -49.40 -58.85 -55.25 -57.49 -61.10 -56.14 -67.02 -54.60 -72.94 -53.05 -78.73 -51.20 -84.53 -49.35 -89.76 -47.61 -94.99 -45.86 -99.69 -44.44 -104.39 -43.01 -108.70 -41.80 -113.01 -40.58 -117.84 -39.68 -122.67 -38.78 -131.53 -37.15 -140.39 -35.52 -146.08 -35.04 -151.77 -34.55 -158.67 -34.11 -165.58 -33.66 -174.54 -33.69 -183.50 -33.72 -193.22 -33.41 -202.94 -33.10 -211.75 -32.85 -220.56 -32.60 -228.14 -32.36 -235.72 -32.12 -240.95 -31.70 -246.17 -31.28 -253.38 -30.89 -260.59 -30.50 -268.08 -30.90 -275.57 -31.29 -282.95 -32.77 -290.33 -34.25 -295.23 -36.94 -300.14 -39.63 -303.11 -45.82 -306.08 -52.00 -305.11 -57.57 -304.15 -63.14 -301.60 -67.20 -299.05 -71.27 -296.03 -74.27 -293.01 -77.27 -288.50 -80.55 -283.99 -83.84 -277.95 -86.80 -271.90 -89.75 -265.89 -92.17 -259.88 -94.58 -252.69 -96.80 -245.49 -99.01 -238.47 -100.75 -231.46 -102.48 -224.54 -104.14 -217.62 -105.81 -209.97 -107.00 -202.32 -108.20 -194.29 -108.82 -186.26 -109.44 -179.01 -109.76 -171.77 -110.08 -164.93 -110.24 -158.10 -110.41 -151.00 -110.17 -143.90 -109.93 -135.38 -108.38 -126.85 -106.84 -117.17 -105.19 -107.49 -103.55 -97.42 -102.21 -87.34 -100.87 -78.51 -99.95 -69.68 -99.04 -62.27 -98.82 -54.86 -98.60 -49.12 -98.81 -43.39 -99.01 -38.38 -99.29 -33.37 -99.57 -28.95 -99.86 -24.54 -100.15 -19.87 -101.11 -15.21 -102.06 -8.65 -104.62 -2.10 -107.17 1.44 -110.32 4.98 -113.48 5.96 -118.29 6.93 -123.10 4.34 -126.52 1.75 -129.94 -4.15 -131.49 -10.06 -133.05 -15.09 -133.88 -20.12 -134.71 -26.30 -135.58 -32.49 -136.44 -39.96 -137.46 -47.42 -138.48 -55.33 -139.21 -63.23 -139.95 -71.65 -140.27 -80.07 -140.60 -89.22 -140.08 -98.37 -139.57 -107.57 -138.13 -116.76 -136.68 -126.17 -134.78 -135.58 -132.87 -145.29 -130.49 -155.00 -128.10 -163.73 -125.75 -172.47 -123.40 -180.87 -121.31 -189.27 -119.22 -196.56 -117.30 -203.84 -115.38 -209.80 -113.74 -215.76 -112.10 -220.35 -110.87 -224.94 -109.63 -229.89 -108.67 -234.84 -107.70 -241.06 -107.02 -247.28 -106.34 -255.15 -106.04 -263.02 -105.75 -271.54 -105.61 -280.06 -105.47 -288.96 -105.52 -297.86 -105.56 -305.22 -105.65 -312.57 -105.73 -317.76 -106.03 -322.96 -106.33 -330.47 -109.49 -337.97 -112.64 -340.41 -116.28 -342.84 -119.91 -344.05 -127.08 -345.27 -134.25 -343.97 -138.31 -342.68 -142.36 -339.03 -146.23 -335.38 -150.09 -330.68 -152.57 -325.97 -155.05 -321.07 -156.81 -316.17 -158.58 -310.59 -159.90 -305.01 -161.23 -298.81 -162.22 -292.60 -163.20 -285.90 -164.00 -279.20 -164.80 -270.72 -164.78 -262.24 -164.77 -252.95 -164.42 -243.65 -164.08 -232.44 -163.48 -221.22 -162.88 -209.58 -162.22 -197.93 -161.56 -188.17 -161.19 -178.41 -160.82 -170.64 -161.01 -162.86 -161.20 -157.83 -162.19 -152.80 -163.18 -146.13 -166.44 -139.47 -169.70 -135.42 -172.00 -131.36 -174.30 -125.97 -178.05 -120.58 -181.79 -117.19 -184.75 -113.80 -187.70 -120.12 -189.55 -126.44 -191.41 -134.57 -192.50 -142.70 -193.60 -151.71 -193.89 -160.72 -194.17 -165.37 -193.78 -170.02 -193.38 -175.38 -192.37 -180.74 -191.36 -187.57 -190.06 -194.40 -188.77 -201.68 -187.33 -208.97 -185.89 -215.20 -184.00 -221.44 -182.11 -227.53 -180.33 -233.61 -178.55 -239.22 -177.12 -244.82 -175.69 -250.66 -174.72 -256.50 -173.75 -262.78 -173.11 -269.06 -172.48 -276.38 -172.15 -283.71 -171.83 -291.15 -172.01 -298.59 -172.19 -303.89 -172.06 -309.18 -171.92 -313.61 -171.50 -318.03 -171.09 -319.62 -171.35 -321.20 -171.62 -322.62 -172.38 -324.04 -173.14 -325.15 -174.31 -326.25 -175.48 -326.92 -176.94 -327.59 -178.41 -327.76 -180.01 -327.93 -181.61 -327.58 -183.18 -327.23 -184.75 -326.39 -186.13 -325.56 -187.51 -324.33 -188.55 -323.10 -189.58 -321.60 -190.17 -320.10 -190.77 -318.49 -190.85 -316.89 -190.93 -315.34 -190.49 -313.79 -190.06 -312.46 -189.15 -311.13 -188.24 -310.16 -186.96 -309.19 -185.67 -308.68 -184.14 -308.17 -182.62 -308.17 -181.01 -308.18 -179.40 -308.70 -177.87 -309.22 -176.35 -310.20 -175.07 -311.18 -173.79 -312.51 -172.89 -313.85 -171.99 -315.40 -171.57 -316.95 -171.14 Z';
 
-// FIX: Same issue — removed the erroneous "Q 0.49 7.13" opener and ensured
-// the path data is space-separated only (no commas adjacent to numbers).
 const SPIRAL_PATH =
   'M 0.49 7.13 -7.86 7.49 -16.21 7.85 -23.90 7.59 -31.58 7.34 -40.24 4.92 -48.91 2.50 -57.71 -0.96 -66.51 -4.44 -75.45 -8.58 -84.39 -12.73 -93.66 -17.42 -102.93 -22.10 -110.74 -26.79 -118.56 -31.48 -124.66 -36.43 -130.75 -41.38 -134.79 -46.35 -138.83 -51.32 -140.98 -55.69 -143.12 -60.06 -143.69 -64.30 -144.25 -68.55 -141.23 -75.11 -138.21 -81.68 -133.84 -83.24 -129.47 -84.81 -125.26 -85.52 -121.06 -86.23 -116.12 -86.59 -111.19 -86.94 -105.38 -86.76 -99.57 -86.57 -93.19 -85.80 -86.80 -85.02 -79.50 -83.27 -72.20 -81.52 -65.56 -79.58 -58.92 -77.63 -52.46 -75.27 -46.01 -72.91 -39.86 -70.08 -33.72 -67.24 -27.79 -63.90 -21.87 -60.56 -16.35 -57.50 -10.83 -54.45 -5.32 -51.42 0.18 -48.40 5.71 -45.78 11.25 -43.17 17.09 -40.95 22.93 -38.74 28.75 -36.99 34.57 -35.23 40.77 -33.91 46.97 -32.59 53.37 -32.25 59.77 -31.92 64.43 -33.01 69.09 -34.10 73.70 -37.38 78.32 -40.65 79.03 -47.88 79.74 -55.11 78.00 -60.40 76.25 -65.69 69.21 -70.74 62.17 -75.80 54.75 -79.24 47.34 -82.68 37.39 -85.85 27.45 -89.01 15.22 -91.97 2.99 -94.92 -11.56 -97.43 -26.13 -99.94 -41.54 -102.26 -56.95 -104.57 -70.80 -107.07 -84.65 -109.57 -96.07 -112.13 -107.49 -114.69 -115.96 -117.30 -124.42 -119.90 -131.22 -122.56 -138.03 -125.21 -143.86 -128.33 -149.70 -131.45 -154.44 -135.28 -159.19 -139.10 -162.76 -143.30 -166.33 -147.50 -168.98 -151.85 -171.64 -156.20 -173.15 -160.82 -174.66 -165.45 -172.55 -174.80 -170.44 -184.15 -164.91 -187.76 -159.38 -191.36 -152.48 -193.30 -145.57 -195.24 -137.72 -196.10 -129.88 -196.96 -122.73 -197.28 -115.59 -197.61 -108.03 -197.32 -100.48 -197.02 -92.75 -195.62 -85.03 -194.21 -76.78 -191.53 -68.53 -188.85 -60.14 -185.48 -51.76 -182.11 -43.78 -178.21 -35.80 -174.30 -27.56 -169.98 -19.33 -165.66 -11.94 -162.16 -4.54 -158.66 2.36 -154.84 9.27 -151.02 15.42 -147.52 21.58 -144.02 27.12 -140.97 32.66 -137.92 38.15 -135.03 43.64 -132.13 50.50 -128.80 57.36 -125.46 64.48 -122.59 71.60 -119.72 78.84 -117.98 86.09 -116.25 92.86 -115.36 99.64 -114.46 105.00 -114.34 110.36 -114.21 115.77 -115.24 121.17 -116.27 123.87 -120.35 126.57 -124.43 128.84 -130.64 131.12 -136.84 130.62 -141.64 130.12 -146.44 125.82 -151.53 121.52 -156.62 117.07 -160.18 112.62 -163.73 106.25 -167.49 99.88 -171.26 90.75 -175.13 81.62 -179.01 70.49 -182.22 59.36 -185.44 46.66 -188.08 33.96 -190.72 20.50 -193.09 7.05 -195.46 -6.43 -197.69 -19.92 -199.91 -31.81 -202.37 -43.70 -204.82 -53.44 -207.36 -63.18 -209.89 -70.46 -212.27 -77.74 -214.64 -83.44 -216.91 -89.14 -219.19 -93.81 -221.95 -98.48 -224.71 -102.22 -227.16 -105.96 -229.61 -112.12 -234.74 -118.28 -239.87 -121.87 -244.25 -125.46 -248.64 -126.08 -257.05 -126.70 -265.45 -123.23 -270.19 -119.76 -274.93 -112.18 -278.20 -104.60 -281.47 -95.75 -283.01 -86.90 -284.54 -76.88 -285.15 -66.86 -285.77 -57.10 -285.83 -47.35 -285.89 -38.11 -285.20 -28.86 -284.51 -21.02 -283.44 -13.18 -282.38 -6.41 -280.89 0.36 -279.41 6.26 -277.74 12.16 -276.07 18.36 -273.56 24.55 -271.05 30.43 -268.27 36.31 -265.48 41.46 -262.96 46.62 -260.44 51.30 -257.51 55.97 -254.58 59.94 -251.54 63.90 -248.51 70.33 -243.77 76.76 -239.04 82.28 -235.34 87.80 -231.64 89.01 -230.33 90.21 -229.02 90.93 -227.39 91.65 -225.76 91.81 -223.99 91.97 -222.21 91.56 -220.48 91.15 -218.75 90.21 -217.24 89.26 -215.73 87.89 -214.60 86.51 -213.47 84.84 -212.84 83.18 -212.21 81.40 -212.14 79.62 -212.07 77.91 -212.58 76.20 -213.08 74.75 -214.11 73.29 -215.13 72.24 -216.57 71.18 -218.00 70.64 -219.70 70.10 -221.40 70.13 -223.18 70.16 -224.96 70.76 -226.64 71.36 -228.32 72.46 -229.71 73.56 -231.11 75.05 -232.09 76.54 -233.06 78.27 -233.51 79.99 -233.96 81.77 -233.83 83.54 -233.70 85.19 -233.02 86.83 -232.33 88.17 -231.15 89.50 -229.98 90.40 -228.44 91.29 -226.89 91.64 -225.15 91.99 -223.40 91.77 -221.64 91.55 -219.87 90.77 -218.27 90.00 -216.66 88.75 -215.39 87.51 -214.12 85.92 -213.31 84.33 -212.51 82.57 -212.25 80.81 -211.99 79.05 -212.31 77.30 -212.63 75.74 -213.49 74.18 -214.35 71.10 -216.93 68.02 -219.52 63.46 -223.88 58.89 -228.23 52.35 -234.02 45.80 -239.80 42.22 -242.55 38.64 -245.30 33.83 -248.02 29.02 -250.75 23.62 -253.54 18.23 -256.33 12.78 -258.82 7.33 -261.31 2.08 -263.29 -3.16 -265.26 -9.11 -266.95 -15.06 -268.64 -22.26 -269.62 -29.46 -270.61 -38.04 -270.67 -46.62 -270.74 -55.78 -269.89 -64.95 -269.03 -73.75 -267.49 -82.55 -265.95 -89.57 -263.76 -96.59 -261.56 -101.83 -258.94 -107.07 -256.32 -103.98 -252.07 -100.89 -247.82 -95.35 -242.44 -89.81 -237.05 -86.56 -234.25 -83.30 -231.45 -78.49 -228.76 -73.68 -226.06 -67.04 -223.50 -60.40 -220.93 -50.92 -218.62 -41.44 -216.32 -29.75 -214.13 -18.07 -211.94 -4.50 -210.02 9.07 -208.10 22.76 -206.12 36.44 -204.14 49.73 -201.97 63.01 -199.79 75.13 -197.08 87.26 -194.37 97.68 -191.07 108.10 -187.77 116.59 -184.12 125.09 -180.46 131.28 -176.04 137.46 -171.62 142.11 -166.44 146.75 -161.27 149.21 -155.72 151.66 -150.17 152.18 -144.60 152.69 -139.04 151.70 -134.40 150.71 -129.76 148.88 -125.30 147.04 -120.83 144.43 -116.50 141.82 -112.17 138.32 -108.37 134.83 -104.57 130.55 -101.99 126.27 -99.41 121.98 -98.72 117.68 -98.03 113.42 -98.56 109.15 -99.09 103.37 -99.86 97.58 -100.63 90.31 -101.83 83.03 -103.03 74.81 -104.87 66.58 -106.71 58.95 -110.32 51.32 -112.39 43.76 -115.72 36.20 -119.06 30.75 -122.38 25.31 -125.71 20.01 -129.19 14.71 -132.66 8.90 -136.39 3.08 -140.12 -3.29 -143.85 -9.66 -147.58 -17.30 -151.02 -24.93 -154.45 -33.12 -158.33 -41.30 -162.21 -48.95 -165.42 -56.60 -168.64 -64.70 -171.19 -72.81 -173.74 -80.35 -175.52 -87.89 -177.31 -94.33 -178.29 -100.77 -179.28 -107.59 -179.20 -114.42 -179.11 -120.81 -178.58 -127.21 -178.05 -133.62 -176.89 -140.04 -175.73 -145.06 -174.28 -150.08 -172.82 -153.16 -168.49 -156.23 -164.15 -152.63 -157.11 -149.04 -150.07 -145.83 -146.59 -142.62 -143.10 -137.85 -139.84 -133.08 -136.57 -127.12 -133.68 -121.15 -130.78 -113.10 -128.45 -105.04 -126.11 -93.83 -123.81 -82.62 -121.52 -68.93 -119.34 -55.23 -117.17 -39.65 -115.25 -24.08 -113.33 -9.03 -111.31 6.01 -109.28 18.83 -106.96 31.64 -104.64 42.73 -102.17 53.82 -99.70 63.43 -96.64 73.05 -93.58 80.10 -89.39 87.15 -85.20 91.82 -79.84 96.50 -74.48 98.48 -68.90 100.46 -63.31 100.77 -58.20 101.08 -53.08 100.39 -48.19 99.70 -43.30 98.25 -39.16 96.80 -35.02 93.95 -30.63 91.11 -26.25 86.74 -23.18 82.38 -20.11 77.34 -18.48 72.30 -16.85 65.73 -15.89 59.17 -14.93 51.32 -15.17 43.48 -15.42 36.45 -16.81 29.42 -18.21 23.08 -20.14 16.73 -22.07 10.16 -24.47 3.60 -26.87 -2.45 -29.70 -8.50 -32.54 -14.04 -35.56 -19.57 -38.59 -25.15 -41.65 -30.73 -44.71 -36.05 -47.65 -41.36 -50.60 -46.77 -53.07 -52.18 -55.53 -58.05 -57.54 -63.91 -59.55 -70.01 -61.13 -76.12 -62.70 -82.56 -63.81 -89.01 -64.92 -94.68 -65.47 -100.34 -66.01 -109.49 -66.17 -118.64 -66.34 -123.18 -67.45 -127.72 -68.55 -127.67 -63.77 -127.63 -58.99 -125.23 -54.71 -122.82 -50.42 -117.82 -45.78 -112.81 -41.13 -105.32 -36.78 -97.83 -32.42 -88.68 -27.99 -79.53 -23.57 -70.84 -19.81 -62.15 -16.05 -53.82 -13.09 -45.49 -10.14 -38.19 -8.25 -30.89 -6.37 -24.01 -5.96 -17.13 -5.55 -8.81 -6.34 -0.49 -7.13 Z';
 
@@ -1258,14 +1250,11 @@ export default function HoverStatePage() {
     </main>
   );
 }`,
-      description: `Card component with an animated stroke effect on border.`,
-      install: "",
-      dependencies: [],
-      interactionType: [{"type":"Hover","description":"Border stroke activation"}],
+      description: `A high-end "Stroke Reveal" gallery card component that utilizes GSAP-driven SVG path animation. The component synchronizes a two-layer stroke effect (a dynamic colored swirl and a static grey spiral) with a refined text-reveal interaction, creating a sophisticated motion language suitable for high-impact landing pages.`,
+      install: "npm install gsap",
+      dependencies: ["gsap","tailwindcss"],
+      interactionType: [{"type":"SVG Stroke Draw","description":"Calculates path length via SVG API and uses GSAP to animate stroke-dashoffset, creating a \"drawing\" effect on hover."},{"type":"Layered Motion Reveal","description":"Coordinates simultaneous trigger of CSS properties and SVG stroke widths for a multi-layered design transition."},{"type":"GSAP Timeline Orchestration","description":"Manages conflicting enter/leave states by killing existing timelines, ensuring smooth state transitions without animation \"glitching\"."}],
       howToUse: `import { StrokeCards } from "@/components/ui/cards/stroke-cards";`,
-      keepInMind: `Optimized for grid layouts.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
     },
     "arc-slider": {
       name: "arc-slider",
@@ -1493,14 +1482,11 @@ export default function ArcSlider() {
     </div>
   );
 }`,
-      description: `3D slider that follows an arc path for dynamic visuals.`,
-      install: "",
-      dependencies: ["framer-motion"],
-      interactionType: [{"type":"Drag","description":"Arc-based drag"}],
+      description: `A physics-driven "Arc Slider" that projects 2D images onto a simulated 3D arc path. It utilizes a custom requestAnimationFrame loop for hardware-accelerated motion, calculating scale, z-index, and Y-offset dynamically based on the scroll vector. The component provides a high-fidelity, kinetic user experience optimized for desktop and mobile touch interaction.`,
+      install: "npm install three",
+      dependencies: ["threejs"],
+      interactionType: [{"type":"Kinetic Scroll Engine","description":"Implements custom velocity-based inertia using requestAnimationFrame and linear interpolation (LERP)."},{"type":"Arc Projection","description":"Calculates dynamic transform matrix (scale, opacity, Y-position) to map elements onto a parabolic curve."},{"type":"State Sync","description":"Real-time calculation of viewport proximity to trigger active slide state."}],
       howToUse: `import { ArcSlider } from "@/components/ui/3d-sliders/arc-slider";`,
-      keepInMind: `Responsive container required.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
     },
     "animated-header": {
       name: "animated-header",
@@ -1639,14 +1625,11 @@ export default function AnimatedHeader() {
   );
 }
 `,
-      description: `Complex header that reacts to scroll velocity and position.`,
-      install: "npm install gsap @studio-freight/lenis",
-      dependencies: ["gsap","@studio-freight/lenis"],
-      interactionType: [{"type":"Scroll","description":"Velocity-based header shrink"}],
+      description: `A data-driven animation controller that leverages SplitType for text-splitting and GSAP ScrollTrigger for diverse animation states.`,
+      install: "npm install gsap @studio-freight/lenis split/type",
+      dependencies: ["gsap","@studio-freight/lenis","split/type"],
+      interactionType: [{"type":"Staggered Character Animation","description":"Uses SplitType to manipulate character-level DOM nodes for high-end micro-interactions."},{"type":"Hybrid Trigger Logic","description":"Conditional mapping of GSAP timelines to ScrollTrigger states: Immediate, Viewport-Enter, and Scrubbed."}],
       howToUse: `import { AnimatedHeader } from "@/components/ui/scroll-effects/animated-header";`,
-      keepInMind: `Requires Lenis smooth scrolling.`,
-      contact: "raj.shytanimo@gmail.com",
-      license: "MIT",
     },
   }
 };
