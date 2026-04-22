@@ -179,7 +179,16 @@ export const Index = [
           'Implements the clamp() function to ensure responsive text scaling across diverse viewport widths while maintaining aspect ratios.',
       },
     ],
-    howToUse: `import { StrikeReveal } from "@/components/ui/hover-effects/strike-reveal";`,
+    howToUse: `import { StrikeReveal } from "@/components/ui/hover-effects/strike-reveal";
+    
+    export default function StrikeReveal = () => {
+  return (
+    <div>
+      <StrikeReveal text='INTERACTIONS!' />
+    </div>
+  );
+};
+    `,
   },
   {
     name: 'infinity-slider',

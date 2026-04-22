@@ -568,7 +568,16 @@ export default StrikeReveal;`,
       install: "",
       dependencies: ["framer-motion"],
       interactionType: [{"type":"Dual-Stage Line Strike","description":"Uses the ::after pseudo-element with a cubic-bezier transition to sweep a horizontal strike-through line across the component."},{"type":"Text Mask Reveal","description":"Utilizes the ::before pseudo-element and the data-letters attribute to trigger a width-based mask reveal of the colored text on hover."},{"type":"Fluid Typography","description":"Implements the clamp() function to ensure responsive text scaling across diverse viewport widths while maintaining aspect ratios."}],
-      howToUse: `import { StrikeReveal } from "@/components/ui/hover-effects/strike-reveal";`,
+      howToUse: `import { StrikeReveal } from "@/components/ui/hover-effects/strike-reveal";
+    
+    export default function StrikeReveal = () => {
+  return (
+    <div>
+      <StrikeReveal text='INTERACTIONS!' />
+    </div>
+  );
+};
+    `,
     },
     "infinity-slider": {
       name: "infinity-slider",

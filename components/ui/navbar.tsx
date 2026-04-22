@@ -105,7 +105,10 @@ const Navbar: React.FC = () => {
               Slash/Ui
             </Link>
             <div className='hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400'>
-              <Link href='/docs' className='hover:text-white transition-colors font-cartographCF'>
+              <Link
+                href='/docs'
+                className='hover:text-white transition-colors font-cartographCF'
+              >
                 Docs
               </Link>
               <Link
@@ -188,7 +191,7 @@ const Navbar: React.FC = () => {
             >
               <div className='w-full max-w-[860px] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden pointer-events-auto'>
                 {/* Mirrored navbar row */}
-                <div className='flex items-center justify-between px-6 h-13  border-zinc-800'>
+                <div className='flex items-center justify-between px-6 h-12.5  border-zinc-800'>
                   <Link href='/' className='font-bold text-white text-lg'>
                     Slash/Ui
                   </Link>
@@ -231,15 +234,24 @@ const Navbar: React.FC = () => {
                   {/* LEFT — legal (Hidden on very small screens or moved to bottom) */}
                   <div className='flex flex-col gap-1.5 pt-1 order-3 md:order-1'>
                     <div className='flex flex-row md:flex-col gap-4 md:gap-1 mt-4'>
-                      {['Privacy Policy', 'Terms', 'Accessibility'].map((l) => (
-                        <a
-                          key={l}
-                          href='#'
-                          className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
-                        >
-                          {l}
-                        </a>
-                      ))}
+                      <Link
+                        href='/privacy-policy'
+                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
+                      >
+                        Privacy Policy
+                      </Link>
+                      <Link
+                        href='/terms'
+                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
+                      >
+                        Terms
+                      </Link>
+                      <Link
+                        href='/accessibility'
+                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
+                      >
+                        Accessibility
+                      </Link>
                     </div>
                   </div>
 
