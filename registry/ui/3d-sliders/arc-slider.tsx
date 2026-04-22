@@ -13,7 +13,6 @@ const CENTER_LIFT = 100;
 const SCROLL_LERP = 0.05;
 
 interface Slide {
-  /** Any valid path ("/images/shirt.jpg") or full URL ("https://…/img.jpg") */
   src: string;
   title: string;
 }

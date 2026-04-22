@@ -21,31 +21,30 @@ export const Index: Record<string, any> = {
   Index.forEach((item: any) => {
     const componentPath = item.files[0].replace(/\.tsx?$/, '');
     const sourceFilePath = path.join(process.cwd(), 'registry', item.files[0]);
-    const detailsFilePath = path.join(
-      process.cwd(),
-      'registry',
-      `details/${item.name}.tsx`,
-    );
-    const hasDetails = existsSync(detailsFilePath);
 
     const rawContent = existsSync(sourceFilePath)
       ? readFileSync(sourceFilePath, 'utf8')
       : '';
-    const safeContent = rawContent.replace(/`/g, '\\`').replace(/\$/g, '\\$');
-    const safeDescription = (item.description || '')
-      .replace(/`/g, '\\`')
-      .replace(/\$/g, '\\$');
+
+    // Helper to sanitize strings for the generated file
+    const escape = (str: string) =>
+      (str || '').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 
     indexContent += `    "${item.name}": {
       name: "${item.name}",
       type: "${item.type}",
       component: React.lazy(() => import("../registry/${componentPath}")),
-      details: ${hasDetails ? `React.lazy(() => import("../registry/details/${item.name}"))` : 'null'},
       files: ${JSON.stringify(item.files)},
       category: "${item.category || 'undefined'}",
-      content: \`${safeContent}\`,
-      description: \`${safeDescription}\`,
+      content: \`${escape(rawContent)}\`,
+      description: \`${escape(item.description)}\`,
       install: "${item.install || ''}",
+      dependencies: ${JSON.stringify(item.dependencies || [])},
+      interactionType: ${JSON.stringify(item.interactionType || [])},
+      howToUse: \`${escape(item.howToUse)}\`,
+      keepInMind: \`${escape(item.keepInMind)}\`,
+      contact: "${item.contact || ''}",
+      license: "${item.license || ''}",
     },
 `;
   });
@@ -54,8 +53,7 @@ export const Index: Record<string, any> = {
 };`;
 
   writeFileSync(OUTPUT_PATH, indexContent);
-  console.log('✅ Slash UI Registry updated!');
-  //npm run build:registry
+  console.log('✅ Slash UI Registry updated (Details removed)!');
 }
 
 buildRegistry();

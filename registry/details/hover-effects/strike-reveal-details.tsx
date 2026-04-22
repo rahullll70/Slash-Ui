@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NavbarDetails = () => {
+const strikeRevealDetails = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const NavbarDetails = () => {
   )
 }
 
-export default NavbarDetails
+export default strikeRevealDetails

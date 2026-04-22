@@ -70,10 +70,10 @@ const Hero = (): JSX.Element => {
       </video>
 
       <div className='relative z-10 container mx-auto px-6 flex mt-40 flex-col items-center'>
-        <h1 className='max-w-4xl text-center text-5xl font-beVietnamPro tracking-tight md:text-7xl leading-[1] text-white'>
+        <h1 className='max-w-4xl text-center text-4xl font-beVietnamPro tracking-tight md:text-7xl leading-[1] text-white'>
           <span className='block overflow-hidden'>{splitText('SLASH/UI')}</span>
           <span className='block overflow-hidden'>
-            <span className='font-sans italic text-6xl md:text-8xl text-zinc-200'>
+            <span className='font-sans italic text-5xl md:text-8xl text-zinc-200'>
               {splitText('components')}
             </span>
           </span>

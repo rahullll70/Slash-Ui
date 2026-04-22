@@ -1,4 +1,4 @@
 1. now add categories on component page
 2. add more components
 3. add component details
-4. make pricining page
+4. add scrollbar in source code

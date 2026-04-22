@@ -8,7 +8,6 @@ export const Index: Record<string, any> = {
       name: "neubrutal-button",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/buttons/neubrutal-button")),
-      details: null,
       files: ["ui/buttons/neubrutal-button.tsx"],
       category: "buttons",
       content: `import React from 'react';
@@ -45,14 +44,19 @@ export default function NeubrutalButton({
   );
 }
 `,
-      description: ``,
+      description: `A high-end button with modern hover effects and bold styling.`,
       install: "npm install framer-motion",
+      dependencies: ["framer-motion"],
+      interactionType: [{"type":"Hover","description":"Interactive hover scaling"}],
+      howToUse: `import { NeubrutalButton } from "@/components/ui/buttons/neubrutal-button";`,
+      keepInMind: `Ensure Framer Motion is installed.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "dot-cursor": {
       name: "dot-cursor",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/cursors/dot-cursor")),
-      details: null,
       files: ["ui/cursors/dot-cursor.tsx"],
       category: "cursors",
       content: `"use client";
@@ -91,14 +95,19 @@ const DotCursor = () => {
 };
 
 export default DotCursor;`,
-      description: ``,
+      description: `A smooth, reactive custom cursor for modern web interfaces.`,
       install: "npm install framer-motion",
+      dependencies: ["framer-motion"],
+      interactionType: [{"type":"Mouse Move","description":"Follows cursor movement"}],
+      howToUse: `import { DotCursor } from "@/components/ui/cursors/dot-cursor";`,
+      keepInMind: `Set cursor to none on body.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "floating-navbar": {
       name: "floating-navbar",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/navbars/floating-navbar")),
-      details: null,
       files: ["ui/navbars/floating-navbar.tsx"],
       category: "navbars",
       content: `'use client';
@@ -246,14 +255,19 @@ const Navbar = () => {
 
 export default Navbar;
 `,
-      description: ``,
+      description: `A sophisticated navigation bar with GSAP animations and audio toggles.`,
       install: "npm install gsap",
+      dependencies: ["gsap"],
+      interactionType: [{"type":"Scroll","description":"Hides/shows on scroll"}],
+      howToUse: `import { FloatingNavbar } from "@/components/ui/navbars/floating-navbar";`,
+      keepInMind: `Requires GSAP integration.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "minimal-scrollbar": {
       name: "minimal-scrollbar",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/scrollbars/minimal-scrollbar")),
-      details: null,
       files: ["ui/scrollbars/minimal-scrollbar.tsx"],
       category: "scrollbars",
       content: `'use client';
@@ -459,14 +473,19 @@ const VisualScrollbar = () => {
 };
 
 export default VisualScrollbar;`,
-      description: ``,
+      description: `Custom, minimalist scrollbar with smooth transition properties.`,
       install: "",
+      dependencies: [],
+      interactionType: [{"type":"Scroll","description":"Native scroll behavior"}],
+      howToUse: `import { MinimalScrollbar } from "@/components/ui/scrollbars/minimal-scrollbar";`,
+      keepInMind: `CSS-only implementation.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "strike-reveal": {
       name: "strike-reveal",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/hover-effects/strike-reveal")),
-      details: null,
       files: ["ui/hover-effects/strike-reveal.tsx"],
       category: "hover-effects",
       content: `import React from 'react';
@@ -526,14 +545,19 @@ const StrikeReveal: React.FC<StrikeRevealProps> = ({ label, href = "#" }) => {
 };
 
 export default StrikeReveal;`,
-      description: ``,
+      description: `Text reveal effect with a striking diagonal animation.`,
       install: "",
+      dependencies: ["framer-motion"],
+      interactionType: [{"type":"Hover","description":"Staggered reveal animation"}],
+      howToUse: `import { StrikeReveal } from "@/components/ui/hover-effects/strike-reveal";`,
+      keepInMind: `Best for headers.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "infinity-slider": {
       name: "infinity-slider",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/3d-sliders/infinity-slider")),
-      details: null,
       files: ["ui/3d-sliders/infinity-slider.tsx"],
       category: "3d-sliders",
       content: `'use client';
@@ -958,14 +982,19 @@ export default function InfiniteSlider({
   );
 }
 `,
-      description: ``,
+      description: `A 3D infinite slider loop using physics-based motion.`,
       install: "",
+      dependencies: ["framer-motion"],
+      interactionType: [{"type":"Drag","description":"Infinite 3D rotation"}],
+      howToUse: `import { InfinitySlider } from "@/components/ui/3d-sliders/infinity-slider";`,
+      keepInMind: `Use hardware-accelerated containers.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "stroke-cards": {
       name: "stroke-cards",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/cards/stroke-cards")),
-      details: null,
       files: ["ui/cards/stroke-cards.tsx"],
       category: "cards",
       content: `'use client';
@@ -1229,14 +1258,19 @@ export default function HoverStatePage() {
     </main>
   );
 }`,
-      description: ``,
+      description: `Card component with an animated stroke effect on border.`,
       install: "",
+      dependencies: [],
+      interactionType: [{"type":"Hover","description":"Border stroke activation"}],
+      howToUse: `import { StrokeCards } from "@/components/ui/cards/stroke-cards";`,
+      keepInMind: `Optimized for grid layouts.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "arc-slider": {
       name: "arc-slider",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/3d-sliders/arc-slider")),
-      details: null,
       files: ["ui/3d-sliders/arc-slider.tsx"],
       category: "3d-sliders",
       content: `"use client";
@@ -1254,7 +1288,6 @@ const CENTER_LIFT = 100;
 const SCROLL_LERP = 0.05;
 
 interface Slide {
-  /** Any valid path ("/images/shirt.jpg") or full URL ("https://…/img.jpg") */
   src: string;
   title: string;
 }
@@ -1460,14 +1493,19 @@ export default function ArcSlider() {
     </div>
   );
 }`,
-      description: ``,
+      description: `3D slider that follows an arc path for dynamic visuals.`,
       install: "",
+      dependencies: ["framer-motion"],
+      interactionType: [{"type":"Drag","description":"Arc-based drag"}],
+      howToUse: `import { ArcSlider } from "@/components/ui/3d-sliders/arc-slider";`,
+      keepInMind: `Responsive container required.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
     "animated-header": {
       name: "animated-header",
       type: "ui",
       component: React.lazy(() => import("../registry/ui/scroll-effects/animated-header")),
-      details: null,
       files: ["ui/scroll-effects/animated-header.tsx"],
       category: "scroll-effects",
       content: `'use client';
@@ -1601,8 +1639,14 @@ export default function AnimatedHeader() {
   );
 }
 `,
-      description: ``,
-      install: "install gsap lenis split/type",
+      description: `Complex header that reacts to scroll velocity and position.`,
+      install: "npm install gsap @studio-freight/lenis",
+      dependencies: ["gsap","@studio-freight/lenis"],
+      interactionType: [{"type":"Scroll","description":"Velocity-based header shrink"}],
+      howToUse: `import { AnimatedHeader } from "@/components/ui/scroll-effects/animated-header";`,
+      keepInMind: `Requires Lenis smooth scrolling.`,
+      contact: "raj.shytanimo@gmail.com",
+      license: "MIT",
     },
   }
 };

@@ -98,19 +98,19 @@ const Navbar: React.FC = () => {
     <>
       {/* ── NAVBAR ── */}
       <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-4 px-6 pointer-events-none'>
-        <div className='flex items-center justify-between px-6 h-14 w-full max-w-[860px] bg-zinc-900 backdrop-blur-3xl border border-zinc-800 rounded-2xl pointer-events-auto'>
+        <div className='flex items-center justify-between px-6 h-13 w-full max-w-[860px] bg-zinc-900 backdrop-blur-3xl border border-zinc-800 rounded-md pointer-events-auto'>
           {/* Left */}
           <div className='flex items-center gap-8'>
             <Link href='/' className='font-bold text-white text-lg'>
               Slash/Ui
             </Link>
             <div className='hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400'>
-              <Link href='/docs' className='hover:text-white transition-colors'>
+              <Link href='/docs' className='hover:text-white transition-colors font-cartographCF'>
                 Docs
               </Link>
               <Link
                 href='/component'
-                className='hover:text-white transition-colors'
+                className='hover:text-white transition-colors font-cartographCF'
               >
                 Components
               </Link>
@@ -235,7 +235,7 @@ const Navbar: React.FC = () => {
                         <a
                           key={l}
                           href='#'
-                          className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors'
+                          className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
                         >
                           {l}
                         </a>
@@ -290,7 +290,7 @@ const Navbar: React.FC = () => {
                         className='py-1.5 flex items-center h-[44px]'
                       >
                         {link.tag && (
-                          <span className='text-[10px] text-zinc-500 tracking-widest uppercase'>
+                          <span className='text-[10px] text-zinc-500 tracking-widest uppercase font-cartographCF'>
                             {link.tag}
                           </span>
                         )}

@@ -14,6 +14,7 @@ export default async function Page({
   if (!activeItem) {
     return <div>Component "{id}" not found in __registry__/index.ts</div>;
   }
+
   const SelectedComponent = activeItem?.component;
 
   return (
@@ -22,6 +23,12 @@ export default async function Page({
       code={activeItem?.content}
       description={activeItem?.description}
       install={activeItem?.install}
+      dependencies={activeItem?.dependencies}
+      interactionType={activeItem?.interactionType}
+      howToUse={activeItem?.howToUse}
+      keepInMind={activeItem?.keepInMind}
+      contact={activeItem?.contact}
+      license={activeItem?.license}
     >
       {SelectedComponent ? (
         <Suspense
