@@ -2,7 +2,47 @@ import React from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/ui/navbar';
 
+// data/socials.ts
+export const SOCIAL_LINKS = [
+  {
+    name: 'GitHub',
+    href: 'https://github.com/rahull-70/Slash-Ui',
+    id: 'v551nqGeHhGn',
+  },
+  {
+    name: 'Twitter',
+    href: 'https://x.com/rahulll_parihar',
+    id: 'YfCbGWCWcuar',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/rahul-parihar-6aba79300/',
+    id: '99290',
+  },
+];
+
 const Support = () => {
+  const FOOTER_CONFIG = {
+    site: [
+      { label: 'Components', path: '/components' },
+      { label: 'Quick-start', path: '/docs' },
+      { label: 'Pricing', path: '/pricing' },
+    ],
+    social: [
+      { label: 'Github', path: 'https://github.com/rahull-70/Slash-Ui' },
+      { label: 'Twitter', path: 'https://x.com/rahulll_parihar' },
+      {
+        label: 'LinkedIn',
+        path: 'https://www.linkedin.com/in/rahul-parihar-6aba79300/',
+      },
+    ],
+    legal: [
+      { label: 'Privacy Policy', path: '/privacy-policy' },
+      { label: 'Terms of Service', path: '/terms' },
+      { label: 'Support', path: '/support' },
+    ],
+  };
+
   return (
     <>
       <Navbar />
@@ -48,7 +88,7 @@ const Support = () => {
                 details and a minimal reproduction snippet.
               </p>
               <Link
-                href='https://github.com'
+                href='https://github.com/rahull-70/Slash-Ui'
                 className='text-zinc-500 hover:text-white transition-colors underline underline-offset-4'
               >
                 Go to GitHub Issues →
@@ -82,19 +122,17 @@ const Support = () => {
                 releases.
               </p>
               <div className='flex gap-3 mt-4'>
-                {[
-                  { id: 'v551nqGeHhGn', alt: 'Github' },
-                  { id: 'YfCbGWCWcuar', alt: 'Twitter' },
-                  { id: '99290', alt: 'LinkedIn' },
-                ].map((icon) => (
+                {SOCIAL_LINKS.map((link) => (
                   <Link
-                    key={icon.alt}
-                    href='#'
+                    key={link.name}
+                    href={link.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className='flex items-center justify-center w-10 h-10 rounded-full border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 hover:scale-110 transition-all duration-300 ease-out'
                   >
                     <img
-                      src={`https://img.icons8.com/?size=100&id=${icon.id}&format=png&color=ffffff`}
-                      alt={icon.alt}
+                      src={`https://img.icons8.com/?size=100&id=${link.id}&format=png&color=ffffff`}
+                      alt={link.name}
                       className='w-5 opacity-70 hover:opacity-100 transition-opacity'
                     />
                   </Link>
@@ -103,8 +141,9 @@ const Support = () => {
             </section>
           </div>
 
-          <footer className='px-6 py-16 '>
-            <div className='max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-start gap-5'>
+          <footer className='px-6 py-16 border-t border-zinc-900'>
+            <div className='max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12'>
+              {/* Brand Column */}
               <div className='flex flex-col gap-2'>
                 <span className='text-sm font-bold tracking-tight text-white uppercase'>
                   Slash UI
@@ -113,57 +152,27 @@ const Support = () => {
                   © 2026 slashh-ui.com
                 </p>
               </div>
+
+              {/* Links Grid */}
               <div className='flex gap-16 md:gap-24'>
-                <div className='flex flex-col gap-1'>
-                  <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
-                    Site
-                  </p>
-                  <div className='flex flex-col gap-0.5'>
-                    {['Components', 'Quick-start', 'Pricing'].map((l) => (
-                      <Link
-                        key={l}
-                        href='#'
-                        className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
-                      >
-                        {l}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <div className='flex flex-col gap-1'>
-                  <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
-                    Social
-                  </p>
-                  <div className='flex flex-col gap-0.5'>
-                    {['Github', 'twitter', 'Linkdin'].map((l) => (
-                      <Link
-                        key={l}
-                        href='#'
-                        className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
-                      >
-                        {l}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <div className='flex flex-col gap-1'>
-                  <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
-                    Legal
-                  </p>
-                  <div className='flex flex-col gap-0.5'>
-                    {['Privacy Policy', 'Terms of Service', 'Support'].map(
-                      (l) => (
+                {Object.entries(FOOTER_CONFIG).map(([category, links]) => (
+                  <div key={category} className='flex flex-col gap-3'>
+                    <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
+                      {category}
+                    </p>
+                    <div className='flex flex-col gap-2'>
+                      {links.map((link) => (
                         <Link
-                          key={l}
-                          href='#'
+                          key={link.label}
+                          href={link.path}
                           className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
                         >
-                          {l}
+                          {link.label}
                         </Link>
-                      ),
-                    )}
+                      ))}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </footer>

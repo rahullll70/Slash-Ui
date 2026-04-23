@@ -169,6 +169,24 @@ const FAQItem = ({ q, a }: { q: string; a: string }) => {
 
 // --- Main Page ---
 const Page = () => {
+  const FOOTER_CONFIG = {
+    site: [
+      { label: 'Components', path: '/components' },
+      { label: 'Quick-start', path: '/docs' },
+      { label: 'Pricing', path: '/pricing' },
+    ],
+    social: [
+      { label: 'Github', path: 'https://github.com/rahull-70/Slash-Ui' },
+      { label: 'Twitter', path: 'https://x.com/rahulll_parihar' },
+      { label: 'LinkedIn', path: 'https://www.linkedin.com/in/rahul-parihar-6aba79300/' },
+    ],
+    legal: [
+      { label: 'Privacy Policy', path: '/privacy-policy' },
+      { label: 'Terms of Service', path: '/terms' },
+      { label: 'Support', path: '/support' },
+    ],
+  };
+
   const pricingSectionRef = useRef(null);
 
   useEffect(() => {
@@ -251,7 +269,7 @@ const Page = () => {
           </div>
           <div className='absolute  bottom-0 left-0 right-0 h-74 bg-gradient-to-t from-white/[0.1] to-transparent pointer-events-none' />
         </div>
-    
+
         {/* Pricing Section (Added above FAQ) */}
         <section ref={pricingSectionRef} className='w-full py-32 px-8 '>
           <div className='max-w-4xl mx-auto'>
@@ -330,8 +348,9 @@ const Page = () => {
       </main>
 
       {/* Footer */}
-      <footer className='px-6 py-16 '>
-        <div className='max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-start gap-5'>
+      <footer className='px-6 py-16 border-t border-zinc-900'>
+        <div className='max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12'>
+          {/* Brand Column */}
           <div className='flex flex-col gap-2'>
             <span className='text-sm font-bold tracking-tight text-white uppercase'>
               Slash UI
@@ -340,55 +359,27 @@ const Page = () => {
               © 2026 slashh-ui.com
             </p>
           </div>
+
+          {/* Links Grid */}
           <div className='flex gap-16 md:gap-24'>
-            <div className='flex flex-col gap-1'>
-              <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
-                Site
-              </p>
-              <div className='flex flex-col gap-0.5'>
-                {['Components', 'Quick-start', 'Pricing'].map((l) => (
-                  <Link
-                    key={l}
-                    href='#'
-                    className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
-                  >
-                    {l}
-                  </Link>
-                ))}
+            {Object.entries(FOOTER_CONFIG).map(([category, links]) => (
+              <div key={category} className='flex flex-col gap-3'>
+                <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
+                  {category}
+                </p>
+                <div className='flex flex-col gap-2'>
+                  {links.map((link) => (
+                    <Link
+                      key={link.label}
+                      href={link.path}
+                      className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
-                Social
-              </p>
-              <div className='flex flex-col gap-0.5'>
-                {['Github', 'twitter', 'Linkdin'].map((l) => (
-                  <Link
-                    key={l}
-                    href='#'
-                    className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
-                  >
-                    {l}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <p className='text-[13px] uppercase tracking-wider font-bold text-white'>
-                Legal
-              </p>
-              <div className='flex flex-col gap-0.5'>
-                {['Privacy Policy', 'Terms of Service', 'Support'].map((l) => (
-                  <Link
-                    key={l}
-                    href='#'
-                    className='text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors'
-                  >
-                    {l}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </footer>

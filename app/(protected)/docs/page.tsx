@@ -7,7 +7,6 @@ import {
   Terminal,
   Code2,
   ChevronRight,
-  Mail,
   Command,
   Moon,
   Info,
