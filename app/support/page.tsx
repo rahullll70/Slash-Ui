@@ -16,7 +16,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/rahul-parihar-6aba79300/',
+    href: 'https://www.linkedin.com/in/rahul-pariharr/',
     id: '99290',
   },
 ];
@@ -33,7 +33,7 @@ const Support = () => {
       { label: 'Twitter', path: 'https://x.com/rahulll_parihar' },
       {
         label: 'LinkedIn',
-        path: 'https://www.linkedin.com/in/rahul-parihar-6aba79300/',
+        path: 'https://www.linkedin.com/in/rahul-pariharr/',
       },
     ],
     legal: [

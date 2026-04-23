@@ -12,7 +12,7 @@ const TermsOfService = () => {
     social: [
       { label: 'Github', path: 'https://github.com/rahull-70/Slash-Ui' },
       { label: 'Twitter', path: 'https://x.com/rahulll_parihar' },
-      { label: 'LinkedIn', path: 'https://www.linkedin.com/in/rahul-parihar-6aba79300/' },
+      { label: 'LinkedIn', path: 'https://www.linkedin.com/in/rahul-pariharr/' },
     ],
     legal: [
       { label: 'Privacy Policy', path: '/privacy-policy' },
