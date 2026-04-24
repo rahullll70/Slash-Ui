@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { BadgeAlert } from 'lucide-react';
+import Navbar from '@/components/ui/navbar';
 
 interface ComponentCardProps {
   title: string;
@@ -88,6 +89,8 @@ const ComponentCard = ({
 
 const ComponentsPage = () => {
   return (
+    <>
+    <Navbar />
     <div className='min-h-screen  pt-32 pb-20 px-6'>
       <div className='max-w-7xl mx-auto space-y-32'>
         {/* Group 1: Out of the Box */}
@@ -239,6 +242,7 @@ const ComponentsPage = () => {
         {/* You can add 3nd and 4th Groups below following the same pattern */}
       </div>
     </div>
+    </>
   );
 };
 

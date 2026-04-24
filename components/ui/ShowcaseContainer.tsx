@@ -211,10 +211,10 @@ export default function ShowcaseContainer({
 
   return (
     <div className='h-screen w-screen bg-[#0A0A0A] p-2 overflow-hidden text-white font-sans'>
-      <div className='h-full w-full rounded-[40px] overflow-hidden flex relative bg-[#0A0A0A]'>
+      <div className='h-full w-full rounded-[40px] overflow-hidden flex relative bg-[#0A0A0A] '>
         {/* LEFT NAV SIDEBAR */}
         <aside
-          className={`absolute top-0 left-0 z-[150] h-full w-[320px] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] bg-[#0A0A0A] border-r border-white/5 ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}`}
+          className={`absolute top-0 left-0 z-[150] outline-none border-none h-full w-[320px] rounded-l-[40px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] bg-[#0A0A0A] ${isSidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}`}
         >
           <div className='flex flex-col h-full p-10'>
             <div className='flex items-center justify-between mb-12'>
@@ -351,7 +351,7 @@ export default function ShowcaseContainer({
 
           {/* RIGHT SIDE PANEL */}
           <aside
-            className={`h-full border-white/5 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] relative z-[130] ${activePanel ? 'w-[50%] opacity-100' : 'w-0 opacity-0'}`}
+            className={`h-full  transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] relative z-[130] ${activePanel ? 'w-[50%] opacity-100' : 'w-0 opacity-0'}`}
           >
             <div className='p-8 h-full flex flex-col min-w-[450px]'>
               <div className='flex items-center justify-between mb-12'>

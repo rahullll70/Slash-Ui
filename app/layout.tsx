@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { SearchProvider } from '@/hooks/use-component-search';
 import SmoothScroll from '@/components/smooth-scroll';
+import TransitionWrapper from '@/components/TransitionWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
       >
+       
         <SmoothScroll>
           <SearchProvider>{children}</SearchProvider>
         </SmoothScroll>

@@ -10,21 +10,18 @@ const TransitionWrapper = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      // Entrance: Layers slide down from top
       tl.to('.layer', {
-        y: '0%',
-        duration: 0.8,
-        ease: 'power3.inOut',
-        stagger: 0.1, // This creates the "multiple layers" effect
-      })
-      // Exit: Layers slide up to reveal the page
-      .to('.layer', {
         y: '-100%',
         duration: 0.8,
         ease: 'power3.inOut',
         stagger: 0.1,
-        delay: 0.2, // Hold for a moment to reveal the page content
-      });
+      })
+      
+      .to('.loader-text', {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.out',
+      }, 0); 
     }, containerRef);
 
     return () => ctx.revert();
@@ -33,12 +30,19 @@ const TransitionWrapper = () => {
   return (
     <div 
       ref={containerRef} 
-      className="fixed inset-0 z-[9999] pointer-events-none flex"
+      className="fixed inset-0 z-[9999] pointer-events-none flex flex-col"
     >
-      {/* Three layers to create the depth effect */}
-      <div className="layer w-full h-full bg-neutral-950 translate-y-[-100%]" />
-      <div className="layer w-full h-full bg-neutral-900 translate-y-[-100%]" />
-      <div className="layer w-full h-full bg-neutral-800 translate-y-[-100%]" />
+      {/* Centered Text Overlay */}
+      <div className="absolute inset-0 z-[4] flex items-center justify-center pointer-events-none">
+        <h1 className="loader-text text-4xl md:text-6xl font-hoshiko text-white tracking-widest">
+          Slash/UI
+        </h1>
+      </div>
+
+      {/* Layers (z-index 1-3) */}
+      <div className="layer absolute inset-0 z-[3] bg-neutral-950" />
+      <div className="layer absolute inset-0 z-[2] bg-neutral-900" />
+      <div className="layer absolute inset-0 z-[1] bg-neutral-800" />
     </div>
   );
 };

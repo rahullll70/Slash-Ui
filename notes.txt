@@ -1,3 +1,5 @@
-1. now add categories on component page
+1. add categories on component page
 2. add more components
-3. add preloader, transition screen
+3. make showcaseScreen border fix or the bg fix
+4. make website smooth 
+5. it takes time to navigate to components make it faster
