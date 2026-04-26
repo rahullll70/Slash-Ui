@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,9 +91,9 @@ const Cta = () => {
           </h1>
           
           <div className="footer-fade opacity-0 translate-y-4 flex justify-center overflow-x-hidden">
-            <button className='group relative px-15 py-4 tracking-widest overflow-hidden border text-white hover:text-black font-hoshiko rounded-full font-semibold transition-all duration-300 hover:bg-red-500 hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2'>
+            <Link href='/pricing' className='group relative px-15 py-4 tracking-widest overflow-hidden border text-white hover:text-black font-hoshiko rounded-full font-semibold transition-all duration-300 hover:bg-red-500 hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2'>
               Slash Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>

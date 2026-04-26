@@ -126,19 +126,19 @@ export default function IndustryProof() {
       >
         <DashedDivider label='Inspired & Legends' />
 
-        <div className='mb-4'>
+        <div className='mb-4 font-cartographCF'>
           <ScrollMarquee items={inspirations} direction={1} />
         </div>
-        <div className='mb-12'>
+        <div className='mb-12 font-cartographCF'>
           <ScrollMarquee items={[...inspirations].reverse()} direction={-1} />
         </div>
 
         <DashedDivider label='Tools & Stack' />
 
-        <div className='mb-4'>
+        <div className='mb-4 font-cartographCF'>
           <ScrollMarquee items={techStack} direction={1} />
         </div>
-        <div className='mb-12'>
+        <div className='mb-12 font-cartographCF'>
           <ScrollMarquee items={[...techStack].reverse()} direction={-1} />
         </div>
 

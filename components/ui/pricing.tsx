@@ -54,7 +54,7 @@ const PricingCard = ({
             {tier}
           </h3>
           <p
-            className={`text-sm mt-3 font-medium leading-relaxed ${isHighlighted ? 'text-zinc-200' : 'text-zinc-400'}`}
+            className={`text-sm mt-3 font-semibold leading-relaxed ${isHighlighted ? 'text-zinc-200' : 'text-zinc-400'}`}
           >
             {description}
           </p>
@@ -73,7 +73,7 @@ const PricingCard = ({
 
         <div className='space-y-4 mb-10 flex-grow'>
           {features.map((feature, index) => (
-            <div key={index} className='flex items-center gap-3 text-[13px]'>
+            <div key={index} className='flex items-center font-cartographCF gap-3 text-[13px]'>
               <Check
                 size={14}
                 className={isHighlighted ? 'text-white' : 'text-zinc-600'}
@@ -158,7 +158,7 @@ const Pricing = () => {
             </span>
           </h2>
 
-          <p className='pricing-reveal translate-y-4 opacity-0 text-zinc-500 text-sm max-w-lg leading-relaxed'>
+          <p className='pricing-reveal translate-y-4 font-cartographCF opacity-0 text-zinc-500 text-sm max-w-lg leading-relaxed'>
             Professional-grade UI components for Next.js and Tailwind. Choose
             the pack that fits your scale.
           </p>
