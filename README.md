@@ -39,7 +39,7 @@ Unlike traditional component libraries, Slash UI copies components directly into
 **1. Install the package**
 
 ```bash
-npm install @ghatak/slash-ui --ignore-scripts
+npx slashh-ui@latest init
 ```
 
 **2. Add a component**
@@ -51,10 +51,10 @@ npx slash-ui add <component-name>
 **3. Use it in your project**
 
 ```tsx
-import { ButtonPulse } from '@/components/ui/buttons/ButtonPulse'
+import { NeubrutalButton } from '@/components/ui/buttons/neubrutal-button'
 
 export default function Page() {
-  return <ButtonPulse>Get Started</ButtonPulse>
+  return <NeubrutalButton children='Click me!' />
 }
 ```
 
@@ -63,13 +63,13 @@ export default function Page() {
 ## CLI Usage
 
 ```bash
-npx slash-ui [command]
+npx slashh-ui@latest init
 ```
 
 | Command | Description |
 |--------|-------------|
-| `npx slash-ui list` | List all available components |
-| `npx slash-ui add <name>` | Add a component to your project |
+| `npx slashh-ui list` | List all available components |
+| `npx slashh-ui add <name>` | Add a component to your project |
 
 ---
 
@@ -79,42 +79,42 @@ npx slash-ui [command]
 Animated, interactive button variants with hover effects.
 
 ```bash
-npx slash-ui add button-magnetic
+npx slashh-ui add neubrutal-button
 ```
 
 ### Cursors
 Custom cursor effects that replace or enhance the default browser cursor.
 
 ```bash
-npx slash-ui add cursor-dot
+npx slashh-ui add dot-cursor
 ```
 
 ### Navbars
 Modern navigation bars with scroll-aware behavior.
 
 ```bash
-npx slash-ui add navbar-glass
+npx slashh-ui add flaoting-navbar
 ```
 
 ### Scrollbars
 Styled and animated scrollbar components.
 
 ```bash
-npx slash-ui add scrollbar-smooth
+npx slashh-ui add minimal-scrollbar
 ```
 
 ### Preloaders & Loaders
 Page entry animations and loading states.
 
 ```bash
-npx slash-ui add preloader-fade
+npx slashh-ui add preloader-fade
 ```
 
 ### Transitions
 Smooth page and element transition effects.
 
 ```bash
-npx slash-ui add transition-slide
+npx slashh-ui add transition-slide
 ```
 
 ---
