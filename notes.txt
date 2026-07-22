@@ -1,5 +1,6 @@
-1. add categories on component page
-2. add more components
-3. make showcaseScreen border fix or the bg fix
-4. make website smooth 
-5. it takes time to navigate to components make it faster
+To do lists --->
+
+1. add more components
+2. make showcaseScreen border fix or the bg fix
+3. make website smooth 
+4. it takes time to navigate to components make it faster

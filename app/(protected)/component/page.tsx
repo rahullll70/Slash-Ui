@@ -90,158 +90,165 @@ const ComponentCard = ({
 const ComponentsPage = () => {
   return (
     <>
-    <Navbar />
-    <div className='min-h-screen  pt-32 pb-20 px-6'>
-      <div className='max-w-7xl mx-auto space-y-32'>
-        {/* Group 1: Out of the Box */}
-        <section>
-          <div className='mb-12'>
-            <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-              Some Random Components{' '}
-            </h2>
-            <p className='text-zinc-500 text-sm mt-2'>
-              Collection of interactive components [Click to view]
-            </p>
-          </div>
+      <Navbar />
+      <div className='min-h-screen  pt-32 pb-20 px-6'>
+        <div className='max-w-7xl mx-auto space-y-32'>
+          {/* Group 1: Out of the Box */}
+          <section>
+            <div className='mb-12'>
+              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
+                Some Random Components{' '}
+              </h2>
+              <p className='text-zinc-500 text-sm mt-2'>
+                Collection of interactive components [Click to view]
+              </p>
+            </div>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
-            <Link href='/component/stike-reveal' className='block'>
-              <ComponentCard
-                title='Strike Reveal'
-                videoSrc='/compVideos/strike-reveal.mp4'
-                showBadge
-              />
-            </Link>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
+              <Link href='/component/stike-reveal' className='block'>
+                <ComponentCard
+                  title='Strike Reveal'
+                  videoSrc='/compVideos/strike-reveal.mp4'
+                  showBadge
+                />
+              </Link>
 
-            <Link href='/component/floating-navbar' className='lg:col-span-2'>
-              <ComponentCard
-                title='floating-navbar'
-                videoSrc='/compVideos/floating-navbar.mp4'
-                showBadge
-              />
-            </Link>
+              <Link href='/component/floating-navbar' className='lg:col-span-2'>
+                <ComponentCard
+                  title='floating-navbar'
+                  videoSrc='/compVideos/floating-navbar.mp4'
+                  showBadge
+                />
+              </Link>
 
-            <Link href='/component/infinity-slider' className='lg:row-span-2'>
-              <ComponentCard
-                title='Infinity Slider'
-                videoSrc='/compVideos/infinite-slider.mp4'
-                showBadge
-              />
-            </Link>
+              <Link href='/component/infinity-slider' className='lg:row-span-2'>
+                <ComponentCard
+                  title='Infinity Slider'
+                  videoSrc='/compVideos/infinite-slider.mp4'
+                  showBadge
+                />
+              </Link>
 
-            <Link href='/component/stroke-cards' className='block'>
-              <ComponentCard
-                title='Stroke Cards'
-                videoSrc='/compVideos/stroke-cards.mp4'
-                showBadge
-              />
-            </Link>
+              <Link href='/component/stroke-cards' className='block'>
+                <ComponentCard
+                  title='Stroke Cards'
+                  videoSrc='/compVideos/stroke-cards.mp4'
+                  showBadge
+                />
+              </Link>
 
-            <Link href='/component/arc-slider' className='lg:col-span-2'>
-              <ComponentCard
-                title='Arc Slider'
-                videoSrc='/compVideos/arc-slider.mp4'
-                showBadge
-              />
-            </Link>
+              <Link href='/component/arc-slider' className='lg:col-span-2'>
+                <ComponentCard
+                  title='Arc Slider'
+                  videoSrc='/compVideos/arc-slider.mp4'
+                  showBadge
+                />
+              </Link>
 
-            <Link href='/component/dot-cursor' className='block'>
-              <ComponentCard
-                title='Dot Curser'
-                videoSrc='/compVideos/dot-cursor.mp4'
-                showBadge
-              />
-            </Link>
+              <Link href='/component/dot-cursor' className='block'>
+                <ComponentCard
+                  title='Dot Curser'
+                  videoSrc='/compVideos/dot-cursor.mp4'
+                  showBadge
+                />
+              </Link>
 
-            <Link href='/component/animated-header' className='lg:col-span-2'>
-              <ComponentCard
-                title='Animated Header'
-                videoSrc='/compVideos/animated-header.mp4'
-                showBadge
-              />
-            </Link>
-            <Link href='/component/neubrutal-button' className='block'>
-              <ComponentCard
-                title='Neubrutal-button'
-                videoSrc='/compVideos/neubrutal-button.mp4'
-                showBadge
-              />
-            </Link>
-          </div>
-        </section>
+              <Link href='/component/animated-header' className='lg:col-span-2'>
+                <ComponentCard
+                  title='Animated Header'
+                  videoSrc='/compVideos/animated-header.mp4'
+                  showBadge
+                />
+              </Link>
+              <Link href='/component/neubrutal-button' className='block'>
+                <ComponentCard
+                  title='Neubrutal-button'
+                  videoSrc='/compVideos/neubrutal-button.mp4'
+                  showBadge
+                />
+              </Link>
+            </div>
+          </section>
 
-        {/* Group 2: 3d components */}
-        <section>
-          <div className='mb-12'>
-            <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-              Some Random Components{' '}
-            </h2>
-            <p className='text-zinc-500 text-sm mt-2'>
-              Collection of interactive components [Click to view]
-            </p>
-          </div>
+          {/* Group 2: Hover Interactions */}
+          <section>
+            <div className='mb-12'>
+              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
+                Hover Interactions{' '}
+              </h2>
+              <p className='text-zinc-500 text-sm mt-2'>
+                Collection of interactive components [Click to view]
+              </p>
+            </div>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
-            <Link href='/component/stike-reveal' className='block'>
-              <ComponentCard
-                title='Strike Reveal'
-                videoSrc='/compVideos/strike-reveal.mp4'
-              />
-            </Link>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
+              <Link href='/component/stike-reveal' className='block'>
+                <ComponentCard
+                  title='Strike Reveal'
+                  videoSrc='/compVideos/strike-reveal.mp4'
+                />
+              </Link>
 
-            <Link href='/component/floating-navbar' className='lg:col-span-2'>
-              <ComponentCard
-                title='floating-navbar'
-                videoSrc='/compVideos/floating-navbar.mp4'
-              />
-            </Link>
+              <Link href='/component/stroke-cards' className='lg:col-span-2'>
+                <ComponentCard
+                  title='Stoke Cards'
+                  videoSrc='/compVideos/stroke-cards.mp4'
+                />
+              </Link>
+            </div>
+          </section>
 
-            <Link href='/component/infinity-slider' className='lg:row-span-2'>
-              <ComponentCard
-                title='Infinity Slider'
-                videoSrc='/compVideos/infinite-slider.mp4'
-              />
-            </Link>
+          {/* Group 3: 3d Components */}
+          <section>
+            <div className='mb-12'>
+              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
+                3D Collections{' '}
+              </h2>
+              <p className='text-zinc-500 text-sm mt-2'>
+                Collection of interactive components [Click to view]
+              </p>
+            </div>
 
-            <Link href='/component/stroke-cards' className='block'>
-              <ComponentCard
-                title='Stroke Cards'
-                videoSrc='/compVideos/stroke-cards.mp4'
-              />
-            </Link>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
+              <Link href='/component/arc-slider' className='block'>
+                <ComponentCard
+                  title='Arc Slider'
+                  videoSrc='/compVideos/arc-slider.mp4'
+                />
+              </Link>
 
-            <Link href='/component/arc-slider' className='lg:col-span-2'>
-              <ComponentCard
-                title='Arc Slider'
-                videoSrc='/compVideos/arc-slider.mp4'
-              />
-            </Link>
+              <Link href='/component/infinity-slider' className='lg:col-span-2'>
+                <ComponentCard
+                  title='Infinity Slider'
+                  videoSrc='/compVideos/infinite-slider.mp4'
+                />
+              </Link>
+            </div>
+          </section>
 
-            <Link href='/component/dot-cursor' className='block'>
-              <ComponentCard
-                title='Dot Curser'
-                videoSrc='/compVideos/dot-cursor.mp4'
-              />
-            </Link>
+          {/* Group 4: 3d Components */}
+          <section>
+            <div className='mb-12'>
+              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
+                Scroll Effects{' '}
+              </h2>
+              <p className='text-zinc-500 text-sm mt-2'>
+                Collection of interactive components [Click to view]
+              </p>
+            </div>
 
-            <Link href='/component/animated-header' className='lg:col-span-2'>
-              <ComponentCard
-                title='Animated Header'
-                videoSrc='/compVideos/animated-header.mp4'
-              />
-            </Link>
-            <Link href='/component/neubrutal-button' className='block'>
-              <ComponentCard
-                title='Neubrutal-button'
-                videoSrc='/compVideos/neubrutal-button.mp4'
-              />
-            </Link>
-          </div>
-        </section>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
+              <Link href='/component/' className='block'>
+                <ComponentCard title='' videoSrc='/compVideos/' />
+              </Link>
 
-        {/* You can add 3nd and 4th Groups below following the same pattern */}
+              <Link href='/component/' className='lg:col-span-2'>
+                <ComponentCard title='' videoSrc='/compVideos/' />
+              </Link>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
     </>
   );
 };
