@@ -1,3 +1,5 @@
+'use server'
+
 import nodemailer from 'nodemailer';
 
 export async function sendOtpEmail(email: string, otp: string) {

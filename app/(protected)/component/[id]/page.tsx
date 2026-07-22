@@ -1,6 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Index } from '@/__registry__';
 import ShowcaseContainer from '@/components/ui/ShowcaseContainer';
+import ComponentRenderer from './ComponentRenderer';
 
 export default async function Page({
   params,
@@ -8,14 +9,11 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
   const activeItem = (Index['default'] as any)[id];
 
   if (!activeItem) {
     return <div>Component "{id}" not found in __registry__/index.ts</div>;
   }
-
-  const SelectedComponent = activeItem?.component;
 
   return (
     <ShowcaseContainer
@@ -26,18 +24,9 @@ export default async function Page({
       dependencies={activeItem?.dependencies}
       interactionType={activeItem?.interactionType}
       howToUse={activeItem?.howToUse}
-
     >
-      {SelectedComponent ? (
-        <Suspense
-          fallback={
-            <div className='flex items-center justify-center h-40'>
-              <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white'></div>
-            </div>
-          }
-        >
-          <SelectedComponent />
-        </Suspense>
+      {activeItem ? (
+        <ComponentRenderer id={id} />
       ) : (
         <div className='flex flex-col items-center justify-center h-64 border border-dashed border-zinc-800 rounded-xl bg-zinc-950/50'>
           <p className='text-zinc-500 font-mono text-xs uppercase tracking-widest'>
