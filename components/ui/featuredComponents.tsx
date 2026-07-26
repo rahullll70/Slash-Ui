@@ -42,7 +42,7 @@ const ComponentCard = ({
       </div>
 
       <div className='px-4 py-3 flex justify-between items-center bg-transparent relative z-10'>
-        <h3 className='text-[13px] font-medium text-zinc-400 group-hover:text-white transition-colors'>
+        <h3 className='text-[13px] font-cartographCF  group-hover:text-white transition-colors'>
           {title}
         </h3>
       </div>

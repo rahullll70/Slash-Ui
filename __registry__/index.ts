@@ -7,7 +7,7 @@ export const Index: Record<string, any> = {
     "neubrutal-button": {
       name: "neubrutal-button",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/buttons/neubrutal-button")),
+      component: React.lazy(() => import("@/registry/ui/buttons/neubrutal-button")),
       files: ["ui/buttons/neubrutal-button.tsx"],
       category: "buttons",
       content: `import React from 'react';
@@ -64,7 +64,7 @@ export default function NeubrutalButton({
     "dot-cursor": {
       name: "dot-cursor",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/cursors/dot-cursor")),
+      component: React.lazy(() => import("@/registry/ui/cursors/dot-cursor")),
       files: ["ui/cursors/dot-cursor.tsx"],
       category: "cursors",
       content: `"use client";
@@ -123,7 +123,7 @@ export default DotCursor;`,
     "floating-navbar": {
       name: "floating-navbar",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/navbars/floating-navbar")),
+      component: React.lazy(() => import("@/registry/ui/navbars/floating-navbar")),
       files: ["ui/navbars/floating-navbar.tsx"],
       category: "navbars",
       content: `'use client';
@@ -289,7 +289,7 @@ export default Navbar;
     "VisualScrollbar": {
       name: "VisualScrollbar",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/scrollbars/minimal-scrollbar")),
+      component: React.lazy(() => import("@/registry/ui/scrollbars/minimal-scrollbar")),
       files: ["ui/scrollbars/minimal-scrollbar.tsx"],
       category: "scrollbars",
       content: `'use client';
@@ -504,7 +504,7 @@ export default VisualScrollbar;`,
     "strike-reveal": {
       name: "strike-reveal",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/hover-effects/strike-reveal")),
+      component: React.lazy(() => import("@/registry/ui/hover-effects/strike-reveal")),
       files: ["ui/hover-effects/strike-reveal.tsx"],
       category: "hover-effects",
       content: `import React from 'react';
@@ -582,7 +582,7 @@ export default StrikeReveal;`,
     "infinity-slider": {
       name: "infinity-slider",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/3d-sliders/infinity-slider")),
+      component: React.lazy(() => import("@/registry/ui/3d-sliders/infinity-slider")),
       files: ["ui/3d-sliders/infinity-slider.tsx"],
       category: "3d-sliders",
       content: `'use client';
@@ -1001,7 +1001,7 @@ export default function InfiniteSlider({
     "stroke-cards": {
       name: "stroke-cards",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/cards/stroke-cards")),
+      component: React.lazy(() => import("@/registry/ui/cards/stroke-cards")),
       files: ["ui/cards/stroke-cards.tsx"],
       category: "cards",
       content: `'use client';
@@ -1268,7 +1268,7 @@ export default function HoverStatePage() {
     "arc-slider": {
       name: "arc-slider",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/3d-sliders/arc-slider")),
+      component: React.lazy(() => import("@/registry/ui/3d-sliders/arc-slider")),
       files: ["ui/3d-sliders/arc-slider.tsx"],
       category: "3d-sliders",
       content: `"use client";
@@ -1500,7 +1500,7 @@ export default function ArcSlider() {
     "animated-header": {
       name: "animated-header",
       type: "ui",
-      component: React.lazy(() => import("../registry/ui/scroll-effects/animated-header")),
+      component: React.lazy(() => import("@/registry/ui/scroll-effects/animated-header")),
       files: ["ui/scroll-effects/animated-header.tsx"],
       category: "scroll-effects",
       content: `'use client';

@@ -1,6 +1,5 @@
 'use client';
 
-import { dracula as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import React, { useState, useEffect } from 'react';
@@ -25,9 +24,22 @@ import {
   Mail,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Index } from '@/__registry__';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Index as RegistryMeta } from '@/registry/index';
 import { getComponentSource } from '@/lib/registry';
+
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
+import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
+import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
+
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('typescript', typescript);
+SyntaxHighlighter.registerLanguage('css', css);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
 
 type Interaction = {
   type: string;
@@ -94,13 +106,13 @@ export default function ShowcaseContainer({
 
   const activeItem = React.useMemo(() => {
     if (!id) return null;
-
     const normalizedId = id.toString().toLowerCase();
-
-    return normalizeRegistryToList(Index).find(
+    return normalizeRegistryToList(RegistryMeta).find(
       (c: any) => c?.name?.toLowerCase() === normalizedId,
     );
   }, [id]);
+
+  const list = normalizeRegistryToList(RegistryMeta);
 
   useEffect(() => {
     setIframeLoading(true);
@@ -172,8 +184,6 @@ export default function ShowcaseContainer({
   const dynamicInteraction =
     propsInteraction || activeItem?.interactionType || [];
   const dynamicHowToUse = propsHowToUse || activeItem?.howToUse || '';
-
-  const list = normalizeRegistryToList(Index);
 
   const filteredComponents = list.filter((comp: any) => {
     const nm = (comp?.name ?? '').toString().toLowerCase();
@@ -613,7 +623,7 @@ export default function ShowcaseContainer({
                       {filteredComponents.length > 0 ? (
                         filteredComponents.map((comp: any) => (
                           <Link
-                            key={comp.name || Index}
+                            key={comp.name}
                             href={`/component/${comp.name}`}
                             onClick={() => {
                               setIsSearchOpen(false);
