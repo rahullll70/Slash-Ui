@@ -275,7 +275,7 @@ const Navbar: React.FC = () => {
                               onClick={() => setIsMenuOpen(false)}
                               className='group flex items-center justify-between w-full py-1.5 cursor-pointer font-switzer font-bold'
                             >
-                              <span className='text-3xl tracking-tighter uppercase transition-colors md:text-3xl text-brand-light/80 group-hover:text-brand-light'>
+                              <span className='text-3xl tracking-tighter uppercase transition-colors md:text-3xl text-brand-light/50 group-hover:text-brand-light'>
                                 Logout
                               </span>
                             </button>

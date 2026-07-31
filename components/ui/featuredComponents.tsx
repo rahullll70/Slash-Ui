@@ -22,9 +22,9 @@ const ComponentCard = ({
 }: ComponentCardProps) => {
   return (
     <div
-      className={`group relative flex flex-col justify-between rounded-3xl ${bg} border border-brand-accent/20 hover:border-white/20 p-1 shadow-xl shadow-brand-accent/10 hover:shadow-2xl transition-all duration-500 h-full cursor-pointer ${span}`}
+      className={`group relative flex flex-col justify-between rounded-3xl ${bg}  p-1 shadow-xl shadow-brand-accent/10 hover:shadow-2xl transition-all duration-500 h-full cursor-pointer ${span}`}
     >
-      <div className='relative flex-grow overflow-hidden rounded-[22px] bg-brand-dark flex items-center justify-center min-h-[140px] border border-white/5'>
+      <div className='relative flex-grow overflow-hidden rounded-[22px] bg-brand-dark flex items-center justify-center min-h-[140px] '>
         {videoSrc ? (
           <video
             src={videoSrc}

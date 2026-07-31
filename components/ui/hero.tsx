@@ -70,12 +70,12 @@ const Hero = (): JSX.Element => {
       </video>
 
       <div className='container relative z-10 flex flex-col items-center px-6 mx-auto mt-40'>
-        <h1 className='flex flex-col items-center max-w-4xl -space-y-2 text-4xl tracking-tight text-center text-white md:text-7xl md:-space-y-5 font-switzer'>
+        <h1 className='flex flex-col items-center max-w-4xl -space-y-2 text-4xl tracking-tight text-center text-white md:text-8xl md:-space-y-5 font-switzer'>
           <span className='block pb-1 overflow-hidden font-semibold leading-none'>
             {splitText('Slash/Ui')}
           </span>
           <span className='block pt-1 overflow-hidden leading-none'>
-            <span className='font-serif italic text-5xl md:text-8xl text-zinc-200 block [line-height:0.8]'>
+            <span className='font-serif italic text-5xl md:text-9xl text-zinc-200 block [line-height:0.8]'>
               {splitText('components')}
             </span>
           </span>

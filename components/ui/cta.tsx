@@ -79,13 +79,13 @@ const Cta = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-red-500/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
 
         <div className="relative z-10 text-center">
-          <h1 className='mb-10 text-4xl font-bold leading-tight tracking-tighter capitalize md:text-6xl font-switzer text-neutral-100'>
+          <h1 className='mb-10 text-4xl font-bold leading-tight tracking-tighter md:text-6xl font-switzer text-neutral-100'>
             <span className="block overflow-hidden">
               {splitText("Start slashing your UI")}
             </span>
             <span className="block overflow-hidden">
               {splitText("development with ")}
-              <span className='inline-block italic tracking-wider text-red-500 translate-y-full opacity-0 font-hoshiko footer-char'>
+              <span className='inline-block px-1 pr-2 italic tracking-wider text-red-500 translate-y-full opacity-0 font-hoshiko footer-char'>
                 Slash/Ui
               </span>
               {splitText(" today!")}
