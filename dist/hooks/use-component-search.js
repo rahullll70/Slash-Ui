@@ -2,7 +2,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { createContext, useContext, useState, useMemo } from 'react';
 import { Home, Box } from 'lucide-react';
-import { Index } from '@/__registry__';
+import { SearchIndex } from '@/__registry__/search-index';
 const SearchContext = createContext(undefined);
 export function SearchProvider({ children }) {
     const [searchQuery, setSearchQuery] = useState('');
@@ -10,11 +10,11 @@ export function SearchProvider({ children }) {
         { icon: Home, label: 'Home', category: 'Pages', path: '/' },
     ], []);
     const componentsList = useMemo(() => {
-        return Object.values(Index['default'] || {}).map((comp) => ({
+        return SearchIndex.map((comp) => ({
             icon: Box,
             label: comp.name,
             category: 'Components',
-            path: `/component/${comp.name}`,
+            path: comp.path,
         }));
     }, []);
     const allItems = useMemo(() => [...staticPages, ...componentsList], [staticPages, componentsList]);

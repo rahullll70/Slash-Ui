@@ -1,2 +1,2 @@
-declare const CustomCursor: () => import("react/jsx-runtime").JSX.Element;
-export default CustomCursor;
+declare const DotCursor: () => import("react/jsx-runtime").JSX.Element;
+export default DotCursor;

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useMemo } from 'react';
 import { Home, Box } from 'lucide-react';
-import { Index } from '@/__registry__'; 
+import { SearchIndex } from '@/__registry__/search-index';
 
 const SearchContext = createContext<any>(undefined);
 
@@ -14,11 +14,11 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
   ], []);
 
   const componentsList = useMemo(() => {
-    return Object.values(Index['default'] || {}).map((comp: any) => ({
+    return SearchIndex.map((comp) => ({
       icon: Box,
       label: comp.name,
       category: 'Components',
-      path: `/component/${comp.name}`,
+      path: comp.path,
     }));
   }, []);
 

@@ -1,4 +1,8 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+});
 const nextConfig = {
-/* config options here */
+    devIndicators: false,
+    serverExternalPackages: ['nodemailer'],
 };
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

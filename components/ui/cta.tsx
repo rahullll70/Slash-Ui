@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from 'next/link';
+import { Footer } from './footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,7 @@ const Cta = () => {
   // Helper to split text into characters for staggering
   const splitText = (text: string) => {
     return text.split("").map((char, i) => (
-      <span key={i} className="footer-char inline-block translate-y-full opacity-0">
+      <span key={i} className="inline-block translate-y-full opacity-0 footer-char">
         {char === " " ? "\u00A0" : char}
       </span>
     ));
@@ -61,37 +62,38 @@ const Cta = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className='text-white border-neutral-800 overflow-hidden relative '>
+    <>
+    <footer ref={footerRef} className='relative overflow-hidden text-white border-neutral-800 '>
       {/* Top Full-Width Logo with Slash Reveal */}
       <div className='w-full overflow-hidden'>
         <img
           ref={logoRef}
           src='/images/slash_1.svg'
           alt='Slash Logo'
-          className='w-full h-auto object-cover block will-change-transform'
+          className='block object-cover w-full h-auto will-change-transform'
         />
       </div>
 
       {/* Main CTA Section */}
-      <div className='relative max-w-7xl mx-auto pt-20 pb-40 px-4 sm:px-6 lg:px-8 overflow-hidden'>
+      <div className='relative px-4 pt-20 pb-40 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8'>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-red-500/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
 
         <div className="relative z-10 text-center">
-          <h1 className='text-4xl md:text-6xl font-switzer capitalize font-bold tracking-tighter leading-tight text-neutral-100 mb-10'>
+          <h1 className='mb-10 text-4xl font-bold leading-tight tracking-tighter capitalize md:text-6xl font-switzer text-neutral-100'>
             <span className="block overflow-hidden">
               {splitText("Start slashing your UI")}
             </span>
             <span className="block overflow-hidden">
               {splitText("development with ")}
-              <span className='italic font-hoshiko text-red-500 tracking-wider inline-block footer-char translate-y-full opacity-0'>
+              <span className='inline-block italic tracking-wider text-red-500 translate-y-full opacity-0 font-hoshiko footer-char'>
                 Slash/Ui
               </span>
               {splitText(" today!")}
             </span>
           </h1>
           
-          <div className="footer-fade opacity-0 translate-y-4 flex justify-center overflow-x-hidden">
-            <Link href='/pricing' className='group relative px-15 py-4 tracking-widest overflow-hidden border text-white hover:text-black font-hoshiko rounded-full font-semibold transition-all duration-300 hover:bg-red-500 hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2'>
+          <div className="flex justify-center overflow-x-hidden translate-y-4 opacity-0 footer-fade">
+            <Link href='/pricing' className='relative flex items-center gap-2 py-4 overflow-hidden font-semibold tracking-widest text-white transition-all duration-300 border rounded-full cursor-pointer group px-15 hover:text-black font-hoshiko hover:bg-red-500 hover:scale-105 active:scale-95'>
               Slash Now
             </Link>
           </div>
@@ -99,16 +101,16 @@ const Cta = () => {
       </div>
 
       {/* Bottom Credit Section */}
-      <div className='footer-fade opacity-0 py-8 border-t border-neutral-900'>
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className='text-sm font-cartographCF text-neutral-500 capitalize'>
+      <div className='border-t opacity-0 py-18 footer-fade border-neutral-900 font-inter'>
+        <div className="flex flex-col items-center justify-between gap-4 px-6 mx-auto max-w-7xl md:flex-row">
+          <p className='text-sm capitalize text-neutral-500'>
             © 2026 Slash/Ui. All Rights Reserved.
           </p>
           
-          <h1 className='text-sm font-cartographCF text-neutral-500'>
+          <h1 className='text-sm text-neutral-500'>
             Designed and Developed by{' '}
             <a
-              className='italic text-neutral-300 hover:text-white transition-colors duration-300 border-b border-neutral-700 hover:border-white'
+              className='italic transition-colors duration-300 border-b text-neutral-300 hover:text-white border-neutral-700 hover:border-white'
               href='https://x.com/rahulll_parihar'
               target='_blank'
               rel='noopener noreferrer'
@@ -118,7 +120,9 @@ const Cta = () => {
           </h1>
         </div>
       </div>
+    
     </footer>
+    </>
   );
 };
 

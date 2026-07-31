@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import Navbar from '@/components/ui/navbar';
 import Hero from '@/components/ui/hero';
-import Footer from '@/components/ui/footer';
+import Footer from '@/components/ui/cta';
 import FeaturedComponents from '@/components/ui/featuredComponents';
 import Pricing from '@/components/ui/pricing';
 import IndustryProof from '@/components/ui/IndustryProof';

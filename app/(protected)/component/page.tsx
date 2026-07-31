@@ -6,6 +6,7 @@ import { BadgeAlert } from 'lucide-react';
 import Navbar from '@/components/ui/navbar';
 
 interface ComponentCardProps {
+  id?: string;
   title: string;
   videoSrc?: string;
   children?: React.ReactNode;
@@ -14,6 +15,7 @@ interface ComponentCardProps {
 }
 
 const ComponentCard = ({
+  id,
   title,
   videoSrc,
   children,
@@ -22,6 +24,7 @@ const ComponentCard = ({
 }: ComponentCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -38,17 +41,37 @@ const ComponentCard = ({
     }
   };
 
+  const toggleBookmark = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsSaved((prev) => !prev);
+  };
+
   return (
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`group relative flex flex-col justify-between rounded-3xl bg-[#161616] border border-white/5 p-1 hover:border-white/20 transition-all duration-500 h-full ${span}`}
+      className={`group relative flex flex-col justify-between rounded-3xl bg-brand-accent border border-white/10 hover:border-brand-accent/40 p-1 shadow-xl shadow-brand-accent/5 hover:shadow-2xl hover:shadow-brand-accent/20 transition-all duration-500 h-full ${span}`}
     >
       <div
-        className={`absolute inset-0 transition-opacity duration-500 rounded-3xl bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.05)_0%,transparent_70%)] ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 transition-opacity duration-500 rounded-3xl bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08)_0%,transparent_70%)] ${
+          isHovered ? 'opacity-100' : 'opacity-0'
+        }`}
       />
 
-      <div className='relative flex-grow overflow-hidden rounded-[22px] bg-[#0A0A0A] flex items-center justify-center min-h-[200px] cursor-pointer border border-white/[0.03]'>
+      <div className='relative flex-grow overflow-hidden rounded-[22px] bg-brand-dark/80 flex items-center justify-center min-h-[200px] cursor-pointer shadow-inner border border-white/5'>
+        {/* Top Right "New" Badge Icon */}
+        {showBadge && (
+          <div className='absolute z-20 flex items-center top-3 right-3 group/tooltip'>
+            <BadgeAlert className='w-5 h-5 text-sky-400 drop-shadow-md' />
+
+            {/* Tooltip Bubble */}
+            <span className='absolute right-0 top-full mt-1 hidden group-hover/tooltip:block bg-brand-accent/90 text-brand-light text-[10px] font-inter px-2 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none'>
+              New
+            </span>
+          </div>
+        )}
+
         {videoSrc ? (
           <video
             ref={videoRef}
@@ -57,51 +80,73 @@ const ComponentCard = ({
             muted
             playsInline
             className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-              isHovered ? 'opacity-100 scale-105' : 'opacity-30 scale-100'
+              isHovered ? 'opacity-100 scale-105' : 'opacity-40 scale-100'
             }`}
           />
         ) : (
-          <div className='relative z-10 w-full h-full flex items-center justify-center'>
+          <div className='relative z-10 flex items-center justify-center w-full h-full'>
             {children}
           </div>
         )}
       </div>
 
-      <div className='px-4 py-3 flex justify-between items-center bg-transparent relative z-10'>
-        <h3 className='text-sm font-medium text-zinc-400 group-hover:text-white transition-colors'>
+      <div className='relative z-10 flex items-center justify-between px-4 py-3 bg-transparent'>
+        <h3 className='text-sm font-medium transition-colors font-switzer text-zinc-400 group-hover:text-brand-light'>
           {title}
         </h3>
 
-        {showBadge && (
-          <div className='group/tooltip relative flex items-center'>
-            <BadgeAlert className='w-4 h-4 text-cyan-400' />
-
-            {/* Tooltip Bubble */}
-            <span className='absolute bottom-full mb-2 hidden group-hover/tooltip:block bg-zinc-800 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap'>
-              New
-            </span>
-          </div>
-        )}
+        {/* Reicon Bookmark Button */}
+        <button
+          type='button'
+          onClick={toggleBookmark}
+          title={isSaved ? 'Remove Bookmark' : 'Save Component'}
+          className='z-20 p-1 transition-colors cursor-pointer text-zinc-400 hover:text-brand-light'
+        >
+          <ReiconBookmark filled={isSaved} />
+        </button>
       </div>
     </div>
   );
 };
 
+{
+  /* Reicon Bookmark SVG Component */
+}
+function ReiconBookmark({ filled = false }: { filled?: boolean }) {
+  return (
+    <svg
+      width='18'
+      height='18'
+      viewBox='0 0 24 24'
+      fill={filled ? 'currentColor' : 'none'}
+      stroke='currentColor'
+      strokeWidth='1.5'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      className='transition-colors'
+    >
+      <path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z' />
+    </svg>
+  );
+}
+
 const ComponentsPage = () => {
   return (
     <>
       <Navbar />
-      <div className='min-h-screen  pt-32 pb-20 px-6'>
-        <div className='max-w-7xl mx-auto space-y-32'>
+      <div className='min-h-screen px-6 pt-32 pb-20 bg-brand-dark text-brand-light font-inter'>
+        <div className='mx-auto space-y-32 max-w-7xl'>
           {/* Group 1: Out of the Box */}
           <section>
-            <div className='mb-12'>
-              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-                Some Random Components{' '}
+            <div className='flex flex-wrap items-center gap-4 mb-10'>
+              <h2 className='text-3xl font-bold text-transparent font-switzer bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text'>
+                Some Random Components
               </h2>
-              <p className='text-zinc-500 text-sm mt-2'>
-                Collection of interactive components [Click to view]
-              </p>
+
+              <span className='px-3 py-1 text-xs border rounded-full font-inter text-zinc-400 bg-brand-accent/10 border-brand-accent/20'>
+                Interactive Components{' '}
+                <span className='text-zinc-500'>[Click to view]</span>
+              </span>
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
@@ -172,15 +217,16 @@ const ComponentsPage = () => {
 
           {/* Group 2: Hover Interactions */}
           <section>
-            <div className='mb-12'>
-              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-                Hover Interactions{' '}
+            <div className='flex flex-wrap items-center gap-4 mb-10'>
+              <h2 className='text-3xl font-bold text-transparent font-switzer bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text'>
+                Hover Interactions
               </h2>
-              <p className='text-zinc-500 text-sm mt-2'>
-                Collection of interactive components [Click to view]
-              </p>
-            </div>
 
+              <span className='px-3 py-1 text-xs border rounded-full font-inter text-zinc-400 bg-brand-accent/10 border-brand-accent/20'>
+                Interactive Components{' '}
+                <span className='text-zinc-500'>[Click to view]</span>
+              </span>
+            </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
               <Link href='/component/stike-reveal' className='block'>
                 <ComponentCard
@@ -198,15 +244,17 @@ const ComponentsPage = () => {
             </div>
           </section>
 
-          {/* Group 3: 3d Components */}
+          {/* Group 3: 3D Collections */}
           <section>
-            <div className='mb-12'>
-              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-                3D Collections{' '}
+            <div className='flex flex-wrap items-center gap-4 mb-10'>
+              <h2 className='text-3xl font-bold text-transparent font-switzer bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text'>
+                3D Interactions
               </h2>
-              <p className='text-zinc-500 text-sm mt-2'>
-                Collection of interactive components [Click to view]
-              </p>
+
+              <span className='px-3 py-1 text-xs border rounded-full font-inter text-zinc-400 bg-brand-accent/10 border-brand-accent/20'>
+                Interactive Components{' '}
+                <span className='text-zinc-500'>[Click to view]</span>
+              </span>
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>
@@ -226,15 +274,17 @@ const ComponentsPage = () => {
             </div>
           </section>
 
-          {/* Group 4: 3d Components */}
+          {/* Group 4: Scroll Effects */}
           <section>
-            <div className='mb-12'>
-              <h2 className='text-white text-3xl font-bold flex items-center gap-3'>
-                Scroll Effects{' '}
+            <div className='flex flex-wrap items-center gap-4 mb-10'>
+              <h2 className='text-3xl font-bold text-transparent font-switzer bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text'>
+                Scroll Effects
               </h2>
-              <p className='text-zinc-500 text-sm mt-2'>
-                Collection of interactive components [Click to view]
-              </p>
+
+              <span className='px-3 py-1 text-xs border rounded-full font-inter text-zinc-400 bg-brand-accent/10 border-brand-accent/20'>
+                Interactive Components{' '}
+                <span className='text-zinc-500'>[Click to view]</span>
+              </span>
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]'>

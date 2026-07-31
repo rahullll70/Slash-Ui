@@ -4,7 +4,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 export default function AnimatedHeader() {
   const containerRef = useRef<HTMLDivElement>(null);

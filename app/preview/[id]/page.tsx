@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Index } from '@/__registry__';
 
 const FULLSCREEN_COMPONENTS = [
-  'flaoting-navbar',
+  'floating-navbar',
   'dot-cursor',
   'minimal-scrollbar',
   'arc-slider',

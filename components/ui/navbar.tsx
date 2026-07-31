@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Command } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { useSearch } from '@/hooks/use-component-search';
 import { logout } from '@/lib/actions/auth.action';
 
@@ -96,24 +96,30 @@ const Navbar: React.FC = () => {
 
   return (
     <>
+      {/* ── TOP SCREEN BLUR OVERLAY (Skiper style) ── */}
+      <div className='fixed top-0 left-0 right-0 h-28 z-[90] pointer-events-none bg-gradient-to-b from-brand-dark via-brand-dark/60 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]' />
+
+      {/* ── BOTTOM SCREEN BLUR OVERLAY (Skiper style) ── */}
+      <div className='fixed bottom-0 left-0 right-0 h-28 z-[90] pointer-events-none bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_top,black_40%,transparent_100%)]' />
+
       {/* ── NAVBAR ── */}
-      <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-4 px-6 pointer-events-none'>
-        <div className='flex items-center justify-between px-6 h-13 w-full max-w-[860px] bg-zinc-900 backdrop-blur-3xl border border-zinc-800 rounded-md pointer-events-auto'>
+      <nav className='fixed top-0 left-0 w-full z-[100] flex justify-center pt-4 px-6 pointer-events-none font-inter'>
+        <div className='flex items-center justify-between px-6 h-13 w-full max-w-[860px] bg-brand-accent backdrop-blur-2xl rounded-md pointer-events-auto shadow-2xl shadow-black/80'>
           {/* Left */}
           <div className='flex items-center gap-8'>
-            <Link href='/' className='font-bold text-white text-lg'>
+            <Link href='/' className='text-lg font-hoshiko text-brand-light'>
               Slash/Ui
             </Link>
-            <div className='hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400'>
+            <div className='items-center hidden gap-6 text-sm inter md:flex text-zinc-400'>
               <Link
                 href='/docs'
-                className='hover:text-white transition-colors font-cartographCF'
+                className='transition-colors hover:text-brand-light'
               >
                 Docs
               </Link>
               <Link
                 href='/component'
-                className='hover:text-white transition-colors font-cartographCF'
+                className='transition-colors hover:text-brand-light'
               >
                 Components
               </Link>
@@ -127,7 +133,7 @@ const Navbar: React.FC = () => {
                 setIsSearchOpen(true);
                 setIsMenuOpen(false);
               }}
-              className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
+              className='flex items-center justify-center transition-all rounded-lg cursor-pointer w-9 h-9 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-brand-light'
               aria-label='Open search'
             >
               <Command size={16} />
@@ -139,11 +145,10 @@ const Navbar: React.FC = () => {
                 setIsMenuOpen((v) => !v);
                 setIsSearchOpen(false);
               }}
-              className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
+              className='flex items-center justify-center transition-all rounded-lg cursor-pointer w-9 h-9 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white'
               aria-label='Toggle menu'
             >
               <div className='flex flex-col justify-center items-center w-4 h-4 gap-[5px]'>
-                {/* Top bar — rotates to 45deg and moves down */}
                 <span
                   className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
                   style={{
@@ -152,7 +157,6 @@ const Navbar: React.FC = () => {
                       : 'none',
                   }}
                 />
-                {/* Bottom bar — rotates to -45deg and moves up */}
                 <span
                   className='block h-[1px] w-5 bg-current rounded-full transition-all duration-500 origin-center'
                   style={{
@@ -189,10 +193,10 @@ const Navbar: React.FC = () => {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className='fixed top-0 left-0 right-0 z-[160] flex justify-center px-6 pt-4 pointer-events-none'
             >
-              <div className='w-full max-w-[860px] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden pointer-events-auto'>
+              <div className='w-full max-w-[860px] bg-brand-accent backdrop-blur-2xl rounded-2xl overflow-hidden pointer-events-auto shadow-2xl shadow-black'>
                 {/* Mirrored navbar row */}
-                <div className='flex items-center justify-between px-6 h-12.5  border-zinc-800'>
-                  <Link href='/' className='font-bold text-white text-lg'>
+                <div className='flex items-center justify-between px-6 h-12.5'>
+                  <Link href='/' className='text-lg text-brand-light font-hoshiko'>
                     Slash/Ui
                   </Link>
                   <div className='flex items-center gap-2'>
@@ -201,14 +205,14 @@ const Navbar: React.FC = () => {
                         setIsSearchOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
+                      className='flex items-center justify-center transition-all rounded-lg cursor-pointer w-9 h-9 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white'
                     >
                       <Command size={16} />
                     </button>
 
                     <button
                       onClick={() => setIsMenuOpen(false)}
-                      className='flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all cursor-pointer'
+                      className='flex items-center justify-center transition-all rounded-lg cursor-pointer w-9 h-9 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white'
                       aria-label='Close menu'
                     >
                       <div className='flex flex-col justify-center items-center w-4 h-4 gap-[5px]'>
@@ -231,24 +235,24 @@ const Navbar: React.FC = () => {
 
                 {/* Menu body — 3 columns */}
                 <div className='grid md:grid-cols-[160px_1fr_160px] grid-cols-1 gap-8 md:gap-4 px-6 py-10 md:py-6'>
-                  {/* LEFT — legal (Hidden on very small screens or moved to bottom) */}
-                  <div className='flex flex-col gap-1.5 pt-1 order-3 md:order-1'>
-                    <div className='flex flex-row md:flex-col gap-4 md:gap-1 mt-4'>
+                  {/* LEFT — legal */}
+                  <div className='flex flex-col gap-1.5 pt-1 order-3 md:order-1 font-inter'>
+                    <div className='flex flex-row gap-4 mt-4 md:flex-col md:gap-1'>
                       <Link
                         href='/privacy-policy'
-                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
+                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors'
                       >
                         Privacy Policy
                       </Link>
                       <Link
                         href='/terms'
-                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
+                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors'
                       >
                         Terms
                       </Link>
                       <Link
                         href='/accessibility'
-                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors font-cartographCF'
+                        className='text-[10px] text-zinc-700 hover:text-zinc-400 transition-colors'
                       >
                         Accessibility
                       </Link>
@@ -256,7 +260,7 @@ const Navbar: React.FC = () => {
                   </div>
 
                   {/* CENTER — main nav links */}
-                  <nav className='flex flex-col justify-center md:pl-4 border-zinc-800 order-1 md:order-2'>
+                  <nav className='flex flex-col justify-center order-1 md:pl-4 md:order-2 font-switzer'>
                     {menuLinks.map((link, i) => (
                       <motion.div
                         key={link.label}
@@ -269,9 +273,9 @@ const Navbar: React.FC = () => {
                             <button
                               type='submit'
                               onClick={() => setIsMenuOpen(false)}
-                              className='group flex items-center justify-between w-full py-1.5 cursor-pointer'
+                              className='group flex items-center justify-between w-full py-1.5 cursor-pointer font-switzer font-bold'
                             >
-                              <span className='text-3xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
+                              <span className='text-3xl tracking-tighter uppercase transition-colors md:text-3xl text-brand-light/80 group-hover:text-brand-light'>
                                 Logout
                               </span>
                             </button>
@@ -280,9 +284,9 @@ const Navbar: React.FC = () => {
                           <Link
                             href={link.path}
                             onClick={() => setIsMenuOpen(false)}
-                            className='group flex items-center justify-between py-1.5'
+                            className='group flex items-center justify-between py-1.5 font-switzer font-bold'
                           >
-                            <span className='text-3xl md:text-3xl font-black uppercase tracking-tighter text-white/80 group-hover:text-white transition-colors'>
+                            <span className='text-3xl uppercase transition-colors md:text-3xl text-brand-light/50 group-hover:text-brand-light'>
                               {link.label}
                             </span>
                           </Link>
@@ -291,8 +295,8 @@ const Navbar: React.FC = () => {
                     ))}
                   </nav>
 
-                  {/* RIGHT — tags (Hidden on mobile to keep focus on links) */}
-                  <div className='hidden md:flex flex-col justify-center gap-0 border-zinc-800 pl-4 order-2 md:order-3'>
+                  {/* RIGHT — tags */}
+                  <div className='flex-col justify-center order-2 hidden gap-0 pl-4 md:flex md:order-3 font-inter'>
                     {menuLinks.map((link, i) => (
                       <motion.div
                         key={link.label + '-tag'}
@@ -302,7 +306,7 @@ const Navbar: React.FC = () => {
                         className='py-1.5 flex items-center h-[44px]'
                       >
                         {link.tag && (
-                          <span className='text-[10px] text-zinc-500 tracking-widest uppercase font-cartographCF'>
+                          <span className='text-[10px] text-zinc-500 tracking-widest uppercase'>
                             {link.tag}
                           </span>
                         )}
@@ -319,97 +323,109 @@ const Navbar: React.FC = () => {
       {/* ── SEARCH MODAL ── */}
       <AnimatePresence>
         {isSearchOpen && (
-          <div className='fixed inset-0 z-[200] flex items-start justify-center pt-[18vh] px-4'>
+          <div className='fixed inset-0 z-[200] flex items-start justify-center pt-[18vh] px-4 font-inter'>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsSearchOpen(false)}
-              className='absolute inset-0 bg-black/60 backdrop-blur-sm'
+              className='absolute inset-0 bg-black/60 backdrop-blur-md'
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className='relative w-full max-w-[600px] bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden'
+              className='relative w-full max-w-[600px] bg-zinc-950/90 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/90 overflow-hidden'
             >
-              <div className='flex items-center px-4 border-b border-zinc-800'>
+              {/* Search Header Input */}
+              <div className='relative z-10 flex items-center px-4 bg-zinc-900/50'>
                 <Command className='text-zinc-500' size={18} />
                 <input
                   autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder='Search components or pages...'
-                  className='w-full h-14 bg-transparent border-none outline-none px-4 text-white text-sm placeholder:text-zinc-600'
+                  className='w-full px-4 text-sm text-white bg-transparent border-none outline-none h-14 placeholder:text-zinc-600 font-inter'
                 />
               </div>
 
-              <div className='max-h-[400px] overflow-y-auto p-2 custom-scrollbar'>
-                {searchQuery.length > 0 ? (
-                  <div className='p-2'>
-                    <p className='px-3 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider'>
-                      Results
-                    </p>
-                    {filteredItems.length > 0 ? (
-                      filteredItems.map((item: any) => (
-                        <Link
-                          key={item.path}
-                          href={item.path}
-                          onClick={() => {
-                            setIsSearchOpen(false);
-                            setSearchQuery('');
-                          }}
-                          className='flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
-                        >
-                          <div className='flex items-center gap-3'>
-                            <item.icon
-                              size={16}
-                              className='text-zinc-500 group-hover:text-white'
-                            />
-                            <span className='text-sm text-zinc-300 group-hover:text-white'>
-                              {item.label}
-                            </span>
-                          </div>
-                          <span className='text-[10px] opacity-50 uppercase tracking-widest'>
-                            {item.category}
-                          </span>
-                        </Link>
-                      ))
-                    ) : (
-                      <p className='px-3 py-4 text-sm text-zinc-600'>
-                        No results found...
+              {/* Scrollable Container with Strong Gradient Masks */}
+              <div className='relative max-h-[400px] overflow-hidden'>
+                {/* Top List Mask */}
+                <div className='absolute top-0 left-0 right-0 z-20 h-8 pointer-events-none bg-gradient-to-b from-zinc-950 via-zinc-950/80 to-transparent' />
+
+                {/* List Items */}
+                <div className='overflow-y-auto max-h-[400px] p-2 py-6 custom-scrollbar'>
+                  {searchQuery.length > 0 ? (
+                    <div className='p-2'>
+                      <p className='px-3 py-2 text-[10px] font-switzer font-bold text-zinc-500 uppercase tracking-wider'>
+                        Results
                       </p>
-                    )}
-                  </div>
-                ) : (
-                  ['Pages', 'Get Started'].map((cat) => (
-                    <div key={cat} className='mb-2'>
-                      <p className='px-3 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider'>
-                        {cat}
-                      </p>
-                      {staticPages
-                        .filter((p: any) => p.category === cat)
-                        .map((p: any) => (
+                      {filteredItems.length > 0 ? (
+                        filteredItems.map((item: any) => (
                           <Link
-                            key={p.label}
-                            href={p.path}
-                            onClick={() => setIsSearchOpen(false)}
-                            className='flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
+                            key={item.path}
+                            href={item.path}
+                            onClick={() => {
+                              setIsSearchOpen(false);
+                              setSearchQuery('');
+                            }}
+                            className='flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
                           >
-                            <div className='text-zinc-500 group-hover:text-white'>
-                              <p.icon size={16} />
+                            <div className='flex items-center gap-3'>
+                              <item.icon
+                                size={16}
+                                className='text-zinc-500 group-hover:text-white'
+                              />
+                              <span className='text-sm text-zinc-300 group-hover:text-white font-inter'>
+                                {item.label}
+                              </span>
                             </div>
-                            <span className='text-sm text-zinc-300 group-hover:text-white'>
-                              {p.label}
+                            <span className='text-[10px] opacity-50 uppercase tracking-widest font-inter'>
+                              {item.category}
                             </span>
                           </Link>
-                        ))}
+                        ))
+                      ) : (
+                        <p className='px-3 py-4 text-sm text-zinc-600 font-inter'>
+                          No results found...
+                        </p>
+                      )}
                     </div>
-                  ))
-                )}
+                  ) : (
+                    ['Pages', 'Get Started'].map((cat) => (
+                      <div key={cat} className='mb-2'>
+                        <p className='px-3 py-2 text-[10px] font-switzer font-bold text-zinc-500 uppercase tracking-wider'>
+                          {cat}
+                        </p>
+                        {staticPages
+                          .filter((p: any) => p.category === cat)
+                          .map((p: any) => (
+                            <Link
+                              key={p.label}
+                              href={p.path}
+                              onClick={() => setIsSearchOpen(false)}
+                              className='flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
+                            >
+                              <div className='text-zinc-500 group-hover:text-white'>
+                                <p.icon size={16} />
+                              </div>
+                              <span className='text-sm text-zinc-300 group-hover:text-white font-inter'>
+                                {p.label}
+                              </span>
+                            </Link>
+                          ))}
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* Bottom List Mask */}
+                <div className='absolute bottom-0 left-0 right-0 z-20 h-8 pointer-events-none bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent' />
               </div>
 
-              <div className='px-4 py-3 border-t border-zinc-800 bg-zinc-900/30 flex justify-between items-center text-[10px] text-zinc-500 font-medium'>
+              {/* Modal Footer */}
+              <div className='px-4 py-3 bg-zinc-900/60 flex justify-between items-center text-[10px] text-zinc-500 font-medium z-10 relative font-inter'>
                 <div className='flex gap-3'>
                   <span className='flex items-center gap-1'>
                     <Command size={10} /> to select

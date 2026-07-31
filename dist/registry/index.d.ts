@@ -3,5 +3,12 @@ export declare const Index: {
     type: string;
     files: string[];
     category: string;
+    description: string;
     install: string;
+    dependencies: string[];
+    interactionType: {
+        type: string;
+        description: string;
+    }[];
+    howToUse: string;
 }[];

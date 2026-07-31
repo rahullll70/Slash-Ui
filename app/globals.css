@@ -4,26 +4,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html,
-body {
-  background-color: var(--color-dark);
-  scroll-behavior: smooth;
-}
-
-body {
-  overflow-x: hidden;
-}
-
-@theme {
-  --font-cartographCF: 'cartographCF', sans-serif;
-  --font-switzer: 'switzer', sans-serif;
-  --font-hoshiko: 'Hoshiko-Satsuki', sans-serif;
-  --font-beVietnamPro: 'BeVietnamPro-ExtraBold', sans-serif;
-
-  --color-light: #edf2f4;
-  --color-dark: #0a0908;
-}
-
+/* -------------------------------------------------------------------------- */
+/* Font Faces                                                                 */
+/* -------------------------------------------------------------------------- */
 @font-face {
   font-family: 'cartographCF';
   src: url(/fonts/CartographCF-Regular.ttf) format('truetype');
@@ -56,35 +39,20 @@ body {
   font-display: swap;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+/* -------------------------------------------------------------------------- */
+/* Tailwind Theme Definitions                                                 */
+/* -------------------------------------------------------------------------- */
+@theme {
+  --font-cartographCF: 'cartographCF', sans-serif;
+  --font-switzer: 'switzer', sans-serif;
+  --font-hoshiko: 'Hoshiko-Satsuki', sans-serif;
+  --font-beVietnamPro: 'BeVietnamPro-ExtraBold', sans-serif;
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
-}
-
-.parent {
-  perspective: 1000px;
-}
-
-.button {
-  transform-style: preserve-3d;
-}
-
-/* Fix hamburger-react internal spacing */
-.hamburger-react {
-  padding: 0 !important;
-  width: 36px !important;
-  height: 36px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  /* Custom Brand Colors (Generates bg-brand-light, bg-brand-dark, bg-brand-accent) */
+  --color-brand-light: #F5F5F5;
+  --color-brand-dark: #0A0908;
+  --color-brand-accent: #141414;
 }
 
 @theme inline {
@@ -106,7 +74,7 @@ html.lenis body {
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
+  --color-accent: var(--accent); /* Handles Shadcn's dynamic accent */
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -128,7 +96,13 @@ html.lenis body {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Dynamic CSS Variables (Shadcn + Global Variables)                         */
+/* -------------------------------------------------------------------------- */
 :root {
+  --color-dark: #0A0908;
+  --color-light: #F5F5F5;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -141,8 +115,8 @@ html.lenis body {
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.12 0 0); /* Mapped your #141414 dark accent to Shadcn */
+  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -197,6 +171,49 @@ html.lenis body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Base Styles & Utilities                                                    */
+/* -------------------------------------------------------------------------- */
+html,
+body {
+  background-color: var(--color-dark);
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.parent {
+  perspective: 1000px;
+}
+
+.button {
+  transform-style: preserve-3d;
+}
+
+.hamburger-react {
+  padding: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 @layer base {
   body {
     @apply bg-background text-foreground;
@@ -205,4 +222,3 @@ html.lenis body {
     @apply font-sans;
   }
 }
-

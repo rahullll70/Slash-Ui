@@ -1,3 +1,2 @@
-import type { NextConfig } from "next";
-declare const nextConfig: NextConfig;
-export default nextConfig;
+declare const _default: any;
+export default _default;

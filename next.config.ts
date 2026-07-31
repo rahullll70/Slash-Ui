@@ -6,9 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig: NextConfig = {
   devIndicators: false,
   serverExternalPackages: ['nodemailer'],
-  experimental: {
-    optimizeCss: true,
-  },
 };
 
 export default withBundleAnalyzer(nextConfig);

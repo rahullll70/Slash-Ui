@@ -12,7 +12,7 @@ export default function LoginPage() {
   const { showToast, ToastContainer } = useToast();
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center text-white px-4 font-sans selection:bg-zinc-800'>
+    <div className='flex flex-col items-center justify-center min-h-screen px-4 font-inter bg-brand-dark text-brand-light selection:bg-brand-light selection:text-brand-dark'>
       
       {/* Toast container at root level */}
       <ToastContainer />
@@ -52,7 +52,7 @@ export default function LoginPage() {
               value={email}
               placeholder='you@example.com'
               onChange={(e) => setEmail(e.target.value)}
-              className='w-full bg-transparent text-xl md:text-5xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all duration-500 placeholder:text-zinc-800'
+              className='w-full py-4 text-xl font-medium transition-all duration-500 bg-transparent border-b outline-none font-switzer md:text-5xl border-zinc-800 focus:border-brand-light text-brand-light placeholder:text-zinc-700'
             />
 
             {loading ? (
@@ -60,7 +60,7 @@ export default function LoginPage() {
             ) : (
               <button
                 type='submit'
-                className='absolute right-0 top-1/2 -translate-y-1/2 p-2 text-zinc-500 hover:text-white transition-colors'
+                className='absolute right-0 p-2 transition-colors -translate-y-1/2 cursor-pointer top-1/2 text-zinc-500 hover:text-brand-light'
               >
                 <ArrowRight size={32} strokeWidth={1.5} />
               </button>
@@ -77,9 +77,9 @@ export default function LoginPage() {
                 formData.append('email', email);
                 
                 showToast('Logged in successfully');
-                await new Promise((res) => setTimeout(res, 1000))
+                await new Promise((res) => setTimeout(res, 1000));
 
-                await verifyOtp(formData)
+                await verifyOtp(formData);
               } catch (err: any) {
                 if (
                   err?.message === 'NEXT_REDIRECT' ||
@@ -92,9 +92,9 @@ export default function LoginPage() {
                 setLoading(false);
               }
             }}
-            className='space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700'
+            className='space-y-8 duration-700 animate-in fade-in slide-in-from-bottom-4'
           >
-            <label htmlFor='otp'>
+            <label htmlFor='otp' className='block text-sm font-inter text-zinc-400 md:text-base'>
               Enter the 6-digit code sent to your email
             </label>
 
@@ -106,7 +106,7 @@ export default function LoginPage() {
                 maxLength={6}
                 disabled={loading}
                 placeholder='000000'
-                className='w-full bg-transparent text-xl md:text-5xl font-light py-4 outline-none border-b border-zinc-800 focus:border-zinc-400 transition-all text-center tracking-[1em] placeholder:text-zinc-900'
+                className='w-full bg-transparent text-xl md:text-5xl font-switzer font-medium py-4 outline-none border-b border-zinc-800 focus:border-brand-light transition-all text-center tracking-[1em] text-brand-light placeholder:text-zinc-800'
               />
 
               {loading ? (
@@ -114,7 +114,7 @@ export default function LoginPage() {
               ) : (
                 <button
                   type='submit'
-                  className='absolute right-0 top-1/2 -translate-y-1/2 p-2 text-zinc-500 hover:text-white transition-colors'
+                  className='absolute right-0 p-2 transition-colors -translate-y-1/2 cursor-pointer top-1/2 text-zinc-500 hover:text-brand-light'
                 >
                   <ArrowRight size={32} strokeWidth={1.5} />
                 </button>
@@ -124,7 +124,7 @@ export default function LoginPage() {
         )}
       </div>
 
-      <footer className='fixed bottom-8 text-md text-zinc-600 uppercase font-hoshiko font-bold'>
+      <footer className='fixed bottom-8 text-md font-hoshiko text-zinc-500'>
         Slash/ui
       </footer>
     </div>
@@ -133,12 +133,12 @@ export default function LoginPage() {
 
 function Loader({ text }: { text: string }) {
   return (
-    <div className='absolute right-0 top-1/2 -translate-y-1/2 text-zinc-400 text-sm flex items-center gap-1'>
+    <div className='absolute right-0 flex items-center gap-1 text-sm -translate-y-1/2 top-1/2 text-zinc-400 font-inter'>
       [{text}
       <span className='flex'>
         <span className='animate-bounce'>.</span>
-        <span className='animate-bounce delay-150'>.</span>
-        <span className='animate-bounce delay-300'>.</span>
+        <span className='delay-150 animate-bounce'>.</span>
+        <span className='delay-300 animate-bounce'>.</span>
       </span>
       ]
     </div>

@@ -1,3 +1,4 @@
+'use server';
 import nodemailer from 'nodemailer';
 export async function sendOtpEmail(email, otp) {
     const transporter = nodemailer.createTransport({

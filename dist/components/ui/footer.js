@@ -1,5 +1,22 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-const Footer = () => {
-    return (_jsxs("footer", { className: ' text-white border-neutral-800 overflow-hidden relative', children: [_jsx("div", { className: 'w-full', children: _jsx("img", { src: '/images/slash_1.svg', alt: 'Slash Logo', className: 'w-full h-auto object-cover block ' }) }), _jsxs("div", { className: 'relative max-w-7xl mx-auto pt-20 pb-40 px-4 sm:px-6 lg:px-8 overflow-hidden', children: [_jsx("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-zinc-800/20 blur-[120px] rounded-full -z-10 pointer-events-none" }), _jsxs("div", { className: "relative z-10 overflow-hidden text-center", children: [_jsxs("h1", { className: 'text-center text-4xl md:text-6xl font-switzer capitalize font-bold tracking-tighter leading-tight text-neutral-100 overflow-hidden', children: ["Start slashing your UI ", _jsx("br", {}), "development with ", _jsx("span", { className: 'italic font-hoshiko text-red-500 tracking-wider px-5', children: "Slash/Ui" }), " today!"] }), _jsx("div", { className: "flex justify-center mt-10 overflow-x-hidden", children: _jsxs("button", { className: 'group relative px-15 py-4 tracking-widest overflow-hidden  border text-white hover:text-black font-hoshiko rounded-full font-semibold transition-all duration-300 hover:bg-red-500 hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2', children: ["Slash Now", _jsx("span", { className: "transition-transform duration-300 group-hover:translate-x-1" })] }) })] })] }), _jsx("div", { className: 'py-8 border-t border-neutral-900', children: _jsxs("div", { className: "max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4", children: [_jsx("p", { className: 'text-sm font-cartographCF text-neutral-500 capitalize', children: "\u00A9 2026 Slash/Ui. All Rights Reserved." }), _jsxs("h1", { className: 'text-sm font-cartographCF text-neutral-500', children: ["Designed and Developed by", ' ', _jsx("a", { className: 'italic text-neutral-300 hover:text-white transition-colors duration-300 border-b border-neutral-700 hover:border-white', href: 'https://x.com/rahulll_parihar', target: '_blank', rel: 'noopener noreferrer', children: "@Rahul" })] })] }) })] }));
+import Link from 'next/link';
+const FOOTER_CONFIG = {
+    site: [
+        { label: 'Components', path: '/components' },
+        { label: 'Quick-start', path: '/docs' },
+        { label: 'Pricing', path: '/pricing' },
+    ],
+    social: [
+        { label: 'Github', path: 'https://github.com/rahull-70/Slash-Ui' },
+        { label: 'Twitter', path: 'https://x.com/rahulll_parihar' },
+        { label: 'LinkedIn', path: 'https://www.linkedin.com/in/rahul-pariharr/' },
+    ],
+    legal: [
+        { label: 'Privacy Policy', path: '/privacy-policy' },
+        { label: 'Terms of Service', path: '/terms' },
+        { label: 'Support', path: '/support' },
+    ],
 };
-export default Footer;
+export const Footer = () => {
+    return (_jsx("footer", { className: 'px-6 py-16 border-t border-zinc-900', children: _jsxs("div", { className: 'max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12', children: [_jsxs("div", { className: 'flex flex-col gap-2', children: [_jsx("span", { className: 'text-sm font-bold tracking-tight text-white uppercase', children: "Slash UI" }), _jsx("p", { className: 'text-[13px] text-zinc-600 font-medium', children: "\u00A9 2026 slashh-ui.com" })] }), _jsx("div", { className: 'grid grid-cols-3 gap-8 md:gap-24 w-full md:w-auto', children: Object.entries(FOOTER_CONFIG).map(([category, links]) => (_jsxs("div", { className: 'flex flex-col gap-3', children: [_jsx("p", { className: 'text-[13px] uppercase tracking-wider font-bold text-white', children: category }), _jsx("div", { className: 'flex flex-col gap-2', children: links.map((link) => (_jsx(Link, { href: link.path, className: 'text-[13px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors', children: link.label }, link.label))) })] }, category))) })] }) }));
+};
