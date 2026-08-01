@@ -1,6 +1,6 @@
 import React from 'react';
 import { Index } from '@/__registry__';
-import ShowcaseContainer from '@/components/ui/ShowcaseContainer';
+import ShowcaseContainer from '@/components/ShowcaseContainer';
 import ComponentRenderer from './ComponentRenderer';
 
 export default async function Page({

@@ -1,13 +1,25 @@
 import React from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/footer';
+import Navbar from '@/components/navbar';
+import { Footer } from '@/components/footer';
 
 // Keep this in a central data file in production
 const SOCIAL_LINKS = [
-  { name: 'GitHub', href: 'https://github.com/rahull-70/Slash-Ui', id: 'v551nqGeHhGn' },
-  { name: 'Twitter', href: 'https://x.com/rahulll_parihar', id: 'YfCbGWCWcuar' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/rahul-pariharr/', id: '99290' },
+  {
+    name: 'GitHub',
+    href: 'https://github.com/rahull-70/Slash-Ui',
+    id: 'v551nqGeHhGn',
+  },
+  {
+    name: 'Twitter',
+    href: 'https://x.com/rahulll_parihar',
+    id: 'YfCbGWCWcuar',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/rahul-pariharr/',
+    id: '99290',
+  },
 ];
 
 const Support = () => {

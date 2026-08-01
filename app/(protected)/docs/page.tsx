@@ -14,7 +14,7 @@ import {
   PanelLeft,
   Home,
 } from 'lucide-react';
-import Navbar from '@/components/ui/navbar';
+import Navbar from '@/components/navbar';
 
 const TechIcons = {
   Framer: () => (

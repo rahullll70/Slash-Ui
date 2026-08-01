@@ -12,7 +12,7 @@ export const initCommand = async () => {
         type: 'text',
         name: 'componentsPath',
         message: 'Where would you like to install your components?',
-        initial: 'components/ui',
+        initial: 'components',
       },
       {
         type: 'confirm',

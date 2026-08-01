@@ -6,10 +6,10 @@ import { Command } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useSearch } from '@/hooks/use-component-search';
 import { logout } from '@/lib/actions/auth.action';
+import { SearchModal } from '@/components/SearchModal';
 
 const Navbar: React.FC = () => {
-  const { searchQuery, setSearchQuery, filteredItems, staticPages } =
-    useSearch();
+  const { searchQuery, setSearchQuery, filteredItems } = useSearch();
 
   const [mounted, setMounted] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -196,7 +196,10 @@ const Navbar: React.FC = () => {
               <div className='w-full max-w-[860px] bg-brand-accent backdrop-blur-2xl rounded-2xl overflow-hidden pointer-events-auto shadow-2xl shadow-black'>
                 {/* Mirrored navbar row */}
                 <div className='flex items-center justify-between px-6 h-12.5'>
-                  <Link href='/' className='text-lg text-brand-light font-hoshiko'>
+                  <Link
+                    href='/'
+                    className='text-lg text-brand-light font-hoshiko'
+                  >
                     Slash/Ui
                   </Link>
                   <div className='flex items-center gap-2'>
@@ -320,124 +323,16 @@ const Navbar: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* ── SEARCH MODAL ── */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <div className='fixed inset-0 z-[200] flex items-start justify-center pt-[18vh] px-4 font-inter'>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsSearchOpen(false)}
-              className='absolute inset-0 bg-black/60 backdrop-blur-md'
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className='relative w-full max-w-[600px] bg-zinc-950/90 backdrop-blur-2xl rounded-xl shadow-2xl shadow-black/90 overflow-hidden'
-            >
-              {/* Search Header Input */}
-              <div className='relative z-10 flex items-center px-4 bg-zinc-900/50'>
-                <Command className='text-zinc-500' size={18} />
-                <input
-                  autoFocus
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder='Search components or pages...'
-                  className='w-full px-4 text-sm text-white bg-transparent border-none outline-none h-14 placeholder:text-zinc-600 font-inter'
-                />
-              </div>
-
-              {/* Scrollable Container with Strong Gradient Masks */}
-              <div className='relative max-h-[400px] overflow-hidden'>
-                {/* Top List Mask */}
-                <div className='absolute top-0 left-0 right-0 z-20 h-8 pointer-events-none bg-gradient-to-b from-zinc-950 via-zinc-950/80 to-transparent' />
-
-                {/* List Items */}
-                <div className='overflow-y-auto max-h-[400px] p-2 py-6 custom-scrollbar'>
-                  {searchQuery.length > 0 ? (
-                    <div className='p-2'>
-                      <p className='px-3 py-2 text-[10px] font-switzer font-bold text-zinc-500 uppercase tracking-wider'>
-                        Results
-                      </p>
-                      {filteredItems.length > 0 ? (
-                        filteredItems.map((item: any) => (
-                          <Link
-                            key={item.path}
-                            href={item.path}
-                            onClick={() => {
-                              setIsSearchOpen(false);
-                              setSearchQuery('');
-                            }}
-                            className='flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
-                          >
-                            <div className='flex items-center gap-3'>
-                              <item.icon
-                                size={16}
-                                className='text-zinc-500 group-hover:text-white'
-                              />
-                              <span className='text-sm text-zinc-300 group-hover:text-white font-inter'>
-                                {item.label}
-                              </span>
-                            </div>
-                            <span className='text-[10px] opacity-50 uppercase tracking-widest font-inter'>
-                              {item.category}
-                            </span>
-                          </Link>
-                        ))
-                      ) : (
-                        <p className='px-3 py-4 text-sm text-zinc-600 font-inter'>
-                          No results found...
-                        </p>
-                      )}
-                    </div>
-                  ) : (
-                    ['Pages', 'Get Started'].map((cat) => (
-                      <div key={cat} className='mb-2'>
-                        <p className='px-3 py-2 text-[10px] font-switzer font-bold text-zinc-500 uppercase tracking-wider'>
-                          {cat}
-                        </p>
-                        {staticPages
-                          .filter((p: any) => p.category === cat)
-                          .map((p: any) => (
-                            <Link
-                              key={p.label}
-                              href={p.path}
-                              onClick={() => setIsSearchOpen(false)}
-                              className='flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all group'
-                            >
-                              <div className='text-zinc-500 group-hover:text-white'>
-                                <p.icon size={16} />
-                              </div>
-                              <span className='text-sm text-zinc-300 group-hover:text-white font-inter'>
-                                {p.label}
-                              </span>
-                            </Link>
-                          ))}
-                      </div>
-                    ))
-                  )}
-                </div>
-
-                {/* Bottom List Mask */}
-                <div className='absolute bottom-0 left-0 right-0 z-20 h-8 pointer-events-none bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent' />
-              </div>
-
-              {/* Modal Footer */}
-              <div className='px-4 py-3 bg-zinc-900/60 flex justify-between items-center text-[10px] text-zinc-500 font-medium z-10 relative font-inter'>
-                <div className='flex gap-3'>
-                  <span className='flex items-center gap-1'>
-                    <Command size={10} /> to select
-                  </span>
-                  <span className='flex items-center gap-1'>Enter to open</span>
-                </div>
-                <span>ESC to close</span>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {/* ── SEARCH MODAL COMPONENT ── */}
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredItems={filteredItems}
+        userEmail={userEmail}
+        authLoaded={authLoaded}
+      />
     </>
   );
 };

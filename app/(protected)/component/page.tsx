@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { BadgeAlert } from 'lucide-react';
-import Navbar from '@/components/ui/navbar';
+import Navbar from '@/components/navbar';
 
 interface ComponentCardProps {
   id?: string;

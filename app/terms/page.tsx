@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/footer';
+import Navbar from '@/components/navbar';
+import { Footer } from '@/components/footer';
 
 const TermsOfService = () => {
   return (
@@ -38,13 +38,17 @@ const TermsOfService = () => {
               </p>
               <ul className='space-y-2 text-sm list-disc list-inside font-inter opacity-90 md:text-md text-brand-light'>
                 <li>
-                  <strong className='font-semibold font-switzer'>Permitted:</strong> Using components to build
-                  websites, SaaS products, and apps.
+                  <strong className='font-semibold font-switzer'>
+                    Permitted:
+                  </strong>{' '}
+                  Using components to build websites, SaaS products, and apps.
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Prohibited:</strong> You may not redistribute, resell,
-                  or sublicense the component source code as a competing UI
-                  library or template kit.
+                  <strong className='font-semibold font-switzer'>
+                    Prohibited:
+                  </strong>{' '}
+                  You may not redistribute, resell, or sublicense the component
+                  source code as a competing UI library or template kit.
                 </li>
               </ul>
             </section>

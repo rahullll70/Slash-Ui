@@ -1,15 +1,15 @@
 'use client';
 
-import Navbar from '@/components/ui/navbar';
+import Navbar from '@/components/navbar';
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Check, Zap, ChevronRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { BadgeAlertIcon } from '@/components/ui/badge-alert';
-import { CircleCheckIcon } from '@/components/ui/circle-check';
-import { TerminalIcon } from '@/components/ui/terminal';
-import { FeatherIcon } from '@/components/ui/feather';
+import { BadgeAlertIcon } from '@/components/badge-alert';
+import { CircleCheckIcon } from '@/components/circle-check';
+import { TerminalIcon } from '@/components/terminal';
+import { FeatherIcon } from '@/components/feather';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,7 +78,10 @@ const PricingCard = ({
 
         <div className='flex-grow mb-10 space-y-4'>
           {features.map((feature, index) => (
-            <div key={index} className='flex items-center font-inter gap-3 text-[13px]'>
+            <div
+              key={index}
+              className='flex items-center font-inter gap-3 text-[13px]'
+            >
               <Check
                 size={14}
                 className={isHighlighted ? 'text-white' : 'text-zinc-600'}
@@ -177,7 +180,10 @@ const Page = () => {
     social: [
       { label: 'Github', path: 'https://github.com/rahull-70/Slash-Ui' },
       { label: 'Twitter', path: 'https://x.com/rahulll_parihar' },
-      { label: 'LinkedIn', path: 'https://www.linkedin.com/in/rahul-pariharr/' },
+      {
+        label: 'LinkedIn',
+        path: 'https://www.linkedin.com/in/rahul-pariharr/',
+      },
     ],
     legal: [
       { label: 'Privacy Policy', path: '/privacy-policy' },
@@ -273,13 +279,8 @@ const Page = () => {
         <section ref={pricingSectionRef} className='w-full px-8 py-32 '>
           <div className='max-w-4xl mx-auto'>
             <div className='flex flex-col items-center mb-20 text-center'>
-              <div className='flex items-center gap-2 px-3 py-1 mb-6 translate-y-4 border rounded-full opacity-0 pricing-reveal border-white/10 bg-zinc-950'>
-                <Zap size={12} className='text-white' />
-                <span className='text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest'>
-                  Pricing Plans
-                </span>
-              </div>
-              <h2 className='mb-6 text-5xl font-black tracking-tighter text-white uppercase translate-y-4 opacity-0 pricing-reveal font-switzer'>
+              
+              <h2 className='mb-6 text-5xl font-black tracking-tighter text-white translate-y-4 opacity-0 font-switzer pricing-reveal'>
                 Unlock the Full Library
               </h2>
               <p className='max-w-lg text-sm leading-relaxed translate-y-4 opacity-0 pricing-reveal text-zinc-500 font-inter'>

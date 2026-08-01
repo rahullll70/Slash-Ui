@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/footer';
+import Navbar from '@/components/navbar';
+import { Footer } from '@/components/footer';
 
 const PrivacyPolicy = () => {
   return (
@@ -36,20 +36,29 @@ const PrivacyPolicy = () => {
               </p>
               <ul className='space-y-2 text-sm list-disc list-inside font-inter opacity-90 md:text-md text-brand-light'>
                 <li>
-                  <strong className='font-semibold font-switzer'>Identity Information:</strong> Name and email address
-                  if you subscribe.
+                  <strong className='font-semibold font-switzer'>
+                    Identity Information:
+                  </strong>{' '}
+                  Name and email address if you subscribe.
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Usage Telemetry:</strong> Anonymous, aggregated data
-                  on component usage (no source code tracking).
+                  <strong className='font-semibold font-switzer'>
+                    Usage Telemetry:
+                  </strong>{' '}
+                  Anonymous, aggregated data on component usage (no source code
+                  tracking).
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Technical Data:</strong> Browser, device info, and IP
-                  addresses via analytics.
+                  <strong className='font-semibold font-switzer'>
+                    Technical Data:
+                  </strong>{' '}
+                  Browser, device info, and IP addresses via analytics.
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Financial Data:</strong> Securely processed via
-                  third-party providers.
+                  <strong className='font-semibold font-switzer'>
+                    Financial Data:
+                  </strong>{' '}
+                  Securely processed via third-party providers.
                 </li>
               </ul>
             </section>
@@ -63,18 +72,28 @@ const PrivacyPolicy = () => {
               </p>
               <ul className='space-y-2 text-sm list-disc list-inside font-inter opacity-90 md:text-md text-brand-light'>
                 <li>
-                  <strong className='font-semibold font-switzer'>Service Delivery:</strong> Managing account access and
-                  library components.
+                  <strong className='font-semibold font-switzer'>
+                    Service Delivery:
+                  </strong>{' '}
+                  Managing account access and library components.
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Improvement:</strong> Refining our UI/UX architecture.
+                  <strong className='font-semibold font-switzer'>
+                    Improvement:
+                  </strong>{' '}
+                  Refining our UI/UX architecture.
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Communication:</strong> Version updates, security
-                  patches, and releases.
+                  <strong className='font-semibold font-switzer'>
+                    Communication:
+                  </strong>{' '}
+                  Version updates, security patches, and releases.
                 </li>
                 <li>
-                  <strong className='font-semibold font-switzer'>Support:</strong> Handling technical inquiries.
+                  <strong className='font-semibold font-switzer'>
+                    Support:
+                  </strong>{' '}
+                  Handling technical inquiries.
                 </li>
               </ul>
             </section>
@@ -109,8 +128,8 @@ const PrivacyPolicy = () => {
                 You retain the right to access, correct, or request the deletion
                 of your personal data from our systems at any time. For
                 inquiries, please contact us at
-                <a 
-                  href='mailto:management@slash.ui' 
+                <a
+                  href='mailto:management@slash.ui'
                   className='ml-1 underline transition-colors text-zinc-400 hover:text-brand-light font-inter'
                 >
                   management@slash.ui
